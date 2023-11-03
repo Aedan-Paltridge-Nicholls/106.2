@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "xN4OMjxiz6eKrdUkwmwngPFaqc6EJ7ABUXajM6ouFZzex3mxBzq44wrEJSacwwKnpHez3WyRwUDjg8UFp6QTaA==",
+  "dgSpecHash": "tmajLeeY0TrzFKWjMm58lVrZtL4KqAO43UIQgSOc13xTjAKEV66wiTMJXco+U2dYTxvq2jGv5sZi8ZV6mP8gtA==",
   "success": true,
-  "projectFilePath": "D:\\Users\\270331389\\source\\repos\\Aedan-Paltridge-Nicholls\\106.2\\106.2\\106.2.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\nicho\\source\\Aedan-Paltridge-Nicholls\\106.2\\106.2\\106.2.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nicho\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\nicho\\.nuget\\packages\\npgsql\\7.0.6\\npgsql.7.0.6.nupkg.sha512",
+    "C:\\Users\\nicho\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\nicho\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\nicho\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

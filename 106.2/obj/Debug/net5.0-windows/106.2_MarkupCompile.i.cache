@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Users\270331389\source\repos\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\
 _106._2
 none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
-D:\Users\270331389\source\repos\Aedan-Paltridge-Nicholls\106.2\106.2\App.xaml
-11151548125
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\App.xaml
+21887965033
 
-5725806790
-193582816078
-MainWindow.xaml;
+61515852987
+1951174071075
+AdminLoginView.xaml;MainWindow.xaml;
 
-True
+False
 
