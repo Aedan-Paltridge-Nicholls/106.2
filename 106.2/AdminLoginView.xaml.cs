@@ -56,7 +56,8 @@ namespace _106._2
         }
         private void AddMemberBUTTON_Click(object sender, RoutedEventArgs e)
         {
-            string comand = "  insert into members (number, name, phonenumbers, email, joindate, address) values (2, 'Krysta Rizziello', '581-231-2360', 'krizziello1@nhs.uk', '2022-11-25', '2890 1st Parkway');";
+            string comand = "insert into members (number, name, phonenumbers, email, joindate, address)" +
+           $" values (2, 'Krysta Rizziello', '581-231-2360', 'krizziello1@nhs.uk', '2022-11-25', '2890 1st Parkway');";
 
 
         }
@@ -65,6 +66,39 @@ namespace _106._2
 
         }
 
-        
+        private void MembernumberBOX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void NameBOX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void JoinDataBOX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void EmailBOX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void IdBOX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void PhonenumberBOX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void AddressBOX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
