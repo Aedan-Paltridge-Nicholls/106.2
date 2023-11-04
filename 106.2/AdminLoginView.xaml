@@ -21,8 +21,9 @@
             <RowDefinition Height=".3*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid x:Name="membersdatagrid" Grid.Column="1" Grid.Row="1">
-            <DataGrid.Columns>
+        <DataGrid x:Name="membersdatagrid" Grid.Column="1" Grid.Row="1"  AutoGeneratingColumn="membersdatagrid_AutoGeneratingColumn">
+            
+            <DataGrid.Columns >
                 
                 <DataGridComboBoxColumn/>
 
@@ -46,13 +47,20 @@
             </Grid.RowDefinitions>
             <!-- Search row -->
                 <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" >Search:</Label>
-            <TextBox x:Name="SearchBOX" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Background="White" BorderBrush="Black" Margin="1,1,1,1"/>
+            <TextBox x:Name="SearchBOX" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="SearchBOX_TextChanged"/>
             <!-- row 1  -->
             <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" >Member No:</Label>
             <TextBox x:Name="MembernumberBOX" Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="MembernumberBOX_TextChanged"/>
 
-            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" >Id:</Label>
-            <TextBox x:Name="IdBOX" Grid.Column="3" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="IdBOX_TextChanged"/>
+            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" >Search By</Label>
+            <ComboBox x:Name="SearchOptionBOX" Grid.Column="3" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="0" SelectionChanged="SearchOptionBOX_SelectionChanged" >
+                <ComboBoxItem>Name</ComboBoxItem>
+                <ComboBoxItem>Member Number</ComboBoxItem>
+                <ComboBoxItem>Phonenumber</ComboBoxItem>
+                <ComboBoxItem>Email</ComboBoxItem>
+                <ComboBoxItem>Join-Date</ComboBoxItem>
+                <ComboBoxItem>Address</ComboBoxItem>
+            </ComboBox>
             <!-- row 2  -->
             <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" >Name:</Label>
             <TextBox x:Name="NameBOX" Grid.Column="1" Grid.Row="2" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="NameBOX_TextChanged"/>
@@ -61,7 +69,7 @@
             <TextBox x:Name="PhonenumberBOX" Grid.Column="3" Grid.Row="2" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="PhonenumberBOX_TextChanged"/>
             <!-- row 3  -->
             <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" >Join Date</Label>
-            <TextBox x:Name="JoinDataBOX" Grid.Column="1" Grid.Row="3" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="JoinDataBOX_TextChanged"/>
+            <DatePicker x:Name="JoinDataBOX" Grid.Column="1" Grid.Row="3"  Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedDateChanged="JoinDataBOX_SelectedDateChanged"  />
 
             <Label Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" >Address :</Label>
             <TextBox x:Name="AddressBOX" Grid.Column="3" Grid.Row="3" Grid.RowSpan="2" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="AddressBOX_TextChanged"/>
@@ -91,7 +99,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="1" Margin="0,5,0,0" >
-                    <Button x:Name="ChangeInfoBUTTON" Background="#C6C5FF">Change Info</Button>
+                    <Button x:Name="ChangeInfoBUTTON" Background="#C6C5FF" Click="ChangeInfoBUTTON_Click">Change Info</Button>
 
                 </Grid>
             </Grid>
