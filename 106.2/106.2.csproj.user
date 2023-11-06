@@ -7,6 +7,26 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Addmemberpopup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="AdminLoginView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Addmemberpopup.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="AdminLoginView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="login.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
