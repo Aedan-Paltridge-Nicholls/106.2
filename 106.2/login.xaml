@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:_106._2"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="login">
+      Title="login"
+      FontFamily="Calibri">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,7 +26,7 @@
             <RowDefinition Height=".5*"/>
         </Grid.RowDefinitions>
        
-        <TextBox Background="White" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
+        <TextBox Background="White" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
         <TextBox Background="Azure" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" />
 
         

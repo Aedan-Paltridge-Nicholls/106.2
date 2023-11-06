@@ -23,7 +23,7 @@
             <RowDefinition Height=".3*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid x:Name="membersdatagrid" Grid.Column="1" Grid.Row="1"  AutoGeneratingColumn="membersdatagrid_AutoGeneratingColumn">
+        <DataGrid x:Name="membersdatagrid" Grid.Column="1" Grid.Row="1"  AutoGeneratingColumn="membersdatagrid_AutoGeneratingColumn" SelectedCellsChanged="membersdatagrid_SelectedCellsChanged">
             
             <DataGrid.Columns >
                 
