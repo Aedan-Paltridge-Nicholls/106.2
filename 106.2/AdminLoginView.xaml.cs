@@ -21,6 +21,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using static System.Formats.Asn1.AsnWriter;
+using System.Windows.Controls.Primitives;
 
 namespace _106._2
 {
@@ -214,7 +215,8 @@ namespace _106._2
         }
         public AdminLoginView()
         {
-            
+           
+
             CultureInfo Dtfi = CultureInfo.CreateSpecificCulture("en-us");
             Dtfi.DateTimeFormat.ShortDatePattern = "yyyy/MM/dd";
             Dtfi.DateTimeFormat.DateSeparator = "-";
@@ -223,6 +225,18 @@ namespace _106._2
             LoadDatagrid();
             JoinDataBOX.SelectedDate = DateTime.Now;
         }
+        public class MemberInfoComferm 
+        {
+            public string number, name, phonenumbers, email, joindate, address;
+            public string getinfo() 
+            { 
+                
+                return number;
+
+            }
+        
+        }
+
         public async void addmember(string number, string name, string phonenumbers, string email, string joindate, string address)
         {
              
@@ -231,13 +245,25 @@ namespace _106._2
                 try
                 {
                     con.Open();
+                    Addmemberpopup addmemberpopup = new Addmemberpopup();
+                    
                     string command = "insert into members (number, name, phonenumbers, email, joindate, address)" +
-                               $" values ( {number}, '{name}', '{phonenumbers}', '{email}', '{joindate}', '{address}' );";
-                    var cmd = new NpgsqlCommand(command, con);
-                    await using var reader = await cmd.ExecuteReaderAsync();
-                    MessageBox.Show(reader.ToString());
-                    con.Open();
-
+                        $" values ( {number}, '{name}', '{phonenumbers}', '{email}', '{joindate}', '{address}' );";
+                    
+                    string info = $"Member ID Number :{number} /n  <LineBreak /> " +
+                                  $"Member Name: {name}  <LineBreak />" +
+                                  $"Member Phonenumber: {phonenumbers} <LineBreak />" +
+                                  $"Member Email: {email} <LineBreak />" +
+                                  $"Member Join-Date: {joindate} <LineBreak />" +
+                                  $"Member Address: {address} <LineBreak />";
+                    addmemberpopup.MemberInfoBox.Text = info;
+                    bool? NotCanceled = addmemberpopup.ShowDialog();
+                    if ( NotCanceled != null && NotCanceled != true)
+                    {
+                        
+                        var cmd = new NpgsqlCommand(command, con);
+                        await using var reader = await cmd.ExecuteReaderAsync();
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -6,7 +6,9 @@
       xmlns:local="clr-namespace:_106._2"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AdminLoginView">
+      Title="AdminLoginView"   
+      FontFamily="Calibri">
+    
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".1*"></ColumnDefinition>

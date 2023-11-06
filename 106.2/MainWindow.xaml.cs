@@ -26,6 +26,7 @@ namespace _106._2
             NpgsqlConnection connectionString = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
 
             InitializeComponent();
+  
 
         }
 

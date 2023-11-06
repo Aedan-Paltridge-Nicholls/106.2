@@ -48,3 +48,5 @@ C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-wind
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\106.2.csproj.CopyComplete
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\AdminLoginView.g.cs
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\AdminLoginView.baml
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\Addmemberpopup.g.cs
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\Addmemberpopup.baml
