@@ -1,5 +1,5 @@
 create table members(
-number int  NOT NULL UNIQUE GENERATED ALWAYS AS IDENTITY,
+number int  NOT NULL UNIQUE ,
 PRIMARY KEY (number ),
 name text,
 phonenumbers text,
