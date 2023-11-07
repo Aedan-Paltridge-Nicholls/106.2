@@ -1,0 +1,32 @@
+create table members(
+number int  NOT NULL UNIQUE GENERATED ALWAYS AS IDENTITY,
+PRIMARY KEY (number ),
+name text,
+phonenumbers text,
+email text,
+joindate date,
+address text
+);
+CREATE TABLE public."Logins"
+(
+    "Userid" integer NOT NULL,
+    "Username" text,
+    password text,
+    FOREIGN KEY ("Userid")
+        REFERENCES public.members ("number") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+);
+
+ALTER TABLE IF EXISTS public."Logins"
+    OWNER to postgres;
+
+create table book(
+Bookid int NOT NULL UNIQUE,
+BookName text,
+Author text,
+Genre text,
+Copy int
+
+);
