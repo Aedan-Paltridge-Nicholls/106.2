@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using Xceed.Wpf.Toolkit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,15 +44,26 @@ namespace _106._2
         private void Addbutton_Click_1(object sender, RoutedEventArgs e)
         {
             NpgsqlConnection conn = connection();
+            conn.Open();
             string idnumber , number = IdNumberBOX.Text , Name = txtUser.Text,password = txtPassword.Text ;
             int Removetext = number.IndexOf(':') + 2;
             idnumber = number.Remove(0, Removetext);
             if (txtUser.Text != null || txtPassword.Text != null )
             {
-                string loginQuery = "INSERT INTO Logins(Username,password,Userid)" +
-                                   $"VALUES ({Name},{password},(SELECT number FROM members WHERE number = {number} ) )      ";
+                string loginQuery = "INSERT INTO logins(Username,password,Userid)" +
+                                   $"VALUES ({Name},{password},(SELECT number FROM members WHERE number = {idnumber} ) )";
+                NpgsqlCommand command = new NpgsqlCommand(loginQuery, conn);
+                command.ExecuteNonQuery();
             }
-
+            else
+            {
+                string message = $"You Must enter a Username and Password \nfor user number {idnumber} ",
+                       caption = "Error Must give Login";
+                Xceed.Wpf.Toolkit.MessageBox.Show(message, caption);
+                conn.Close();
+                return;
+            }
+            conn.Close();
             this.DialogResult = false; this.Close();
 
 
