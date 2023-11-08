@@ -103,11 +103,11 @@ namespace _106._2
                 try
                 {
                     con.Open();
-                    string sql = "SELECT * FROM Members"; // Replace with your SQL query
+                    string sql = "SELECT * FROM Members"; 
                     NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, con);
                     DataTable dt = new DataTable();
                     dataAdapter.Fill(dt);
-                    membersdatagrid.ItemsSource = dt.DefaultView; // Replace 'dataGrid' with your DataGrid's name
+                    membersdatagrid.ItemsSource = dt.DefaultView; 
                 }
                 catch (Exception ex)
                 {
@@ -118,6 +118,17 @@ namespace _106._2
 
 
         }
+        public void LoadDatagridTest(string comm)
+        {
+            NpgsqlConnection con = new NpgsqlConnection(connectionString);
+            NpgsqlCommand cmd = new NpgsqlCommand(comm, con);
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds, "members");
+            membersdatagrid.ItemsSource = ds.Tables["members"].DefaultView;
+            membersdatagrid.DataContext = ds;
+        }
+
         public void LoadDatagrid(int Input)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
@@ -125,11 +136,11 @@ namespace _106._2
                 try
                 {
                     con.Open();
-                    string sql = $"SELECT * FROM Members WHERE number = {Input} "; // Replace with your SQL query
+                    string sql = $"SELECT * FROM Members WHERE number = {Input} "; 
                     NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, con);
                     DataTable dt = new DataTable();
                     dataAdapter.Fill(dt);
-                    membersdatagrid.ItemsSource = dt.DefaultView; // Replace 'dataGrid' with your DataGrid's name
+                    membersdatagrid.ItemsSource = dt.DefaultView; 
                 }
                 catch (Exception ex)
                 {
@@ -145,11 +156,12 @@ namespace _106._2
                 try
                 {
                     con.Open();
-                    string sql = $"SELECT * FROM Members WHERE joindate::date  = '{Input}' "; // Replace with your SQL query
+                    string sql = $"SELECT * FROM Members WHERE joindate::date  = '{Input}' "; 
                     NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, con);
                     DataTable dt = new DataTable();
+
                     dataAdapter.Fill(dt);
-                    membersdatagrid.ItemsSource = dt.DefaultView; // Replace 'dataGrid' with your DataGrid's name
+                    membersdatagrid.ItemsSource = dt.DefaultView; 
                     
                 }
                 catch (Exception ex)
@@ -199,11 +211,11 @@ namespace _106._2
                         con.Open();
                         string searchtypeout = searchtypestringer(type);
 
-                        string sql = $"SELECT * FROM Members WHERE {type} ILIKE \'%{Search}%\' "; // Replace with your SQL query
+                        string sql = $"SELECT * FROM Members WHERE {type} ILIKE \'%{Search}%\' "; 
                         NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, con);
                         DataTable dt = new DataTable();
                         dataAdapter.Fill(dt);
-                        membersdatagrid.ItemsSource = dt.DefaultView; // Replace 'dataGrid' with your DataGrid's name
+                        membersdatagrid.ItemsSource = dt.DefaultView; 
                     }
                     catch (Exception ex)
                     {
@@ -222,7 +234,7 @@ namespace _106._2
             Dtfi.DateTimeFormat.DateSeparator = "-";
             Thread.CurrentThread.CurrentCulture = Dtfi;
             InitializeComponent();
-            LoadDatagrid();
+            LoadDatagridTest("SELECT * FROM members");
             JoinDataBOX.SelectedDate = DateTime.Now;
         }
         public class MemberInfoComferm 
@@ -259,7 +271,7 @@ namespace _106._2
                                   $"Member Address: {address} <LineBreak />";
                     addmemberpopup.MemberInfoBox.Text = info;
                     bool? NotCanceled = addmemberpopup.ShowDialog();
-                    if ( NotCanceled != null && NotCanceled != true)
+                    if ( NotCanceled != null && NotCanceled == true)
                     {
                         
                         var cmd = new NpgsqlCommand(command, con);
@@ -418,8 +430,8 @@ namespace _106._2
         }
         private void SearchOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                numericinput = (SearchOptionBOX.SelectedIndex == 1) ? true : false;
-                Dateinput = (SearchOptionBOX.SelectedIndex == 4) ? true : false;
+            numericinput = (SearchOptionBOX.SelectedIndex == 1) ? true : false;
+            Dateinput = (SearchOptionBOX.SelectedIndex == 4) ? true : false;
             if (Dateinput)
             {
                 SearchBOX.Text = "Please use the date time picker";
@@ -431,12 +443,12 @@ namespace _106._2
         private void membersdatagrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.PropertyType == typeof(System.DateTime))
-                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "yyyy/MM/dd";
         }
 
         private void membersdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-
+            membersdatagrid.
         }
     }
 }

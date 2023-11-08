@@ -23,11 +23,17 @@
             <RowDefinition Height=".3*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid x:Name="membersdatagrid" Grid.Column="1" Grid.Row="1"  AutoGeneratingColumn="membersdatagrid_AutoGeneratingColumn" SelectedCellsChanged="membersdatagrid_SelectedCellsChanged">
+        <DataGrid x:Name="membersdatagrid" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="1"  AutoGenerateColumns="False" SelectedCellsChanged="membersdatagrid_SelectedCellsChanged">
             
-            <DataGrid.Columns >
-                
+            <DataGrid.Columns > 
                 <DataGridComboBoxColumn/>
+                <DataGridTextColumn Header="Member ID" Binding="{Binding number}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="Phonenumber" Binding="{Binding phonenumbers}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding email}"/>
+                <DataGridTextColumn Header="Join-date " Binding="{Binding joindate}"/>
+                <DataGridTextColumn Header="Address" Binding="{Binding address}"/>
+               
 
             </DataGrid.Columns>
         </DataGrid>
@@ -55,7 +61,7 @@
             <TextBox x:Name="MembernumberBOX" Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="MembernumberBOX_TextChanged"/>
 
             <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" >Search By</Label>
-            <ComboBox x:Name="SearchOptionBOX" Grid.Column="3" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="0" SelectionChanged="SearchOptionBOX_SelectionChanged" >
+            <ComboBox x:Name="SearchOptionBOX" IsEditable="False" ItemsSource="{Binding}" Grid.Column="3" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="0" SelectionChanged="SearchOptionBOX_SelectionChanged" >
                 <ComboBoxItem>Name</ComboBoxItem>
                 <ComboBoxItem>Member Number</ComboBoxItem>
                 <ComboBoxItem>Phonenumber</ComboBoxItem>

@@ -37,6 +37,7 @@ namespace _106._2
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+
             this.DialogResult = false; this.Close();
             
         }
@@ -57,14 +58,14 @@ namespace _106._2
             }
             else
             {
-                string message = $"You Must enter a Username and Password \nfor user number {idnumber} ",
+                string message = $"You Must enter a Username and Password \nfor user number : {idnumber} ",
                        caption = "Error Must give Login";
-                Xceed.Wpf.Toolkit.MessageBox.Show(message, caption);
+                Xceed.Wpf.Toolkit.MessageBox.Show(message, caption,MessageBoxButton.OK,MessageBoxImage.Stop);
                 conn.Close();
                 return;
             }
             conn.Close();
-            this.DialogResult = false; this.Close();
+            this.DialogResult = true; this.Close();
 
 
         }

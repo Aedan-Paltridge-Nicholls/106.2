@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_106._2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800"
+        Title="MainWindow" Height="600" Width="900"
         FontFamily="Calibri">
 
-    <Grid>
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -160,7 +160,7 @@
                 <TextBlock Margin=" 1.5,1.5,1.5,1.5" TextWrapping="Wrap" Text="Due-date" />
             </Viewbox>
         </Grid>
-        <Frame Grid.Row="2" x:Name="Main" Background="Aqua">
+        <Frame  Grid.Row="2" x:Name="Main" Background="Aqua">
             
         </Frame>
         <Grid x:Name="footer" Background="Black" Grid.Column="0" Grid.Row="3">
