@@ -246,9 +246,10 @@ namespace _106._2
                 {
                     con.Open();
                     Addmemberpopup addmemberpopup = new Addmemberpopup();
-                    
+
                     string command = "insert into members (number, name, phonenumbers, email, joindate, address)" +
                         $" values ( {number}, '{name}', '{phonenumbers}', '{email}', '{joindate}', '{address}' );";
+                    
                     
                     string info = $"Member ID Number :{number} /n  <LineBreak /> " +
                                   $"Member Name: {name}  <LineBreak />" +
