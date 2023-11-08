@@ -7,7 +7,7 @@ email text,
 joindate date,
 address text
 );
-CREATE TABLE public."Logins"
+CREATE TABLE public."logins"
 (
     "Userid" integer NOT NULL,
     "Username" text,
@@ -19,7 +19,7 @@ CREATE TABLE public."Logins"
         NOT VALID
 );
 
-ALTER TABLE IF EXISTS public."Logins"
+ALTER TABLE IF EXISTS public."logins"
     OWNER to postgres;
 
 create table book(
