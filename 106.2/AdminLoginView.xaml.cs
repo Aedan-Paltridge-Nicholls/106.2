@@ -22,6 +22,9 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using static System.Formats.Asn1.AsnWriter;
 using System.Windows.Controls.Primitives;
+using Xceed.Wpf.AvalonDock.Themes;
+using Xceed.Wpf.Toolkit.Primitives;
+using static _106._2.AdminLoginView;
 
 namespace _106._2
 {
@@ -94,32 +97,10 @@ namespace _106._2
         public MemberdataStorage Memberdata = new();
         
         public string connectionString = "Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;";
-        public void LoadDatagrid()
+        
+        public void LoadDatagrid(string comm)
         {
-
-
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    string sql = "SELECT * FROM Members"; 
-                    NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, con);
-                    DataTable dt = new DataTable();
-                    dataAdapter.Fill(dt);
-                    membersdatagrid.ItemsSource = dt.DefaultView; 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally { con.Close(); }
-            }
-
-
-        }
-        public void LoadDatagridTest(string comm)
-        {
+            comm = (comm == null) ? "SELECT * FROM members" : comm;
             NpgsqlConnection con = new NpgsqlConnection(connectionString);
             NpgsqlCommand cmd = new NpgsqlCommand(comm, con);
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
@@ -127,50 +108,9 @@ namespace _106._2
             adapter.Fill(ds, "members");
             membersdatagrid.ItemsSource = ds.Tables["members"].DefaultView;
             membersdatagrid.DataContext = ds;
+           
         }
 
-        public void LoadDatagrid(int Input)
-        {
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    string sql = $"SELECT * FROM Members WHERE number = {Input} "; 
-                    NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, con);
-                    DataTable dt = new DataTable();
-                    dataAdapter.Fill(dt);
-                    membersdatagrid.ItemsSource = dt.DefaultView; 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally { con.Close(); }
-            }
-        }
-        public void LoadDatagrid(string Input)
-        {
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    string sql = $"SELECT * FROM Members WHERE joindate::date  = '{Input}' "; 
-                    NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, con);
-                    DataTable dt = new DataTable();
-
-                    dataAdapter.Fill(dt);
-                    membersdatagrid.ItemsSource = dt.DefaultView; 
-                    
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally { con.Close(); }
-            }
-        }
         public string  searchtypestringer(Searchtype type)
         {
             switch (type)
@@ -178,13 +118,13 @@ namespace _106._2
                 case Searchtype.number:
                      return "number";   
                 case Searchtype.name:
-                  return "name";
+                    return "name";
                 case Searchtype.phonenumbers:
                     return "phonenumbers";
                 case Searchtype.email:
                     return "email";
                 case Searchtype.joindate:
-                    return "joindata";
+                    return "joindate";
                 case Searchtype.address: 
                     return "address";
                 default:
@@ -194,36 +134,42 @@ namespace _106._2
         
 
         }
+        public void RefreshGrid() 
+        {
+            membersdatagrid.Items.Refresh();
+        }
         public void LoadDatagrid(string Search,Searchtype type)
-        { 
-
-            if (searchtypestringer(type) == "number") 
+        {
+            
+            string typeNow = searchtypestringer(type);
+            switch (typeNow)
             {
-                int Output = int.Parse(Search);
-                LoadDatagrid(Output);  
-            }
-            else
-            {
-                using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
-                { 
-                    try
-                    {
-                        con.Open();
-                        string searchtypeout = searchtypestringer(type);
 
-                        string sql = $"SELECT * FROM Members WHERE {type} ILIKE \'%{Search}%\' "; 
-                        NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, con);
-                        DataTable dt = new DataTable();
-                        dataAdapter.Fill(dt);
-                        membersdatagrid.ItemsSource = dt.DefaultView; 
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally { con.Close(); }
-                }
-            }
+                case "number":
+                    int Output = int.Parse(Search);
+                    LoadDatagrid($"SELECT * FROM Members WHERE {typeNow} = {Output} ");
+                    break;
+                case "name":
+                    LoadDatagrid($"SELECT * FROM Members WHERE {typeNow} ILIKE \'%{Search}%\' ");
+                    break;
+                case "phonenumbers":
+                    LoadDatagrid($"SELECT * FROM Members WHERE {typeNow} ILIKE \'%{Search}%\' ");
+                    break;
+                case "email":
+                    LoadDatagrid($"SELECT * FROM Members WHERE {typeNow} ILIKE \'%{Search}%\' ");
+                    break;
+                case "joindate":
+                    LoadDatagrid($"SELECT * FROM Members WHERE {typeNow} = \'{Search}\' ");
+                    break;
+                case "address":
+                    LoadDatagrid($"SELECT * FROM Members WHERE {typeNow} ILIKE \'%{Search}%\' ");
+                    break;
+                default:
+                    break;
+            };
+            RefreshGrid();
+
+
         }
         public AdminLoginView()
         {
@@ -234,8 +180,8 @@ namespace _106._2
             Dtfi.DateTimeFormat.DateSeparator = "-";
             Thread.CurrentThread.CurrentCulture = Dtfi;
             InitializeComponent();
-            LoadDatagridTest("SELECT * FROM members");
-            JoinDataBOX.SelectedDate = DateTime.Now;
+            LoadDatagrid("SELECT * FROM members");
+            JoinDataBOX.SelectedDate = DateTime.Today;
         }
         public class MemberInfoComferm 
         {
@@ -350,8 +296,12 @@ namespace _106._2
             string Date = JoinDataBOX.SelectedDate.ToString();
             Date = Date.Remove(Date.IndexOf(' '));
             Memberdata.Set_joindate(Date);
-
-            if (Dateinput) { LoadDatagrid(Date); }
+            if (Dateinput) 
+            {
+                Searchtype outtype;
+                outtype = Searchtype.joindate;
+                LoadDatagrid(Date, outtype);
+            }
 
         }
         // Textboxes
@@ -372,7 +322,7 @@ namespace _106._2
         // Search 
         public void Search(string SearchOut)
         {
-            if (string.IsNullOrEmpty(SearchOut)) {LoadDatagrid();}
+            if (string.IsNullOrEmpty(SearchOut)) {LoadDatagrid("");}
             else 
             { 
                 switch(SearchOptionBOX.SelectedIndex)
@@ -430,25 +380,22 @@ namespace _106._2
         }
         private void SearchOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (Dateinput) { SearchBOX.Clear(); }
             numericinput = (SearchOptionBOX.SelectedIndex == 1) ? true : false;
             Dateinput = (SearchOptionBOX.SelectedIndex == 4) ? true : false;
             if (Dateinput)
             {
                 SearchBOX.Text = "Please use the date time picker";
-
+               
 
             }
         }
 
-        private void membersdatagrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            if (e.PropertyType == typeof(System.DateTime))
-                (e.Column as DataGridTextColumn).Binding.StringFormat = "yyyy/MM/dd";
-        }
+
 
         private void membersdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            membersdatagrid.
+
         }
     }
 }

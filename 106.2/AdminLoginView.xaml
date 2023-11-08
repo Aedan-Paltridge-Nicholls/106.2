@@ -55,13 +55,14 @@
             </Grid.RowDefinitions>
             <!-- Search row -->
                 <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" >Search:</Label>
+            
             <TextBox x:Name="SearchBOX" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="SearchBOX_TextChanged"/>
             <!-- row 1  -->
             <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" >Member No:</Label>
             <TextBox x:Name="MembernumberBOX" Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="MembernumberBOX_TextChanged"/>
 
             <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" >Search By</Label>
-            <ComboBox x:Name="SearchOptionBOX" IsEditable="False" ItemsSource="{Binding}" Grid.Column="3" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="0" SelectionChanged="SearchOptionBOX_SelectionChanged" >
+            <ComboBox x:Name="SearchOptionBOX" IsEditable="False"  Grid.Column="3" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="0" SelectionChanged="SearchOptionBOX_SelectionChanged" >
                 <ComboBoxItem>Name</ComboBoxItem>
                 <ComboBoxItem>Member Number</ComboBoxItem>
                 <ComboBoxItem>Phonenumber</ComboBoxItem>
