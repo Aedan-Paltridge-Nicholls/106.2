@@ -9,10 +9,10 @@ address text
 );
 CREATE TABLE public."logins"
 (
-    "Userid" integer NOT NULL,
-    "Username" text,
-    password text,
-    FOREIGN KEY ("Userid")
+    "userid" integer NOT NULL,
+    "username" text,
+    "userpassword" text,
+    FOREIGN KEY ("userid")
         REFERENCES public.members ("number") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
@@ -23,10 +23,10 @@ ALTER TABLE IF EXISTS public."logins"
     OWNER to postgres;
 
 create table book(
-Bookid int NOT NULL UNIQUE,
-BookName text,
-Author text,
-Genre text,
-Copy int
+bookid int NOT NULL UNIQUE,
+bookName text,
+author text,
+genre text,
+copy int
 
 );
