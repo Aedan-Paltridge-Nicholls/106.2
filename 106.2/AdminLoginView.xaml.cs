@@ -239,10 +239,16 @@ namespace _106._2
             {
                 try
                 {
+                    Updatememberpopup updatememberpopup = new Updatememberpopup();
                     string command = $"UPDATE members SET name = {name}, phonenumbers = {phonenumbers}, email = {email}, joindate = {joindate}, address = {address} WHERE number = {number} ";
-                    var cmd = new NpgsqlCommand(command, con);
-                    await using var reader = await cmd.ExecuteReaderAsync();
-                    MessageBox.Show(reader.ToString());
+                    bool? NotCanceled = updatememberpopup.ShowDialog();
+                    if (NotCanceled != null && NotCanceled == true)
+                    {
+                        var cmd = new NpgsqlCommand(command, con);
+
+                        await using var reader = await cmd.ExecuteReaderAsync();
+                    }
+                   
                     con.Open();
 
                 }

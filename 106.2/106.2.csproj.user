@@ -16,6 +16,9 @@
     <Compile Update="login.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Updatememberpopup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Addmemberpopup.xaml">
@@ -28,6 +31,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Updatememberpopup.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

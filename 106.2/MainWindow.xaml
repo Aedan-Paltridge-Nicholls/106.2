@@ -124,7 +124,7 @@
                     <RowDefinition Height="1*"/>
                     <!--Row 2-->
                 </Grid.RowDefinitions>
-                <Button x:Name="Logout" Grid.Column="1" Grid.Row="1" Background="Red"  Foreground="White">Logout</Button>
+                <Button x:Name="Logout" Grid.Column="1" Grid.Row="1" Background="#FF1010"  Foreground="White">Logout</Button>
             </Grid>
         </Grid>
       
