@@ -209,12 +209,12 @@ namespace _106._2
                         $" values ( {number}, '{name}', '{phonenumbers}', '{email}', '{joindate}', '{address}' );";
                     
                     
-                    string info = $"Member ID Number :{number} /n  <LineBreak /> " +
-                                  $"Member Name: {name}  <LineBreak />" +
-                                  $"Member Phonenumber: {phonenumbers} <LineBreak />" +
-                                  $"Member Email: {email} <LineBreak />" +
-                                  $"Member Join-Date: {joindate} <LineBreak />" +
-                                  $"Member Address: {address} <LineBreak />";
+                    string info = $"Member ID Number :{number} {Environment.NewLine} " +
+                                  $"Member Name: {name}   {Environment.NewLine}" +
+                                  $"Member Phonenumber: {phonenumbers}  {Environment.NewLine}" +
+                                  $"Member Email: {email}  {Environment.NewLine}" +
+                                  $"Member Join-Date: {joindate}   {Environment.NewLine}" +
+                                  $"Member Address: {address}   {Environment.NewLine}";
                     addmemberpopup.MemberInfoBox.Text = info;
                     bool? NotCanceled = addmemberpopup.ShowDialog();
                     if ( NotCanceled != null && NotCanceled == true)
@@ -239,8 +239,30 @@ namespace _106._2
             {
                 try
                 {
+                    con.Open();
                     Updatememberpopup updatememberpopup = new Updatememberpopup();
-                    string command = $"UPDATE members SET name = {name}, phonenumbers = {phonenumbers}, email = {email}, joindate = {joindate}, address = {address} WHERE number = {number} ";
+                    string command = $"UPDATE members SET name = {name}, phonenumbers = {phonenumbers}, email = {email}, joindate = {joindate}, address = {address}" +
+                                     $" WHERE number = {number} ",
+                       NEWinfo = $"Member ID Number :{number} {Environment.NewLine} " +
+                                  $"Member Name: {name}   {Environment.NewLine}" +
+                                  $"Member Phonenumber: {phonenumbers}  {Environment.NewLine}" +
+                                  $"Member Email: {email}  {Environment.NewLine}" +
+                                  $"Member Join-Date: {joindate}   {Environment.NewLine}" +
+                                  $"Member Address: {address}   {Environment.NewLine}" ;
+                    List<string> ListOldInfo = new List<string>();
+                    foreach (int item in Enum.GetValues(typeof(Searchtype)))
+                    {
+                        string OldInfoGet = $"SELECT {Enum.GetName(typeof(Searchtype),item)} FROM members WHERE number = {number}  ";
+
+                       NpgsqlCommand command1 = new NpgsqlCommand(OldInfoGet, con);
+                      var readingmember =  command1.ExecuteReader();
+                        while (readingmember.Read())
+                        {
+                            ListOldInfo.Add(readingmember.GetString(0));
+                        }
+                       
+                    }
+
                     bool? NotCanceled = updatememberpopup.ShowDialog();
                     if (NotCanceled != null && NotCanceled == true)
                     {
@@ -249,7 +271,7 @@ namespace _106._2
                         await using var reader = await cmd.ExecuteReaderAsync();
                     }
                    
-                    con.Open();
+                    
 
                 }
                 catch (Exception ex)

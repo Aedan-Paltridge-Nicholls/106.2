@@ -31,13 +31,21 @@
                 <RowDefinition/>
                 <RowDefinition Height=".1*"/>
             </Grid.RowDefinitions>
-            <!--Labels-->
-            <TextBlock Grid.Row="1" Foreground="Black"  Grid.Column="1" Background="White" TextAlignment="Center"  Text="Old Member Info"  IsEnabled="False" LineStackingStrategy="MaxHeight"/>
-            <TextBox Grid.Row="1"  Grid.Column="3" IsEnabled="False" TextAlignment="Center"  Background="White" Text="Old Member Info" MaxLines="1"/>
-            
-            <TextBox Grid.Row="3"  Grid.Column="1" IsEnabled="False" Background="White"/>
-            <TextBox Grid.Row="3"  Grid.Column="3" IsEnabled="False" Background="White"/>
+          
+            <!--Label's-->
 
+            <TextBox Grid.Row="1" BorderBrush="#000000"  Grid.Column="1" TextAlignment="Center"  Background="White" Text="New Member Info" MaxLines="1" />
+            <TextBox Grid.Row="1"  BorderBrush="#000000"  Grid.Column="3" TextAlignment="Center"  Background="White" Text="Old Member Info" MaxLines="1" />
+            
+            <!--content-->
+
+            <Border  Grid.Row="3"  Grid.Column="1" BorderBrush="#000000" BorderThickness="1" >
+                <TextBlock IsEnabled="False" Background="White" x:Name="OldMemberInfo"/>
+            </Border>
+            <Border  Grid.Row="3"  Grid.Column="3" BorderBrush="#000000" BorderThickness="1" >
+                <TextBlock IsEnabled="False" Background="White" x:Name="NewMemberInfo"/>
+            </Border>
+            
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -54,11 +62,10 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height=".5*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="Updatemember"  Foreground="#000000" Background="#C6C5FF"  Grid.Row="1" Grid.Column="1"  Click="Updatemember_Click"  FontWeight="Bold">Update Member</Button>
-            <Button x:Name="UpdateLogin"  Foreground="#000000" Background="#C6C5FF"  Grid.Row="1" Grid.Column="3"  Click="Updatemember_Click"  FontWeight="Bold">Update Login</Button>
+            <Button x:Name="Updatemember" Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="1"  Click="Updatemember_Click"  FontWeight="Bold">Update Member</Button>
+            <Button x:Name="UpdateLogin"  Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="3"  Click="UpdateLogin_Click"  FontWeight="Bold">Update Login</Button>
+            <Button x:Name="cancelbutton" Foreground="#FFFFFF" Background="#FF1010"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="5"  Click="CancelButton_Click"  FontWeight="Bold">Cancel</Button>
 
-            <Button x:Name="cancelbutton" Foreground="#FFFFFF" Background="#FF1010" Grid.Row="1" Grid.Column="5"  Click="CancelButton_Click" FontWeight="Bold">Cancel</Button>
-            
 
         </Grid>
 

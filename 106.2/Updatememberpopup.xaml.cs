@@ -1,4 +1,5 @@
 ﻿
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace _106._2
         {
             InitializeComponent();
         }
-
+        
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false; this.Close();
@@ -33,6 +34,12 @@ namespace _106._2
         private void Updatemember_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true; this.Close();
+        }
+
+        private void UpdateLogin_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateloginPopup updateloginPopup = new UpdateloginPopup();
+            updateloginPopup.Show();
         }
     }
 }
