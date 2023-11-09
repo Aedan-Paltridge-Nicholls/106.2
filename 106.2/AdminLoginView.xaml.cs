@@ -91,18 +91,22 @@ namespace _106._2
         {
             number, name, phonenumbers, email, joindate, address
         }
-
-        public Searchtype searchtype = new Searchtype();
+        
+        public  NpgsqlConnection  SqlCONN = GlobalVariables.SqlCONN ;
+        public  Searchtype searchtype = new Searchtype();
         
         public MemberdataStorage Memberdata = new();
-        
-        public string connectionString = "Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;";
-        
+  
+       
+       
+
+      
+
         public void LoadDatagrid(string comm)
         {
             comm = (comm == null) ? "SELECT * FROM members" : comm;
-            NpgsqlConnection con = new NpgsqlConnection(connectionString);
-            NpgsqlCommand cmd = new NpgsqlCommand(comm, con);
+           
+            NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             adapter.Fill(ds, "members");
@@ -198,11 +202,11 @@ namespace _106._2
         public async void addmember(string number, string name, string phonenumbers, string email, string joindate, string address)
         {
              
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString)) 
+            using (SqlCONN) 
             {
                 try
                 {
-                    con.Open();
+                    SqlCONN.Open();
                     Addmemberpopup addmemberpopup = new Addmemberpopup();
 
                     string command = "insert into members (number, name, phonenumbers, email, joindate, address)" +
@@ -220,7 +224,7 @@ namespace _106._2
                     if ( NotCanceled != null && NotCanceled == true)
                     {
                         
-                        var cmd = new NpgsqlCommand(command, con);
+                        var cmd = new NpgsqlCommand(command, SqlCONN);
                         await using var reader = await cmd.ExecuteReaderAsync();
                     }
                 }
@@ -228,18 +232,18 @@ namespace _106._2
                 {
                     MessageBox.Show(ex.Message);
                 }
-                finally {con.Close(); } 
+                finally { SqlCONN.Close(); } 
             
             }
         }
         public async void UpdateMember(string number, string name, string phonenumbers, string email, string joindate, string address)
         {
 
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            using (SqlCONN)
             {
                 try
                 {
-                    con.Open();
+                    SqlCONN.Open();
                     Updatememberpopup updatememberpopup = new Updatememberpopup();
                     string command = $"UPDATE members SET name = {name}, phonenumbers = {phonenumbers}, email = {email}, joindate = {joindate}, address = {address}" +
                                      $" WHERE number = {number} ",
@@ -254,7 +258,7 @@ namespace _106._2
                     {
                         string OldInfoGet = $"SELECT {Enum.GetName(typeof(Searchtype),item)} FROM members WHERE number = {number}  ";
 
-                       NpgsqlCommand command1 = new NpgsqlCommand(OldInfoGet, con);
+                       NpgsqlCommand command1 = new NpgsqlCommand(OldInfoGet, SqlCONN);
                       var readingmember =  command1.ExecuteReader();
                         while (readingmember.Read())
                         {
@@ -262,11 +266,12 @@ namespace _106._2
                         }
                        
                     }
-
+                    UpdateloginPopup updateloginPopup = new UpdateloginPopup();
+                    updateloginPopup.IdNumberBOX.Text = $"ID Number : {Environment.NewLine} {number}";
                     bool? NotCanceled = updatememberpopup.ShowDialog();
                     if (NotCanceled != null && NotCanceled == true)
                     {
-                        var cmd = new NpgsqlCommand(command, con);
+                        var cmd = new NpgsqlCommand(command, SqlCONN);
 
                         await using var reader = await cmd.ExecuteReaderAsync();
                     }
@@ -278,12 +283,14 @@ namespace _106._2
                 {
                     MessageBox.Show(ex.Message);
                 }
-                finally { con.Close(); }
+                finally { SqlCONN.Close(); }
 
             }
         }
         public bool numericinput =false;
         public bool Dateinput = false;
+
+
         // Buttons
         private void AddMemberBUTTON_Click(object sender, RoutedEventArgs e)
         {

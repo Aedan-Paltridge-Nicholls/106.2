@@ -24,15 +24,10 @@ namespace _106._2
         {
             InitializeComponent();
         }
-        public NpgsqlConnection connection()
-        {
-            AdminLoginView AdminLoginView = new AdminLoginView();
-            string connectionString = AdminLoginView.connectionString;
-            return new NpgsqlConnection(connectionString);
-        }
+     
         private void update_Click_1(object sender, RoutedEventArgs e)
         {
-            NpgsqlConnection conn = connection();
+            NpgsqlConnection conn = GlobalVariables.SqlCONN;
             conn.Open();
             string idnumber, number = IdNumberBOX.Text, Name = txtUser.Text, password = txtPassword.Text;
             int Removetext = number.IndexOf(':') + 2;

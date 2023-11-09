@@ -24,6 +24,10 @@
 
   <ItemGroup>
     <Resource Include="logo_color 1.png" />
+	  <Using Include="GlobalVariables">
+		  <static>True</static>
+	  </Using>
+	 
   </ItemGroup>
 
 </Project>

@@ -297,3 +297,6 @@ C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-wind
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\Updatememberpopup.baml
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\UpdateloginPopup.baml
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\UpdateloginPopup.g.cs
+D:\Users\270331389\source\repos\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\106.2.csprojAssemblyReference.cache
+D:\Users\270331389\source\repos\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\UpdateloginPopup.baml
+D:\Users\270331389\source\repos\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\UpdateloginPopup.g.cs

@@ -14,14 +14,13 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
             <RowDefinition/>
-            <RowDefinition Height=".2*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".1*" />
-                <ColumnDefinition />
+                <ColumnDefinition Width="1.48*"/>
                 <ColumnDefinition Width=".1*" />
-                <ColumnDefinition />
+                <ColumnDefinition Width="1.48*"/>
                 <ColumnDefinition Width=".1*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions >
@@ -29,7 +28,7 @@
                 <RowDefinition Height=".1*"/>
                 <RowDefinition Height=".05*"/>
                 <RowDefinition/>
-                <RowDefinition Height=".1*"/>
+                <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
           
             <!--Label's-->
@@ -45,29 +44,29 @@
             <Border  Grid.Row="3"  Grid.Column="3" BorderBrush="#000000" BorderThickness="1" >
                 <TextBlock IsEnabled="False" Background="White" x:Name="NewMemberInfo"/>
             </Border>
-            
+            <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="1.1*"/>
+                    <ColumnDefinition Width=".1*"/>
+                    <ColumnDefinition Width="1.1*"/>
+                    <ColumnDefinition Width=".1*"/>
+                    <ColumnDefinition Width="1.1*"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".5*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height=".5*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="Updatemember" Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="0"  Click="Updatemember_Click"  FontWeight="Bold">Update Member</Button>
+                <Button x:Name="UpdateLogin"  Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="2"  Click="UpdateLogin_Click"  FontWeight="Bold">Update Login</Button>
+                <Button x:Name="cancelbutton" Foreground="#FFFFFF" Background="#FF1010"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="4"  Click="CancelButton_Click"  FontWeight="Bold">Cancel Update</Button>
+
+
+            </Grid>
+
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".1*"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width=".1*"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width=".1*"/>
-                <ColumnDefinition Width=".7*"/>
-                <ColumnDefinition Width=".1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height=".5*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height=".5*"/>
-            </Grid.RowDefinitions>
-            <Button x:Name="Updatemember" Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="1"  Click="Updatemember_Click"  FontWeight="Bold">Update Member</Button>
-            <Button x:Name="UpdateLogin"  Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="3"  Click="UpdateLogin_Click"  FontWeight="Bold">Update Login</Button>
-            <Button x:Name="cancelbutton" Foreground="#FFFFFF" Background="#FF1010"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="5"  Click="CancelButton_Click"  FontWeight="Bold">Cancel</Button>
-
-
-        </Grid>
-
+        
     </Grid>
 </Window>
