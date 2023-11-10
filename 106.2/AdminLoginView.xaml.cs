@@ -92,7 +92,7 @@ namespace _106._2
             number, name, phonenumbers, email, joindate, address
         }
         
-        public  NpgsqlConnection  SqlCONN = GlobalVariables.SqlCONN ;
+        public  NpgsqlConnection  SqlCONN = GloVar.SqlCONN ;
         public  Searchtype searchtype = new Searchtype();
         
         public MemberdataStorage Memberdata = new();
