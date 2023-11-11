@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\App.xaml
-6-605814580
+7-1384340373
 
-10-1521681059
+9633993346
 218-269317474
-Addmemberpopup.xaml;AdminLoginView.xaml;login.xaml;MainWindow.xaml;UpdateloginPopup.xaml;Updatememberpopup.xaml;
+Admin\Book\AdminBookView.xaml;Admin\Members\Addmemberpopup.xaml;Admin\Members\AdminLoginView.xaml;Admin\Members\UpdateloginPopup.xaml;Admin\Members\Updatememberpopup.xaml;login.xaml;MainWindow.xaml;
 
-True
+False
 

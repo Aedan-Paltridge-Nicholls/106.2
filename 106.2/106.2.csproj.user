@@ -7,27 +7,33 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Addmemberpopup.xaml.cs">
+    <Compile Update="Admin\Book\AdminBookView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="AdminLoginView.xaml.cs">
+    <Compile Update="Admin\Members\Addmemberpopup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin\Members\AdminLoginView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="login.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UpdateloginPopup.xaml.cs">
+    <Compile Update="Admin\Members\UpdateloginPopup.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Updatememberpopup.xaml.cs">
+    <Compile Update="Admin\Members\Updatememberpopup.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Addmemberpopup.xaml">
+    <Page Update="Admin\Book\AdminBookView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="AdminLoginView.xaml">
+    <Page Update="Admin\Members\Addmemberpopup.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Admin\Members\AdminLoginView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="login.xaml">
@@ -36,10 +42,10 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UpdateloginPopup.xaml">
+    <Page Update="Admin\Members\UpdateloginPopup.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Updatememberpopup.xaml">
+    <Page Update="Admin\Members\Updatememberpopup.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

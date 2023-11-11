@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_106._2"
         mc:Ignorable="d"
-        Title="Updatememberpopup" Height="350" Width="300"
-    FontFamily="Calibri" MinHeight="100" MinWidth="300">
+        Title="Updatememberpopup" Height="350" Width="350"
+    FontFamily="Calibri" MinHeight="350" MinWidth="350">
 
     <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
@@ -39,10 +39,10 @@
             <!--content-->
 
             <Border  Grid.Row="3"  Grid.Column="1" BorderBrush="#000000" BorderThickness="1" >
-                <TextBlock IsEnabled="False" Background="White" x:Name="OldMemberInfo"/>
+                <TextBlock IsEnabled="False" TextWrapping="Wrap"  Background="White" x:Name="OldMemberInfo"/>
             </Border>
             <Border  Grid.Row="3"  Grid.Column="3" BorderBrush="#000000" BorderThickness="1" >
-                <TextBlock IsEnabled="False" Background="White" x:Name="NewMemberInfo"/>
+                <TextBlock IsEnabled="False" TextWrapping="Wrap" Background="White" x:Name="NewMemberInfo"/>
             </Border>
             <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>

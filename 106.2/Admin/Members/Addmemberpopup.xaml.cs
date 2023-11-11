@@ -26,9 +26,9 @@ namespace _106._2
             InitializeComponent();
             
         }
-        
-      
-       
+
+        public static NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
+
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -39,7 +39,7 @@ namespace _106._2
 
         private void Addbutton_Click_1(object sender, RoutedEventArgs e)
         {
-            NpgsqlConnection conn = GlobalVariables.SqlCONN;
+            NpgsqlConnection conn = SqlCONN;
             conn.Open();
             string idnumber , number = IdNumberBOX.Text , Name = txtUser.Text,password = txtPassword.Text ;
             int Removetext = number.IndexOf(':') + 2;

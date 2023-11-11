@@ -91,9 +91,8 @@ namespace _106._2
         {
             number, name, phonenumbers, email, joindate, address
         }
-        
-        public  NpgsqlConnection  SqlCONN = GloVar.SqlCONN ;
-        public  Searchtype searchtype = new Searchtype();
+
+        public Searchtype searchtype = new Searchtype();
         
         public MemberdataStorage Memberdata = new();
   
@@ -104,6 +103,7 @@ namespace _106._2
 
         public void LoadDatagrid(string comm)
         {
+            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
             comm = (comm == null) ? "SELECT * FROM members" : comm;
            
             NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
@@ -201,8 +201,7 @@ namespace _106._2
 
         public async void addmember(string number, string name, string phonenumbers, string email, string joindate, string address)
         {
-             
-            using (SqlCONN) 
+            using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;")) 
             {
                 try
                 {
@@ -236,10 +235,10 @@ namespace _106._2
             
             }
         }
-        public async void UpdateMember(string number, string name, string phonenumbers, string email, string joindate, string address)
+        public  void UpdateMember(string number, string name, string phonenumbers, string email, string joindate, string address)
         {
 
-            using (SqlCONN)
+            using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
             {
                 try
                 {
@@ -247,36 +246,48 @@ namespace _106._2
                     Updatememberpopup updatememberpopup = new Updatememberpopup();
                     string command = $"UPDATE members SET name = {name}, phonenumbers = {phonenumbers}, email = {email}, joindate = {joindate}, address = {address}" +
                                      $" WHERE number = {number} ",
-                       NEWinfo = $"Member ID Number :{number} {Environment.NewLine} " +
-                                  $"Member Name: {name}   {Environment.NewLine}" +
-                                  $"Member Phonenumber: {phonenumbers}  {Environment.NewLine}" +
-                                  $"Member Email: {email}  {Environment.NewLine}" +
-                                  $"Member Join-Date: {joindate}   {Environment.NewLine}" +
-                                  $"Member Address: {address}   {Environment.NewLine}" ;
-                    List<string> ListOldInfo = new List<string>();
-                    foreach (int item in Enum.GetValues(typeof(Searchtype)))
-                    {
-                        string OldInfoGet = $"SELECT {Enum.GetName(typeof(Searchtype),item)} FROM members WHERE number = {number}  ";
 
-                       NpgsqlCommand command1 = new NpgsqlCommand(OldInfoGet, SqlCONN);
-                      var readingmember =  command1.ExecuteReader();
-                        while (readingmember.Read())
+                       NEWinfo = $"Member ID Number :{number} {Environment.NewLine} " +
+                                 $"Member Name: {name}   {Environment.NewLine}" +
+                                 $"Member Phonenumber: {phonenumbers}  {Environment.NewLine}" +
+                                 $"Member Email: {email}  {Environment.NewLine}" +
+                                 $"Member Join-Date: {joindate}   {Environment.NewLine}" +
+                                 $"Member Address: {address}   {Environment.NewLine}",
+                       OLDinfo =  "";
+                    var cmdsql = new NpgsqlCommand($"SELECT * FROM members WHERE number  = {number} ", SqlCONN);
+                    using NpgsqlDataReader readerOne = cmdsql.ExecuteReader();
+                    while (readerOne.Read())
+                    {
+                        for (int i = 1; i < readerOne.FieldCount; i++)
                         {
-                            ListOldInfo.Add(readingmember.GetString(0));
+                            OLDinfo += (readerOne.GetValue(i)).ToString() + '|' ;
                         }
-                       
                     }
-                    UpdateloginPopup updateloginPopup = new UpdateloginPopup();
-                    updateloginPopup.IdNumberBOX.Text = $"ID Number : {Environment.NewLine} {number}";
+                    string[] strings = OLDinfo.Split('|');
+                    string OLDname = strings[0], OLDphonenumbers = strings[1], OLDemail = strings[2], OLDjoindate = strings[3], OLDaddress = strings[4];
+                    string[] strings1  = OLDjoindate.Split(' ');
+                    OLDjoindate = strings1[0];
+                    OLDinfo = $"Member ID Number :{number} {Environment.NewLine} " +
+                              $"Member Name: {OLDname}   {Environment.NewLine}" +
+                              $"Member Phonenumber: {OLDphonenumbers}  {Environment.NewLine}" +
+                              $"Member Email: {OLDemail}  {Environment.NewLine}" +
+                              $"Member Join-Date: {OLDjoindate}   {Environment.NewLine}" +
+                              $"Member Address: {OLDaddress}   {Environment.NewLine}";
+                    updatememberpopup.NewMemberInfo.Text = NEWinfo;
+                    updatememberpopup.OldMemberInfo.Text = OLDinfo;
+                    updatememberpopup.IdUpdateNumber = number;
+                    SqlCONN.Close();
+                    SqlCONN.Open();
+
                     bool? NotCanceled = updatememberpopup.ShowDialog();
                     if (NotCanceled != null && NotCanceled == true)
                     {
                         var cmd = new NpgsqlCommand(command, SqlCONN);
 
-                        await using var reader = await cmd.ExecuteReaderAsync();
+                        using var reader = cmd.ExecuteReader();
                     }
-                   
-                    
+
+
 
                 }
                 catch (Exception ex)
@@ -329,15 +340,17 @@ namespace _106._2
         private void JoinDataBOX_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             string Date = JoinDataBOX.SelectedDate.ToString();
-            Date = Date.Remove(Date.IndexOf(' '));
-            Memberdata.Set_joindate(Date);
-            if (Dateinput) 
+            if (membersdatagrid.SelectedIndex == 0)
             {
-                Searchtype outtype;
-                outtype = Searchtype.joindate;
-                LoadDatagrid(Date, outtype);
+                Date = Date.Remove(Date.IndexOf(' '));
+                Memberdata.Set_joindate(Date);
+                if (Dateinput)
+                {
+                    Searchtype outtype;
+                    outtype = Searchtype.joindate;
+                    LoadDatagrid(Date, outtype);
+                }
             }
-
         }
         // Textboxes
         private void EmailBOX_TextChanged(object sender, TextChangedEventArgs e)
@@ -430,7 +443,33 @@ namespace _106._2
 
         private void membersdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
+            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
+            SqlCONN.Open();
+            if(membersdatagrid.SelectedIndex != 0)
+            { 
+                    string number = membersdatagrid.SelectedIndex.ToString(), seleceted = "" ;
+                var cmdsql = new NpgsqlCommand($"SELECT * FROM members WHERE number  = {number} ", SqlCONN);
+                using NpgsqlDataReader readerOne = cmdsql.ExecuteReader();
+                while (readerOne.Read())
+                {
+                    for (int i = 0; i < readerOne.FieldCount; i++)
+                    {
+                        seleceted += (readerOne.GetValue(i)).ToString() + '|';
+                    }
+                }
+                string[] strings = seleceted.Split('|');
+                string OLDnumber = strings[0],  OLDname = strings[1], OLDphonenumbers = strings[2], OLDemail = strings[3], OLDjoindate = strings[4], OLDaddress = strings[5];
+                string[] strings1 = OLDjoindate.Split(' ');
+                OLDjoindate = strings1[0];
 
+                AddressBOX.Text = OLDaddress;
+                JoinDataBOX.Text = OLDjoindate;
+                EmailBOX.Text = OLDemail; 
+                PhonenumberBOX.Text = OLDphonenumbers;
+                NameBOX.Text = OLDname;
+                MembernumberBOX.Text = OLDnumber;
+            }
+            SqlCONN.Close();
         }
     }
 }

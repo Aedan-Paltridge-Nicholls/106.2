@@ -24,19 +24,20 @@ namespace _106._2
         {
             InitializeComponent();
         }
-     
+        public static NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
+
         private void update_Click_1(object sender, RoutedEventArgs e)
         {
-            NpgsqlConnection conn = GlobalVariables.SqlCONN;
+            NpgsqlConnection conn = SqlCONN;
             conn.Open();
             string idnumber, number = IdNumberBOX.Text, Name = txtUser.Text, password = txtPassword.Text;
-            int Removetext = number.IndexOf(':') + 2;
-            idnumber = number.Remove(0, Removetext);
+            int Removetext = number.IndexOf(':') ;
+            idnumber = number.Remove(0, (Removetext + 4));
             if (txtUser.Text != null || txtPassword.Text != null)
             {
-                string loginQuery = "UPDATE  logins" +
-                                   $"SET ( Username = \'{Name}\',password = \'{password}\'," +
-                                   $"WHERE (SELECT number FROM members WHERE number = {idnumber} ) ";
+                string loginQuery = " UPDATE  logins" +
+                                   $" SET  username = \'{Name}\', userpassword = \'{password}\' " +
+                                   $" WHERE userid = (SELECT number FROM members WHERE number = {idnumber} ) ";
                 NpgsqlCommand command = new NpgsqlCommand(loginQuery, conn);
                 command.ExecuteNonQuery();
             }

@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminLoginView"   
       FontFamily="Calibri">
-    
+
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".1*"></ColumnDefinition>
@@ -23,9 +23,15 @@
             <RowDefinition Height=".3*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid x:Name="membersdatagrid" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="1"  AutoGenerateColumns="False" SelectedCellsChanged="membersdatagrid_SelectedCellsChanged">
-            
-            <DataGrid.Columns > 
+        <DataGrid x:Name="membersdatagrid" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="1"  AutoGenerateColumns="False" SelectedCellsChanged="membersdatagrid_SelectedCellsChanged" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible">
+            <DataGrid.RowBackground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InfoColorKey}}"/>
+            </DataGrid.RowBackground>
+            <DataGrid.AlternatingRowBackground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionColorKey}}"/>
+            </DataGrid.AlternatingRowBackground>
+
+            <DataGrid.Columns >
                 <DataGridComboBoxColumn/>
                 <DataGridTextColumn Header="Member ID" Binding="{Binding number}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
@@ -33,7 +39,7 @@
                 <DataGridTextColumn Header="Email" Binding="{Binding email}"/>
                 <DataGridTextColumn Header="Join-date " Binding="{Binding joindate}"/>
                 <DataGridTextColumn Header="Address" Binding="{Binding address}"/>
-               
+
 
             </DataGrid.Columns>
         </DataGrid>
@@ -43,7 +49,7 @@
                 <ColumnDefinition Width="5*"></ColumnDefinition>
                 <ColumnDefinition Width="1.5*"></ColumnDefinition>
                 <ColumnDefinition Width="5*"></ColumnDefinition>
-               
+
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -54,8 +60,8 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <!-- Search row -->
-                <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" >Search:</Label>
-            
+            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" >Search:</Label>
+
             <TextBox x:Name="SearchBOX" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="SearchBOX_TextChanged"/>
             <!-- row 1  -->
             <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" >Member No:</Label>
@@ -85,7 +91,7 @@
             <!-- row 4  -->
             <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" >Email:</Label>
             <TextBox x:Name="EmailBOX" Grid.Column="1" Grid.Row="4" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="EmailBOX_TextChanged"/>
-           <!-- Button row -->
+            <!-- Button row -->
             <Grid Grid.Column="1" Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -93,10 +99,10 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
 
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid Grid.Column="1" Margin="0,5,0,0" >
-                    <Button  x:Name="AddMemberBUTTON" Background="#C6C5FF" Click="AddMemberBUTTON_Click" > Add Member </Button>
-                    
+                    <Button  x:Name="AddMemberBUTTON" Background="#C6C5FF" Click="AddMemberBUTTON_Click" >Add Member</Button>
+
                 </Grid>
             </Grid>
             <Grid Grid.Column="3" Grid.Row="5">
