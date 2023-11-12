@@ -37,7 +37,7 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
                 <DataGridTextColumn Header="Phonenumber" Binding="{Binding phonenumbers}"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding email}"/>
-                <DataGridTextColumn Header="Join-date " Binding="{Binding joindate}"/>
+                <DataGridTextColumn Header="Join-date " Binding="{Binding joindate ,StringFormat='yyyy-MM-dd'}"/>
                 <DataGridTextColumn Header="Address" Binding="{Binding address}"/>
 
 

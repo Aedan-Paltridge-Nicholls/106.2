@@ -244,7 +244,7 @@ namespace _106._2
                 {
                     SqlCONN.Open();
                     Updatememberpopup updatememberpopup = new Updatememberpopup();
-                    string command = $"UPDATE members SET name = {name}, phonenumbers = {phonenumbers}, email = {email}, joindate = {joindate}, address = {address}" +
+                    string command = $"UPDATE members SET name = \'{name}\', phonenumbers = \'{phonenumbers}\', email = \'{email}\', joindate = \'{joindate}\', address = \'{address}\'" +
                                      $" WHERE number = {number} ",
 
                        NEWinfo = $"Member ID Number :{number} {Environment.NewLine} " +
@@ -402,6 +402,7 @@ namespace _106._2
         
         private void SearchBOX_TextChanged(object sender, TextChangedEventArgs e)
         {
+            membersdatagrid.SelectedIndex = -1;
             string SearchOut = "" ;
             if (numericinput)
             {
@@ -468,6 +469,7 @@ namespace _106._2
                 PhonenumberBOX.Text = OLDphonenumbers;
                 NameBOX.Text = OLDname;
                 MembernumberBOX.Text = OLDnumber;
+                Memberdata.Set_joindate(OLDjoindate);
             }
             SqlCONN.Close();
         }
