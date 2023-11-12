@@ -293,7 +293,7 @@ namespace _106._2
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                }
+                 }
                 finally { SqlCONN.Close(); }
 
             }
