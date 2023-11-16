@@ -20,6 +20,7 @@ namespace _106._2
     /// </summary>
     public partial class UpdateloginPopup : Window
     {
+        
         public UpdateloginPopup()
         {
             InitializeComponent();

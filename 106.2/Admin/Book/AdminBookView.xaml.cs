@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,10 +26,9 @@ namespace _106._2.Admin.Book
             InitializeComponent();
         }
 
-        private void ChangeInfoBUTTON_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+ //    will need to test layter   select book.*, booklog.* , members.name from book
+ //inner join booklog on booklog.bookid = book.bookid
+ //inner join members on booklog.issuedid = members.number;
 
         private void AddBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
@@ -50,47 +50,48 @@ namespace _106._2.Admin.Book
 
         }
 
-        private void Bookname_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void TitleBOX_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void genre_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void GenreBOX_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void CopyNumberBOX_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void Booksdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
 
         }
 
-        private void Booksdatagrid_SelectedCellsChanged_1(object sender, SelectedCellsChangedEventArgs e)
-        {
 
-        }
 
         private void AuthorBOX_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void JoinDataBOX_TextChanged(object sender, TextChangedEventArgs e)
+     
+        
+
+        private void GenreOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void WithdrawBookBUTTON_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ChangeBookInfoBUTTON_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void HoldBookBUTTON_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ReturnBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
 
         }
