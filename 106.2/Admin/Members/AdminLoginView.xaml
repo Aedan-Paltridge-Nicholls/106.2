@@ -23,7 +23,7 @@
             <RowDefinition Height=".3*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid x:Name="membersdatagrid" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="1"  AutoGenerateColumns="False" SelectedCellsChanged="membersdatagrid_SelectedCellsChanged" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible">
+        <DataGrid x:Name="membersdatagrid" IsReadOnly="True" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="1"  AutoGenerateColumns="False" SelectedCellsChanged="membersdatagrid_SelectedCellsChanged" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible">
             <DataGrid.RowBackground>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InfoColorKey}}"/>
             </DataGrid.RowBackground>

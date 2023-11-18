@@ -24,7 +24,7 @@
             <RowDefinition Height=".3*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid x:Name="Booksdatagrid" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="1"  AutoGenerateColumns="False" SelectedCellsChanged="Booksdatagrid_SelectedCellsChanged" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible">
+        <DataGrid x:Name="Booksdatagrid" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False"  SelectedCellsChanged="Booksdatagrid_SelectedCellsChanged" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible">
             <DataGrid.RowBackground>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InfoColorKey}}"/>
             </DataGrid.RowBackground>
@@ -34,11 +34,19 @@
 
             <DataGrid.Columns >
                 <DataGridComboBoxColumn/>
-                <DataGridTextColumn Header="Book ID" Binding="{Binding number}"/>
-                <DataGridTextColumn Header="Title" Binding="{Binding name}"/>
-                <DataGridTextColumn Header="Author" Binding="{Binding phonenumbers}"/>
-                <DataGridTextColumn Header="Genre" Binding="{Binding email}"/>
-
+                <DataGridTextColumn Header="Book ID" Binding="{Binding book_id}"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding bookname}"/>
+                <DataGridTextColumn Header="Author" Binding="{Binding author}"/>
+                <DataGridTextColumn Header="Genre" Binding="{Binding genre}"/>
+                <DataGridCheckBoxColumn  Header="On Hold" Binding="{Binding onhold}"/>
+                <DataGridCheckBoxColumn  Header="Withdrawn" Binding="{Binding withdrawn}"/>
+                <DataGridCheckBoxColumn  Header="Overdue" Binding="{Binding overdue}"/>
+                <DataGridCheckBoxColumn  Header="Returned" Binding="{Binding returned}"/>
+                <DataGridTextColumn Header="Due-date" Binding="{Binding duedate, StringFormat='yyyy-MM-dd'}" />
+                <DataGridTextColumn  Header="Hold ID" Binding="{Binding holdid}"/>
+                <DataGridTextColumn  Header="On Hold to" Binding="{Binding username_holdid}"/>
+                <DataGridTextColumn  Header="Issued id" Binding="{Binding issuedid}"/>
+                <DataGridTextColumn  Header="Issued to" Binding="{Binding username_issuedid}"/>
 
             </DataGrid.Columns>
         </DataGrid>
@@ -67,11 +75,8 @@
             <TextBox x:Name="BookIdnumberBOX" Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="BookIdnumberBOX_TextChanged" MaxLines="1"/>
 
             <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" >Search By</Label>
-            <ComboBox x:Name="SearchOptionBOX" IsEditable="False"  Grid.Column="3" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="0" SelectionChanged="SearchOptionBOX_SelectionChanged" >
-                <ComboBoxItem>Book ID</ComboBoxItem>
-                <ComboBoxItem>Title</ComboBoxItem>
-                <ComboBoxItem>Author</ComboBoxItem>
-                <ComboBoxItem>Genre</ComboBoxItem>
+            <ComboBox x:Name="SearchOptionBOX" IsEditable="False" ItemsSource="{Binding}" Grid.Column="3" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="0" SelectionChanged="SearchOptionBOX_SelectionChanged" >
+                
             </ComboBox>
             <!--row 2-->
             <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" >Title:</Label>
@@ -81,7 +86,7 @@
             <TextBox x:Name="AuthorBOX" Grid.Column="3" Grid.Row="2" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="AuthorBOX_TextChanged" MaxLines="1"/>
             <!--row 3-->
             <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" >Genre:</Label>
-            <ComboBox x:Name="GenreOptionBOX" ItemsSource="{Binding}" IsEditable="False"  Grid.Column="1" Grid.Row="3" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectionChanged="GenreOptionBOX_SelectionChanged" >
+            <ComboBox x:Name="GenreOptionBOX" ItemsSource="{Binding}" IsEditable="False" SelectedIndex="0" Grid.Column="1" Grid.Row="3" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectionChanged="GenreOptionBOX_SelectionChanged" >
 
             </ComboBox>
             <Label Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" >Selected:</Label>

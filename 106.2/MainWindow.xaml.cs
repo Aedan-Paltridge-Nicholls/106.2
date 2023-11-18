@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using _106._2.Admin.Book;
 using Npgsql;
 namespace _106._2
 {
@@ -38,6 +39,7 @@ namespace _106._2
 
         private void AdminBookButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            Main.Content = new AdminBookView();
         }
 
         private void DuedateButton_MouseDown(object sender, MouseButtonEventArgs e)
