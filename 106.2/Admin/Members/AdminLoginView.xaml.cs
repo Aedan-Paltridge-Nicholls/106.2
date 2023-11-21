@@ -25,6 +25,7 @@ using System.Windows.Controls.Primitives;
 using Xceed.Wpf.AvalonDock.Themes;
 using Xceed.Wpf.Toolkit.Primitives;
 using static _106._2.AdminLoginView;
+using System.Reflection;
 
 namespace _106._2
 {
@@ -402,7 +403,7 @@ namespace _106._2
         
         private void SearchBOX_TextChanged(object sender, TextChangedEventArgs e)
         {
-            membersdatagrid.SelectedIndex = -1;
+            
             string SearchOut = "" ;
             if (numericinput)
             {
@@ -440,36 +441,30 @@ namespace _106._2
             }
         }
 
+        
+       
+                
+            
 
 
-        private void membersdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+    private void membersdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
             SqlCONN.Open();
-            if(membersdatagrid.SelectedIndex != 0)
+            if(membersdatagrid.SelectedIndex != -1)
             { 
-                    string number = membersdatagrid.SelectedIndex.ToString(), seleceted = "" ;
-                var cmdsql = new NpgsqlCommand($"SELECT * FROM members WHERE number  = {number} ", SqlCONN);
-                using NpgsqlDataReader readerOne = cmdsql.ExecuteReader();
-                while (readerOne.Read())
-                {
-                    for (int i = 0; i < readerOne.FieldCount; i++)
-                    {
-                        seleceted += (readerOne.GetValue(i)).ToString() + '|';
-                    }
-                }
-                string[] strings = seleceted.Split('|');
-                string OLDnumber = strings[0],  OLDname = strings[1], OLDphonenumbers = strings[2], OLDemail = strings[3], OLDjoindate = strings[4], OLDaddress = strings[5];
-                string[] strings1 = OLDjoindate.Split(' ');
-                OLDjoindate = strings1[0];
-
-                AddressBOX.Text = OLDaddress;
-                JoinDataBOX.Text = OLDjoindate;
-                EmailBOX.Text = OLDemail; 
-                PhonenumberBOX.Text = OLDphonenumbers;
-                NameBOX.Text = OLDname;
-                MembernumberBOX.Text = OLDnumber;
-                Memberdata.Set_joindate(OLDjoindate);
+                DataGrid dg = (DataGrid)sender;
+                DataRowView selectedRow = dg.SelectedItem as DataRowView;
+               
+                
+                
+                AddressBOX.Text = selectedRow[5].ToString();
+                JoinDataBOX.Text = selectedRow[4].ToString();
+                EmailBOX.Text = selectedRow[3].ToString(); 
+                PhonenumberBOX.Text = selectedRow[2].ToString();
+                NameBOX.Text = selectedRow[1].ToString();
+                MembernumberBOX.Text = selectedRow[0].ToString();
+                Memberdata.Set_joindate(selectedRow[4].ToString());
             }
             SqlCONN.Close();
         }

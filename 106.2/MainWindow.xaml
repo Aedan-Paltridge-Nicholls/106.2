@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:_106._2"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900"
-        FontFamily="Calibri">
+        FontFamily="Calibri" FontStretch="UltraExpanded">
 
     <Grid >
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -18,6 +19,7 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
+
        <Grid x:Name="Header" Background="Black" Grid.Column="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.1*"/>
@@ -58,9 +60,12 @@
                     <RowDefinition Height="1*"/>
                     <!--Row 1-->
                 </Grid.RowDefinitions>
-                <Image Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Source="/logo_color 1.png"/>
+                <Image Grid.Column="0"  Grid.Row="0" Source="/Images/logo_color 1.png" IsEnabled="False">
+                    
+                </Image>
                 <TextBlock Foreground="White" Grid.Column="0" Grid.Row="2"> LIBRARY OF YOOBEE COLLEGE</TextBlock>
             </Grid>
+           
             <Grid x:Name="Searchbar" Grid.Column="2" Grid.Row="1" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"/>
@@ -83,6 +88,7 @@
                     <RowDefinition Height="1*"/>
                     <!--Row 2-->
                 </Grid.RowDefinitions>
+                
                 <TextBox x:Name="textBox" Grid.Column="1" Grid.Row="1" MaxLines="1" VerticalContentAlignment="Center"/>
                 <Button x:Name="search" Grid.Column="3" Grid.Row="1" >Search</Button>
             </Grid>
@@ -150,7 +156,7 @@
             
 
 
-            <Viewbox x:Name="AdminBookButton"  Grid.Row="1" Grid.Column="2"  MouseDown="AdminBookButton_MouseDown">
+            <Viewbox x:Name="AdminBookButton" StretchDirection="Both" Stretch="Uniform"  Grid.Row="1" Grid.Column="2"  MouseDown="AdminBookButton_MouseDown">
                 <TextBlock Margin=" 1.5,1.5,1.5,1.5" TextWrapping="Wrap" Text="Book" />
             </Viewbox>
             <Viewbox x:Name="MembersButton"  Grid.Row="1" Grid.Column="3"   MouseDown="MembersButton_MouseDown"  >

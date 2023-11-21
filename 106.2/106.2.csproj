@@ -12,7 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="56600013.JPG.JPG" />
     <None Remove="logo_color 1.png" />
+    <None Remove="logo_white 3.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="56600013.JPG.JPG" />
+    <Resource Include="Images\logo_color 1.png" />
     <Resource Include="logo_color 1.png" />
+    <Resource Include="logo_white 3.png" />
   </ItemGroup>
 
 </Project>
