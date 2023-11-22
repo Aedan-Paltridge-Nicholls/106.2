@@ -204,6 +204,7 @@ namespace _106._2
         {
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;")) 
             {
+                if (number == "") { MessageBox.Show(" Must enter Member id number"); }
                 try
                 {
                     SqlCONN.Open();
@@ -220,6 +221,7 @@ namespace _106._2
                                   $"Member Join-Date: {joindate}   {Environment.NewLine}" +
                                   $"Member Address: {address}   {Environment.NewLine}";
                     addmemberpopup.MemberInfoBox.Text = info;
+                    addmemberpopup.IdNumberBOX.Text = $"ID Number :{Environment.NewLine}{number}";
                     bool? NotCanceled = addmemberpopup.ShowDialog();
                     if ( NotCanceled != null && NotCanceled == true)
                     {
@@ -467,6 +469,25 @@ namespace _106._2
                 Memberdata.Set_joindate(selectedRow[4].ToString());
             }
             SqlCONN.Close();
+        }
+
+        
+
+        private void ClearSearch_Click(object sender, RoutedEventArgs e)
+        {
+            SearchBOX.Clear();
+            SearchOptionBOX.SelectedIndex = -1;
+        }
+
+        private void ResetMemberDataGridSelection_Click(object sender, RoutedEventArgs e)
+        {
+            membersdatagrid.SelectedIndex = -1;
+            NameBOX.Clear();
+            MembernumberBOX.Clear();
+            PhonenumberBOX.Clear();
+            JoinDataBOX.Text = DateTime.Now.ToString();
+            EmailBOX.Clear();
+            AddressBOX.Clear();
         }
     }
 }

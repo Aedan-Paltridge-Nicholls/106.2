@@ -11,7 +11,7 @@
       FontSize="17pt "
       FontFamily="Calibri">
 
-    <Grid Background="White" ShowGridLines="True">
+    <Grid Background="White" ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".5*"/>
             <ColumnDefinition Width="5*"/>
@@ -28,7 +28,7 @@
             <RowDefinition Height=".5*"/>
         </Grid.RowDefinitions>
         <Image Grid.ColumnSpan="2" Grid.RowSpan="3"  Source="/56600013.JPG.JPG" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <Grid Grid.Row="1" Grid.Column="1" ShowGridLines="True">
+        <Grid Grid.Row="1" Grid.Column="1" ShowGridLines="False">
             <Grid.RowDefinitions>
                 <RowDefinition Height="6*"/>
                 <RowDefinition Height="17*"/>

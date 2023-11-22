@@ -41,15 +41,17 @@ namespace _106._2
         {
             NpgsqlConnection conn = SqlCONN;
             conn.Open();
+
             string idnumber , number = IdNumberBOX.Text , Name = txtUser.Text,password = txtPassword.Text ;
             int Removetext = number.IndexOf(':') + 2;
             idnumber = number.Remove(0, Removetext);
-            if (txtUser.Text != null || txtPassword.Text != null )
+            if (txtUser.Text != "" || txtPassword.Text != ""|| number == "")
             {
                 string loginQuery = "INSERT INTO logins(Username,password,Userid)" +
                                    $"VALUES ({Name},{password},(SELECT number FROM members WHERE number = {idnumber} ) )";
                 NpgsqlCommand command = new NpgsqlCommand(loginQuery, conn);
                 command.ExecuteNonQuery();
+                conn.Close();
             }
             else
             {

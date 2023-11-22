@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
+using _106._2.MainProgram.User;
 
 namespace _106._2
 {
@@ -26,7 +27,7 @@ namespace _106._2
         {
             InitializeComponent();
         }
-
+        public string LoginId {  get; set; }
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
@@ -34,16 +35,31 @@ namespace _106._2
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
             DataTable dataTable = new DataTable();
             adapter.Fill(dataTable);
-            if (dataTable != null ) 
+            if (dataTable.Rows.Count > 0 ) 
             {
                 MainWindow mainWindow = new MainWindow();
-                this.Close();
+                this.Close();                           
                 mainWindow.Show();
-            
+                string IsAdmin = dataTable.Columns.IndexOf("isadmin").ToString() ;
+                if (IsAdmin == "true")
+                {
+                    LoginId = dataTable.Columns.IndexOf("userid").ToString();
+                     mainWindow = new MainWindow();
+                    mainWindow.Show (); 
+                    this.Close();
+                }
+                else if (IsAdmin == "false") 
+                {
+                    LoginId = dataTable.Columns.IndexOf("userid").ToString();
+                    UserLoginView userLoginView = new UserLoginView();
+                    userLoginView.Show();
+                    this.Close();
+                }
             }
             else 
             {
-                MessageBox.Show("Incorect Login");
+               
+               MessageBox.Show("Incorect Login","Login fail", MessageBoxButton.OK, MessageBoxImage.Error );
             }
         }
     }

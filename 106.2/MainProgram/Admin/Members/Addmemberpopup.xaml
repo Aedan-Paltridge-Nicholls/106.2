@@ -6,6 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Addmemberpopup" Height="350" Width="300"
+        MaxHeight="350" MaxWidth="300"
            FontFamily="Calibri" MinHeight="350" MinWidth="300">
     <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
@@ -15,11 +16,9 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Grid.IsSharedSizeScope="True">
-            <Border.BorderBrush>
-                <SolidColorBrush Color="Black"/>
-            </Border.BorderBrush>
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,0" Background="White" x:Name="MemberInfoBox" TextWrapping="Wrap" IsEnabled="False"  >
+        <Border Grid.Row="0" Grid.Column="0" Margin="10,0" BorderBrush="Black" BorderThickness="1">
+            
+            <TextBlock  Background="White" x:Name="MemberInfoBox" TextWrapping="Wrap" IsEnabled="False"  >
 
             </TextBlock>
         </Border>
@@ -45,12 +44,12 @@
                 <RowDefinition Height=".5*"/>
 
             </Grid.RowDefinitions>
-            <xctk:WatermarkTextBox x:Name="txtUser" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"  TextAlignment="Justify" FontSize="20" MaxLines="1" Watermark="User Name"/>
-            <xctk:WatermarkPasswordBox x:Name="txtPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7"  TextAlignment="Justify" FontSize="20" MaxLines="1" Watermark="Password"/>
-            <Button x:Name="Addbutton" Background="#C6C5FF" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Click="Addbutton_Click_1">Add Member</Button>
-            <Button x:Name="cancelbutton" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="3" Click="CancelButton_Click">Cancel</Button>
+            <xctk:WatermarkTextBox BorderBrush="Black" x:Name="txtUser" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"  TextAlignment="Justify" FontSize="20" MaxLines="1" Watermark="User Name"/>
+            <xctk:WatermarkPasswordBox BorderBrush="Black" x:Name="txtPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7"  TextAlignment="Justify" FontSize="20" MaxLines="1" Watermark="Password"/>
+            <Button FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="Addbutton" Background="#C6C5FF" Foreground="#0A66C2" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"  Click="Addbutton_Click_1">Add Member</Button>
+            <Button FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="cancelbutton" Background="#FF1010" Foreground="White" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="3"  Click="CancelButton_Click">Cancel</Button>
             <TextBlock Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="2" TextWrapping="Wrap" IsEnabled="False" x:Name="IdNumberBOX"  TextAlignment="Center"  Text="ID Number :" Background="White" />
-            <Border BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1" Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <Border BorderBrush="Black" BorderThickness="1" Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2"/>
 
         </Grid>
 

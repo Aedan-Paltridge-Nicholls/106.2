@@ -1,10 +1,12 @@
-﻿using Npgsql;
+﻿using _106._2.MainProgram.Admin.Book;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -58,19 +60,19 @@ namespace _106._2.Admin.Book
             public void Set_IssuedTo(string Input) { IssuedTo = Input.Trim(); }
 
             // Getters
-            public string Get_BookID(string Input) { return BookID; }
-            public string Get_Title(string Input) { return Title; }
-            public string Get_Author(string Input) { return Author; }
-            public string Get_Genre(string Input) { return Genre; }
-            public string Get_OnHold(string Input) { return OnHold; }
-            public string Get_Withdrawn(string Input) { return Withdrawn; }
-            public string Get_Overdue(string Input) { return Overdue; }
-            public string Get_Returned(string Input) { return Returned; }
-            public string Get_DueDate(string Input) { return DueDate; }
-            public string Get_HoldID(string Input) { return HoldID; }
-            public string Get_OnHoldTo(string Input) { return OnHoldTo; }
-            public string Get_IssuedId(string Input) { return IssuedId; }
-            public string Get_IssuedTo(string Input) { return IssuedTo; }
+            public string Get_BookID() { return BookID; }
+            public string Get_Title() { return Title; }
+            public string Get_Author() { return Author; }
+            public string Get_Genre() { return Genre; }
+            public string Get_OnHold() { return OnHold; }
+            public string Get_Withdrawn() { return Withdrawn; }
+            public string Get_Overdue() { return Overdue; }
+            public string Get_Returned() { return Returned; }
+            public string Get_DueDate() { return DueDate; }
+            public string Get_HoldID() { return HoldID; }
+            public string Get_OnHoldTo() { return OnHoldTo; }
+            public string Get_IssuedId() { return IssuedId; }
+            public string Get_IssuedTo() { return IssuedTo; }
 
             public DataStorage()
             {
@@ -124,32 +126,32 @@ namespace _106._2.Admin.Book
         {
             switch (type)
             {
-                case  Searchtype.BookID:
+                case Searchtype.BookID:
                     return "BookID";
                 case Searchtype.Title:
-                   return "Title";
+                    return "Title";
                 case Searchtype.Author:
-                   return "Author";
+                    return "Author";
                 case Searchtype.Genre:
-                   return "Genre";
+                    return "Genre";
                 case Searchtype.OnHold:
-                   return "OnHold";
-                case  Searchtype.Withdrawn:
-                   return "Withdrawn";
+                    return "OnHold";
+                case Searchtype.Withdrawn:
+                    return "Withdrawn";
                 case Searchtype.Overdue:
-                   return "Overdue";
+                    return "Overdue";
                 case Searchtype.Returned:
-                   return "Returned";
+                    return "Returned";
                 case Searchtype.DueDate:
-                   return "DueDate";
+                    return "DueDate";
                 case Searchtype.HoldID:
-                   return "HoldID";
+                    return "HoldID";
                 case Searchtype.OnHoldTo:
-                   return "OnHoldTo";
+                    return "OnHoldTo";
                 case Searchtype.IssuedId:
-                   return "IssuedId";
+                    return "IssuedId";
                 case Searchtype.IssuedTo:
-                   return "IssuedTo";
+                    return "IssuedTo";
                 default:
                     return "";
 
@@ -181,7 +183,7 @@ namespace _106._2.Admin.Book
         public void LoadDatagrid(string comm)
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-            if(comm == null)
+            if (comm == null)
             {
                 LoadDatagrid();
                 return;
@@ -228,7 +230,7 @@ namespace _106._2.Admin.Book
                         + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                         + " FROM book"
                         + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                        +$" WHERE  (SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) = {Output}  "
+                        + $" WHERE  (SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) = {Output}  "
                         + " order by Book_id;";
                         LoadDatagrid($"{command}");
                     }
@@ -251,7 +253,7 @@ namespace _106._2.Admin.Book
                     break;
                 case "Author":
                     {
-                      
+
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,"
@@ -268,7 +270,7 @@ namespace _106._2.Admin.Book
                     break;
                 case "Genre":
                     {
-                        
+
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,"
@@ -351,7 +353,7 @@ namespace _106._2.Admin.Book
                     break;
                 case "IssuedTo":
                     {
-                       
+
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,"
@@ -391,23 +393,20 @@ namespace _106._2.Admin.Book
                     Genres.Add((readerOne.GetValue(i)).ToString());
                 }
             }
-           GenreOptionBOX.ItemsSource = Genres;
+            GenreOptionBOX.ItemsSource = Genres;
             SqlCONN.Close();
         }
-        
-        private void AddBookBUTTON_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
+
 
         private void BookIdnumberBOX_TextChanged(object sender, TextChangedEventArgs e)
         {
-           dataStorage.Set_BookID(BookIdnumberBOX.Text);
+            dataStorage.Set_BookID(BookIdnumberBOX.Text);
         }
 
         private void SearchOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch (SearchOptionBOX.SelectedIndex) 
+            switch (SearchOptionBOX.SelectedIndex)
             {
                 case 0:
                     {
@@ -415,7 +414,7 @@ namespace _106._2.Admin.Book
                         Boolinput = false;
                         Numericinput = true;
                     }
-                break;
+                    break;
                 case 4:
                     {
                         Dateinput = false;
@@ -465,7 +464,7 @@ namespace _106._2.Admin.Book
                         Numericinput = true;
                     }
                     break;
-                    default: 
+                default:
                     {
                         Dateinput = false;
                         Boolinput = false;
@@ -592,23 +591,136 @@ namespace _106._2.Admin.Book
                             + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                             + " FROM book"
                             + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            +$" WHERE  genre = \'{GenreOptionBOX.SelectedItem}\' "
+                            + $" WHERE  genre = \'{GenreOptionBOX.SelectedItem}\' "
                             + " order by Book_id;";
                 LoadDatagrid(command);
             }
         }
-        
+        public void Addbook(String BookID,String Title,String Author, String Genre)
+        {
+            using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
+            {
+                if (BookID == "") { MessageBox.Show(" Must enter Book id number"); }
+                try
+                {
+                    SqlCONN.Open();
+                    AddBookPopup addBookPopup = new AddBookPopup();
 
+                    string command = "INSERT INTO book (bookID, bookname, author, genre)" +
+                        $" VALUES ( {BookID}, '{Title}', '{Author}', '{Genre}'  );" +
+                        $" INSERT INTO booklog (bookID) VALUES ({BookID}) ";
+
+
+                    string info = $"Book ID Number :{BookID} {Environment.NewLine} " +
+                                  $"Book Title: {Title}   {Environment.NewLine}" +
+                                  $"Book Author: {Author}  {Environment.NewLine}" +
+                                  $"Book Genre: {Genre}  {Environment.NewLine}";
+                    addBookPopup.BookInfoBox.Text = info;
+                    
+                    bool? NotCanceled = addBookPopup.ShowDialog();
+                    if (NotCanceled != null && NotCanceled == true)
+                    {
+
+                        var cmd = new NpgsqlCommand(command, SqlCONN);
+                       cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally { SqlCONN.Close(); }
+
+            }
+        }
+        private void AddBookBUTTON_Click(object sender, RoutedEventArgs e)
+        {
+            string BookIdOut = dataStorage.Get_BookID(),
+                BooKTitleOut = dataStorage.Get_Title(),
+                BookAuthorOut = dataStorage.Get_Author(),
+                BookGenreOut = dataStorage.Get_Genre();
+            Addbook(BookIdOut,BooKTitleOut,BookAuthorOut,BookGenreOut);
+            Booksdatagrid.Items.Refresh();
+        }
         private void WithdrawBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        public void Updatebook(String BookID, String Title, String Author, String Genre)
+        {
+            using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
+            {
+                
+                try
+                {
 
+                    SqlCONN.Open();
+                    UpdateBookPopup UpadteBookPopup = new UpdateBookPopup();
+
+                    string command = "UPDATE  book " +
+                        $" SET bookname = '{Title}',author = '{Author}',genre = '{Genre}'  " +
+                        $" WHERE bookID = ({BookID}) ", SelectedBookId = SelectedBookID.Text.Substring(SelectedBookID.Text.IndexOf(':')+2 ) ;
+                    if (SelectedBookId == "") 
+                    {
+                        throw new Exception(" Must select a book to update ");
+                    }
+                    DataTable dataTable = new DataTable();
+
+                    NpgsqlCommand cmd1 = new NpgsqlCommand($"Select * FROM book WHERE bookid = {SelectedBookId}", SqlCONN);
+                    NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    dt.Rows[1].ToString();
+                    
+                    string
+                    OldBookId = dt.Rows[0].ToString(),
+                    OldTitle = dt.Rows[1].ToString(),
+                    OLdAuthor = dt.Rows[2].ToString(),
+                    OldGenre = dt.Rows[3].ToString(); 
+                 string Newinfo = $"Book ID Number :{BookID} {Environment.NewLine} " +
+                                  $"Book Title: {Title}   {Environment.NewLine}" +
+                                  $"Book Author: {Author}  {Environment.NewLine}" +
+                                  $"Book Genre: {Genre}  {Environment.NewLine}",
+                        Oldinfo = $"Book ID Number :{OldBookId} {Environment.NewLine} " +
+                                  $"Book Title: {OldTitle}   {Environment.NewLine}" +
+                                  $"Book Author: {OLdAuthor}  {Environment.NewLine}" +
+                                  $"Book Genre: {OldGenre}  {Environment.NewLine}";
+
+
+
+
+                    UpadteBookPopup.OldBookInfo.Text = Oldinfo;
+                    UpadteBookPopup.NewBookInfo.Text = Newinfo;
+                    bool? NotCanceled = UpadteBookPopup.ShowDialog();
+                    if (NotCanceled != null && NotCanceled == true)
+                    {
+
+                        var cmd = new NpgsqlCommand(command, SqlCONN);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally { SqlCONN.Close(); }
+
+            }
+        }
         private void ChangeBookInfoBUTTON_Click(object sender, RoutedEventArgs e)
         {
+            string BookIdOut = dataStorage.Get_BookID(),
+                 BooKTitleOut = dataStorage.Get_Title(),
+                 BookAuthorOut = dataStorage.Get_Author(),
+                 BookGenreOut = dataStorage.Get_Genre();
+            Updatebook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut);
+            RefreshBookGrid();
 
         }
-
+        private void RefreshBookGrid() 
+        {
+            LoadDatagrid();
+        }
         private void HoldBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
 
@@ -616,7 +728,7 @@ namespace _106._2.Admin.Book
 
         private void ReturnBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
         private void Booksdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
@@ -632,7 +744,7 @@ namespace _106._2.Admin.Book
                 AuthorBOX.Text = selectedRow.Row[2].ToString();
                 GenreOptionBOX.Text = selectedRow.Row[3].ToString();
                 DuedateDatepicker.Text = selectedRow.Row[8].ToString();
-                SelectedBookID.Text = $"Book ID : {number}";
+                SelectedBookID.Text = $"Book ID :{Environment.NewLine}{number}";
                 
             }
           

@@ -55,7 +55,6 @@ namespace _106._2
 
         private void HomeButton_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
-
         }
     }
 }

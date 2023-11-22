@@ -62,7 +62,18 @@
             <!-- Search row -->
             <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" >Search:</Label>
 
-            <TextBox x:Name="SearchBOX" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="SearchBOX_TextChanged"/>
+            <Grid Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0"  >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <ColumnDefinition Width=".5*"></ColumnDefinition>
+                    <ColumnDefinition Width=".5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="2" x:Name="ResetMemberDataGridSelection" Margin="1,1,1,1" Background="#C6C5FF" BorderBrush="Black" Click="ResetMemberDataGridSelection_Click" >Reset selection</Button>
+                <TextBox x:Name="SearchBOX" Grid.Column="0" Grid.ColumnSpan="2"  Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="SearchBOX_TextChanged" MaxLines="1" />
+                <Button x:Name="ClearSearch" Background="#C6C5FF"  Grid.Column="3" BorderBrush="Black" Margin="1,1,1,1" Click="ClearSearch_Click">Clear Search</Button>
+            </Grid>
             <!-- row 1  -->
             <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" >Member No:</Label>
             <TextBox x:Name="MembernumberBOX" Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="MembernumberBOX_TextChanged"/>
@@ -83,7 +94,7 @@
             <Label Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" >Phonenumber:</Label>
             <TextBox x:Name="PhonenumberBOX" Grid.Column="3" Grid.Row="2" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="PhonenumberBOX_TextChanged"/>
             <!-- row 3  -->
-            <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" >Join ee</Label>
+            <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" >Join Date</Label>
             <DatePicker x:Name="JoinDataBOX" Grid.Column="1" Grid.Row="3"  Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedDateChanged="JoinDataBOX_SelectedDateChanged"  />
 
             <Label Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" >Address :</Label>
