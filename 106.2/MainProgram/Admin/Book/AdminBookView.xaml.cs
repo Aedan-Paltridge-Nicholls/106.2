@@ -642,6 +642,64 @@ namespace _106._2.Admin.Book
             Addbook(BookIdOut,BooKTitleOut,BookAuthorOut,BookGenreOut);
             Booksdatagrid.Items.Refresh();
         }
+        public void withdrawBook(String BookID, String Title, String Author, String Genre)
+        {
+            using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
+            {
+
+                try
+                {
+
+                    SqlCONN.Open();
+                    WithdrawBookPopup withdrawBookPopup = new WithdrawBookPopup();
+
+                    string command = "UPDATE  book " +
+                        $" SET bookname = '{Title}',author = '{Author}',genre = '{Genre}'  " +
+                        $" WHERE bookID = ({BookID}) ", SelectedBookId = SelectedBookID.Text.Substring(SelectedBookID.Text.IndexOf(':') + 2)
+                        , SelectedMemberID = SelectedMemberId.Text.Substring(SelectedBookID.Text.IndexOf(':') + 2);//left off here 
+                    if (SelectedBookId == "")
+                    {
+                        throw new Exception(" Must select a book to update ");
+                    }
+                    DataTable dataTable = new DataTable();
+
+                    NpgsqlCommand cmd1 = new NpgsqlCommand($"Select * FROM book WHERE bookid = {SelectedBookId}", SqlCONN);
+                    NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    dt.Rows[1].ToString();
+
+                    string
+                    MemerIDnumber = dt.Rows[0].ToString(),
+                    MemberName = dt.Rows[1].ToString();
+                    string Newinfo = $"Book ID Number :{BookID} {Environment.NewLine} " +
+                                     $"Book Title: {Title}   {Environment.NewLine}" +
+                                     $"Book Author: {Author}  {Environment.NewLine}" +
+                                     $"Book Genre: {Genre}  {Environment.NewLine}",
+                           Oldinfo = $"Member ID Number :{MemerIDnumber} {Environment.NewLine} " +
+                                     $"Member Name: {MemberName}   {Environment.NewLine};";
+
+
+
+
+                    withdrawBookPopup.BookInfo.Text = Oldinfo;
+                    withdrawBookPopup.MemberInfo.Text = Newinfo;
+                    bool? NotCanceled = withdrawBookPopup.ShowDialog();
+                    if (NotCanceled != null && NotCanceled == true)
+                    {
+
+                        var cmd = new NpgsqlCommand(command, SqlCONN);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally { SqlCONN.Close(); }
+
+            }
+        }
         private void WithdrawBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
 
