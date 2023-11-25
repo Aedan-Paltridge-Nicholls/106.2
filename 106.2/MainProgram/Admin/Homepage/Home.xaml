@@ -1,0 +1,116 @@
+﻿<Page x:Class="_106._2.MainProgram.Homepage.Home"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_106._2.MainProgram.Homepage"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Home">
+  
+    <Grid x:Name="contentgrid" Grid.Row="2"  Margin="0,8,0,0" ShowGridLines="False"   >
+        <Grid.ColumnDefinitions>
+            <!--Border-->
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+
+            <!--New books template area-->
+            <!--Book 1-->
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <!--Border-->
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            <!--Book 2-->
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <!--Border-->
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            <!--Book 3-->
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <!--Border-->
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            <!--Book 4-->
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <!--Border-->
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            <!--Book 5-->
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+
+            <!--Border between books and event banner-->
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            <!--Event Banner-->
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+
+            <!--Border-->
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="1115*"/>
+        </Grid.RowDefinitions>
+
+        <!--New books label-->
+        <Label Grid.Column="1" Content="New Books" Grid.ColumnSpan="7" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="130" FontSize="15"/>
+
+
+        <!--Books template, calling BookTemplate -->
+        <ItemsControl x:Name="wrap"   Grid.Column="1" Grid.ColumnSpan="10" Grid.Row="2" ItemsSource="{Binding Books}" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel x:Name="wrapPanel" ItemWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=ColumnDefinitions[1].ActualWidth}" Orientation="Horizontal" VerticalAlignment="Top"   />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+
+                <DataTemplate>
+
+                    <local:Booktemplate/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+
+        <!--Event banners on the right side-->
+
+        <!--Seasonal books event banner-->
+        <Grid x:Name="SeasonalBooksBanner" Grid.Column="11" Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <!--Column 1-->
+                <ColumnDefinition Width="0.1*"/>
+                <!--Column 2-->
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <!--Row 0-->
+                <RowDefinition Height="1*"/>
+                <!--Row 1-->
+            </Grid.RowDefinitions>
+            <Image Grid.Column="0" HorizontalAlignment="Center" Stretch="Uniform" Width="Auto" Grid.Row="0" VerticalAlignment="Top" Source="/test/seasonal_books.jpg"/>
+        </Grid>
+
+
+        <!--Christmas market event banner-->
+        <Grid x:Name="ChristmansMarketBanner" Grid.Column="11" Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <!--Column 1-->
+                <ColumnDefinition Width="0.1*"/>
+                <!--Column 2-->
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <!--Row 0-->
+                <RowDefinition Height="1*"/>
+                <!--Row 1-->
+            </Grid.RowDefinitions>
+            <Image HorizontalAlignment="Left" Stretch="Uniform" Width="Auto" VerticalAlignment="Center" Source="/Resources/Images/christmas_market.jpg"/>
+        </Grid>
+
+        <!--Footer-->
+
+
+    </Grid>
+  
+
+</Page>

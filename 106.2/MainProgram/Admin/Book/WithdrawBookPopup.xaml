@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_106._2.MainProgram.Admin.Book"
         mc:Ignorable="d"
-        Title="WithdrawBookPopup" Height="350" Width="350"
-        MaxHeight="350" MaxWidth="350" FontSize="17"
-        FontFamily="Calibri" MinHeight="350" MinWidth="350">
+        Title="WithdrawBookPopup" 
+        Height="350" Width="350"
+        FontSize="17" FontFamily="Calibri" 
+        ResizeMode="NoResize">
 
     <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
@@ -16,7 +17,7 @@
         <Grid.RowDefinitions >
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0" >
+        <Grid Grid.Row="0" Grid.Column="0" Grid.IsSharedSizeScope="True" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".1*" />
                 <ColumnDefinition Width="1.48*"/>
@@ -26,10 +27,13 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions >
                 <RowDefinition Height=".05*"/>
-                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".15*"/>
                 <RowDefinition Height=".05*"/>
-                <RowDefinition/>
-                <RowDefinition Height="0.2*"/>
+
+                <RowDefinition Height="1.3*"/>
+                <RowDefinition Height=".05*"/>
+                <RowDefinition Height=".2*"/>
+                <RowDefinition Height=".3*"/>
             </Grid.RowDefinitions>
 
             <!--Label's-->
@@ -39,13 +43,16 @@
 
             <!--content-->
 
-            <Border  Grid.Row="3"  Grid.Column="1" BorderBrush="#000000" BorderThickness="1" >
+            <Border  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="1" BorderBrush="#000000" BorderThickness="1" >
                 <TextBlock IsEnabled="False" TextWrapping="Wrap"  Background="White" x:Name="BookInfo"/>
             </Border>
-            <Border  Grid.Row="3"  Grid.Column="3" BorderBrush="#000000" BorderThickness="1" >
+            <Border  Grid.Row="3" Grid.RowSpan="1"  Grid.Column="3" BorderBrush="#000000" BorderThickness="1" >
                 <TextBlock IsEnabled="False" TextWrapping="Wrap" Background="White" x:Name="MemberInfo"/>
             </Border>
-            <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3">
+            <Border  Grid.Row="5" Grid.RowSpan="1"  Grid.ColumnSpan="3"  Grid.Column="1" >
+                <DatePicker Name="DueDatePicker"  Background="White"  />
+            </Border>
+            <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
 
                     <ColumnDefinition Width="1.1*"/>
@@ -59,8 +66,8 @@
                     <RowDefinition Height="3*"/>
                     <RowDefinition Height=".5*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="WithdrawBook" Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="0"  Click="WithdrawBook_Click"  FontWeight="Bold">Withdraw Book</Button>
-                <Button x:Name="Cancelbutton" Foreground="#FFFFFF" Background="#FF1010"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="2"  Click="CancelButton_Click"  FontWeight="Bold">Cancel </Button>
+                <Button IsDefault="True" x:Name="WithdrawBook" Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="0"  Click="WithdrawBook_Click"  FontWeight="Bold">Withdraw Book</Button>
+                <Button IsCancel="True" x:Name="Cancelbutton" Foreground="#FFFFFF" Background="#FF1010"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="2"  Click="CancelButton_Click"  FontWeight="Bold">Cancel </Button>
 
 
             </Grid>

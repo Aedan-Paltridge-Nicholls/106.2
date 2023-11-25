@@ -4,40 +4,47 @@
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-       mc:Ignorable="d"
+       mc:Ignorable="d" Activated="Window_Activated"
         Title="UpdateloginPopup" Height="200" Width="300"
-    FontFamily="Calibri" MinHeight="100" MinWidth="300">
-    <Grid>
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".5*"/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition  Width=".5*"/>
-                <ColumnDefinition/>
-                <ColumnDefinition  Width=".5*"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width=".5*"/>
-                <ColumnDefinition Width=".5*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height=".5*" />
-                <RowDefinition/>
-                <RowDefinition Height=".5*"/>
-                <RowDefinition/>
-                <RowDefinition Height=".5*"/>
-                <RowDefinition/>
-                <RowDefinition Height=".5*"/>
+    FontFamily="Calibri" MinHeight="200" MinWidth="300">
+    <Grid ShowGridLines="False"  >
+      
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition  Width=".5*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition  Width=".5*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width=".5*"/>
+            <ColumnDefinition Width=".5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*" />
+            <RowDefinition/>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition/>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition/>
+            <RowDefinition Height=".5*"/>
 
-            </Grid.RowDefinitions>
-            <xctk:WatermarkTextBox x:Name="txtUser" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"  TextAlignment="Justify" FontSize="20" MaxLines="1" Watermark="User Name"/>
-            <xctk:WatermarkPasswordBox x:Name="txtPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7"  TextAlignment="Justify" FontSize="20" MaxLines="1" Watermark="Password"/>
-            <Button x:Name="Addbutton" Background="#C6C5FF" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Click="update_Click_1">Update login</Button>
-            <Button x:Name="cancelbutton" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="3" Click="CancelButton_Click">Cancel</Button>
-            <TextBlock Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="2" TextWrapping="Wrap" IsEnabled="False" x:Name="IdNumberBOX"  TextAlignment="Center"  Text="ID Number :" Background="White" />
-            <Border BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1" Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2"/>
+        </Grid.RowDefinitions>
+        <!-- ROW 1 -->
+        <xctk:WatermarkTextBox x:Name="txtUser" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"  TextAlignment="Justify" FontSize="20" MaxLines="1" Watermark="User Name"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2">
+            <TextBlock  TextWrapping="Wrap" IsEnabled="False" x:Name="IdNumberBOX"  TextAlignment="Center"  Text="ID Number :" Background="White" />
+        </Border>
 
-        </Grid>
+        <!--ROW 2 (GRID row 3)-->
+        <xctk:WatermarkPasswordBox x:Name="txtPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4"  TextAlignment="Justify" FontSize="20" MaxLines="1" Watermark="Password"/>
+        <CheckBox x:Name="IsAdminCheckBox" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="3" VerticalContentAlignment="Center" Content=" Is Admin " Checked="IsAdminCheckBox_Checked" Unchecked="IsAdminCheckBox_Unchecked" />
+        <!--ROW 3 (GRID row 5)-->
+
+        <Button x:Name="Addbutton" IsDefault="True" Background="#C6C5FF" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Click="update_Click_1">Update login</Button>
+        <Button x:Name="cancelbutton" IsCancel="True" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="3" Click="CancelButton_Click">Cancel</Button>
+      
+
 
     </Grid>
 </Window>

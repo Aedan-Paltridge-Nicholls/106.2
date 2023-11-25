@@ -45,6 +45,7 @@
             <Border  Grid.Row="3"  Grid.Column="3" BorderBrush="#000000" BorderThickness="1" >
                 <TextBlock IsEnabled="False" TextWrapping="Wrap" Background="White" x:Name="NewMemberInfo"/>
             </Border>
+            <!-- Buttons-->
             <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
 
@@ -60,9 +61,9 @@
                     <RowDefinition Height="3*"/>
                     <RowDefinition Height=".5*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="Updatemember" Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="0"  Click="Updatemember_Click"  FontWeight="Bold">Update Member</Button>
+                <Button IsDefault="True" x:Name="Updatemember" Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="0"  Click="Updatemember_Click"  FontWeight="Bold">Update Member</Button>
                 <Button x:Name="UpdateLogin"  Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="2"  Click="UpdateLogin_Click"  FontWeight="Bold">Update Login</Button>
-                <Button x:Name="cancelbutton" Foreground="#FFFFFF" Background="#FF1010"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="4"  Click="CancelButton_Click"  FontWeight="Bold">Cancel Update</Button>
+                <Button IsCancel="True" x:Name="cancelbutton" Foreground="#FFFFFF" Background="#FF1010"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="4"  Click="CancelButton_Click"  FontWeight="Bold">Cancel Update</Button>
 
 
             </Grid>

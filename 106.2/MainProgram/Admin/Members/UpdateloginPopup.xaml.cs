@@ -22,11 +22,16 @@ namespace _106._2
     {
         
         public UpdateloginPopup()
-        {
+        { 
             InitializeComponent();
+           
+        }
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            IdNumberBOX.Text = member_IdBox;
         }
         public static NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-
+        public string member_IdBox {  get; set; }
         private void update_Click_1(object sender, RoutedEventArgs e)
         {
             NpgsqlConnection conn = SqlCONN;
@@ -37,7 +42,7 @@ namespace _106._2
             if (txtUser.Text != null || txtPassword.Password != null)
             {
                 string loginQuery = " UPDATE  logins" +
-                                   $" SET  username = \'{Name}\', userpassword = \'{password}\' " +
+                                   $" SET  username = \'{Name}\', userpassword = \'{password}\', isadmin = \'{admin.ToString()}\' " +
                                    $" WHERE userid =  {idnumber}  ";
                 NpgsqlCommand command = new NpgsqlCommand(loginQuery, conn);
                 command.ExecuteNonQuery();
@@ -57,6 +62,18 @@ namespace _106._2
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        public bool admin = false; 
+        private void IsAdminCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+           admin = true;
+            IdNumberBOX.Text = member_IdBox;
+
+        }
+
+        private void IsAdminCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+          admin = false;
         }
     }
 }

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\App.xaml
-111582756724
-
-131959756054
+131799376231
+11328433308
+151822227178
 218-269317474
-MainProgram\Admin\Book\AddBookPopup.xaml;MainProgram\Admin\Book\AdminBookView.xaml;MainProgram\Admin\Book\UpdateBookPopup.xaml;MainProgram\Admin\Book\WithdrawBookPopup.xaml;MainProgram\Admin\MainWindow.xaml;MainProgram\Admin\Members\Addmemberpopup.xaml;MainProgram\Admin\Members\AdminLoginView.xaml;MainProgram\Admin\Members\UpdateloginPopup.xaml;MainProgram\Admin\Members\Updatememberpopup.xaml;MainProgram\login.xaml;MainProgram\User\UserLoginView.xaml;
+MainProgram\Admin\Book\AddBookPopup.xaml;MainProgram\Admin\Book\AdminBookView.xaml;MainProgram\Admin\Book\UpdateBookPopup.xaml;MainProgram\Admin\Book\WithdrawBookPopup.xaml;MainProgram\Admin\Homepage\Booktemplate.xaml;MainProgram\Admin\Homepage\Home.xaml;MainProgram\Admin\MainWindow.xaml;MainProgram\Admin\Members\Addmemberpopup.xaml;MainProgram\Admin\Members\AdminLoginView.xaml;MainProgram\Admin\Members\UpdateloginPopup.xaml;MainProgram\Admin\Members\Updatememberpopup.xaml;MainProgram\login.xaml;MainProgram\User\UserLoginView.xaml;
 
 False
 

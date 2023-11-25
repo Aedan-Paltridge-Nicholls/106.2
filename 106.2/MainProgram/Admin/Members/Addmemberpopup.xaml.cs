@@ -28,7 +28,7 @@ namespace _106._2
         }
 
         public static NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-
+        public bool Admin = false;
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -42,13 +42,13 @@ namespace _106._2
             NpgsqlConnection conn = SqlCONN;
             conn.Open();
 
-            string idnumber , number = IdNumberBOX.Text , Name = txtUser.Text,password = txtPassword.Text ;
-            int Removetext = number.IndexOf(':') + 2;
+            string idnumber , number = IdNumberBOX.Text , Name = txtUser.Text,password = txtPassword.Password ;
+            int Removetext = number.IndexOf(':') + 4;
             idnumber = number.Remove(0, Removetext);
             if (txtUser.Text != "" || txtPassword.Text != ""|| number == "")
             {
-                string loginQuery = "INSERT INTO logins(Username,password,Userid)" +
-                                   $"VALUES ({Name},{password},(SELECT number FROM members WHERE number = {idnumber} ) )";
+                string loginQuery = "INSERT INTO logins(username,userpassword,isadmin,Userid)" +
+                                   $"VALUES (\'{Name}\',\'{password}\',\'{Admin.ToString()}\',(SELECT number FROM members WHERE number = {idnumber} ) )";
                 NpgsqlCommand command = new NpgsqlCommand(loginQuery, conn);
                 command.ExecuteNonQuery();
                 conn.Close();
@@ -65,6 +65,16 @@ namespace _106._2
             this.DialogResult = true; this.Close();
 
 
+        }
+
+        private void IsAdminCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Admin = true;
+        }
+
+        private void IsAdminCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Admin = false;
         }
     }
 }

@@ -25,6 +25,12 @@
     <Compile Update="MainProgram\Admin\Members\AdminLoginView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MainProgram\Admin\Homepage\Booktemplate.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MainProgram\Admin\Homepage\Home.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MainProgram\login.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -55,6 +61,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainProgram\Admin\Members\AdminLoginView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainProgram\Admin\Homepage\Booktemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainProgram\Admin\Homepage\Home.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainProgram\login.xaml">

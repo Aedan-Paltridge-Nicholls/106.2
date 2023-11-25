@@ -39,8 +39,8 @@ namespace _106._2
         private void UpdateLogin_Click(object sender, RoutedEventArgs e)
         {
             UpdateloginPopup updateloginPopup = new UpdateloginPopup();
-            updateloginPopup.IdNumberBOX.Text = $"ID Number : {Environment.NewLine} {IdUpdateNumber}";
-            updateloginPopup.Show();
+            updateloginPopup.member_IdBox = $"ID Number : {Environment.NewLine} {IdUpdateNumber}";
+            updateloginPopup.ShowDialog();
         }
     }
 }

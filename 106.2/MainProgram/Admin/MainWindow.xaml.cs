@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using _106._2.Admin.Book;
+using _106._2.MainProgram.Homepage;
 using Npgsql;
 namespace _106._2
 {
@@ -28,13 +29,13 @@ namespace _106._2
             
 
             InitializeComponent();
-  
+            Main.Content = new Home();
 
         }
 
         private void HomeButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-                                        
+            Main.Content = new Home();
         }
 
         private void AdminBookButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -53,8 +54,12 @@ namespace _106._2
 
         }
 
-        private void HomeButton_MouseDown_1(object sender, MouseButtonEventArgs e)
+        
+        private void Logout_Click(object sender, RoutedEventArgs e)
         {
+            Main.Content = new login();
         }
+
+        
     }
 }

@@ -13,6 +13,13 @@
 
   <ItemGroup>
     <None Remove="56600013.JPG.JPG" />
+    <None Remove="MainProgram\Images\56600013.JPG.JPG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="MainProgram\Images\56600013.JPG.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

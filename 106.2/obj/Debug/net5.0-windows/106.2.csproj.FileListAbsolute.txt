@@ -310,3 +310,10 @@ C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-wind
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Book\UpdateBookPopup.baml
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Book\WithdrawBookPopup.g.cs
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Book\WithdrawBookPopup.baml
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Homepage\Booktemplate.g.cs
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Homepage\Home.g.cs
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Homepage\Booktemplate.baml
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Homepage\Home.baml
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\bin\Debug\net5.0-windows\MainProgram\Images\56600013.JPG.JPG
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\106.2_Content.g.cs

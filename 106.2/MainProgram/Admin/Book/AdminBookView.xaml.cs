@@ -642,7 +642,7 @@ namespace _106._2.Admin.Book
             Addbook(BookIdOut,BooKTitleOut,BookAuthorOut,BookGenreOut);
             Booksdatagrid.Items.Refresh();
         }
-        public void withdrawBook(String BookID, String Title, String Author, String Genre)
+        public void withdrawBook(String BookID, String Title, String Author, String Genre, string MemberId)
         {
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
             {
@@ -652,11 +652,7 @@ namespace _106._2.Admin.Book
 
                     SqlCONN.Open();
                     WithdrawBookPopup withdrawBookPopup = new WithdrawBookPopup();
-
-                    string command = "UPDATE  book " +
-                        $" SET bookname = '{Title}',author = '{Author}',genre = '{Genre}'  " +
-                        $" WHERE bookID = ({BookID}) ", SelectedBookId = SelectedBookID.Text.Substring(SelectedBookID.Text.IndexOf(':') + 2)
-                        , SelectedMemberID = SelectedMemberId.Text.Substring(SelectedBookID.Text.IndexOf(':') + 2);//left off here 
+                    string SelectedBookId = SelectedBookID.Text.Substring(SelectedBookID.Text.IndexOf(':') + 2) ; 
                     if (SelectedBookId == "")
                     {
                         throw new Exception(" Must select a book to update ");
@@ -685,6 +681,9 @@ namespace _106._2.Admin.Book
                     withdrawBookPopup.BookInfo.Text = Oldinfo;
                     withdrawBookPopup.MemberInfo.Text = Newinfo;
                     bool? NotCanceled = withdrawBookPopup.ShowDialog();
+                    string command = "UPDATE  booklog " +
+                        $" SET withdrawn = 'true',returned = 'false', issueid = {MemberId}  " +
+                        $" WHERE bookID = ({SelectedBookId}) ";
                     if (NotCanceled != null && NotCanceled == true)
                     {
 
@@ -702,7 +701,13 @@ namespace _106._2.Admin.Book
         }
         private void WithdrawBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
-
+            string BookIdOut = dataStorage.Get_BookID(),
+                   BooKTitleOut = dataStorage.Get_Title(),
+                   BookAuthorOut = dataStorage.Get_Author(),
+                   BookGenreOut = dataStorage.Get_Genre(),
+                   MemberIdOut = SelectedMemberId.Text.Substring(SelectedBookID.Text.IndexOf(':') + 2);
+            withdrawBook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut, MemberIdOut);
+                  
         }
         public void Updatebook(String BookID, String Title, String Author, String Genre)
         {
