@@ -18,11 +18,11 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".1*" />
+                <ColumnDefinition Width=".05*" />
                 <ColumnDefinition Width="1.48*"/>
-                <ColumnDefinition Width=".1*" />
+                <ColumnDefinition Width=".05*" />
                 <ColumnDefinition Width="1.48*"/>
-                <ColumnDefinition Width=".1*" />
+                <ColumnDefinition Width=".05*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions >
                 <RowDefinition Height=".05*"/>
@@ -45,12 +45,14 @@
             <Border  Grid.Row="3"  Grid.Column="3" BorderBrush="#000000" BorderThickness="1" >
                 <TextBlock IsEnabled="False" TextWrapping="Wrap" Background="White" x:Name="NewBookInfo"/>
             </Border>
+            <!--Buttons-->
             <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
 
                     <ColumnDefinition Width="1.1*"/>
-                    <ColumnDefinition Width=".08*"/>
-
+                    <ColumnDefinition Width=".05*"/>
+                    <ColumnDefinition Width="1.1*"/>
+                    <ColumnDefinition Width=".05*"/>
                     <ColumnDefinition Width="1.1*"/>
 
                 </Grid.ColumnDefinitions>
@@ -59,8 +61,12 @@
                     <RowDefinition Height="3*"/>
                     <RowDefinition Height=".5*"/>
                 </Grid.RowDefinitions>
+                <!--column 1 (grid column 0) -->
                 <Button x:Name="UpdateBook" Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="0"  Click="UpdateBook_Click"  FontWeight="Bold">Update Book</Button>
-                <Button x:Name="Cancelbutton" Foreground="#FFFFFF" Background="#FF1010"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="2"  Click="CancelButton_Click"  FontWeight="Bold">Cancel Update</Button>
+                <!--column 2  -->
+                <Button x:Name="Updatecover" Foreground="#000000" Background="#c9c9c9"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="2"  Click="Updatecover_Click"  FontWeight="Bold">Update Cover</Button>
+                <!--column 3 (grid column 4) -->
+                <Button x:Name="Cancelbutton" Foreground="#FFFFFF" Background="#FF1010"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="4"  Click="CancelButton_Click"  FontWeight="Bold">Cancel Update</Button>
 
 
             </Grid>

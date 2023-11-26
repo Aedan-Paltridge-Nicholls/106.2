@@ -1,4 +1,6 @@
-﻿using System;
+﻿using _106._2.Admin.Book;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,8 +32,8 @@ namespace _106._2.MainProgram.Admin.Book
         }
 
         private void Addbutton_Click_1(object sender, RoutedEventArgs e)
-        {
+        { 
             this.DialogResult = true; this.Close();
-        }
+        }  
     }
 }

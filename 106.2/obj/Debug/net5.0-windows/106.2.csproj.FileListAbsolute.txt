@@ -291,14 +291,12 @@ D:\Users\270331389\source\repos\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\n
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Members\Addmemberpopup.baml
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Members\UpdateloginPopup.baml
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Book\AdminBookView.g.cs
-C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\MainWindow.g.cs
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Members\Addmemberpopup.g.cs
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Members\AdminLoginView.g.cs
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Members\UpdateloginPopup.g.cs
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Members\Updatememberpopup.g.cs
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\login.g.cs
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Book\AdminBookView.baml
-C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\MainWindow.baml
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Members\AdminLoginView.baml
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Members\Updatememberpopup.baml
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\login.baml
@@ -317,3 +315,6 @@ C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-wind
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Homepage\Home.baml
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\bin\Debug\net5.0-windows\MainProgram\Images\56600013.JPG.JPG
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\106.2_Content.g.cs
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\MainWindow.g.cs
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\MainWindow.baml
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\bin\Debug\net5.0-windows\CoreHtmlToImage.dll

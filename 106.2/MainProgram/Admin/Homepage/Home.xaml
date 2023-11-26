@@ -4,10 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:_106._2.MainProgram.Homepage"
-      mc:Ignorable="d" 
+      mc:Ignorable="d" FontFamily="Calibri"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Home">
-  
+    <ScrollViewer>
     <Grid x:Name="contentgrid" Grid.Row="2"  Margin="0,8,0,0" ShowGridLines="False"   >
         <Grid.ColumnDefinitions>
             <!--Border-->
@@ -85,7 +85,7 @@
                 <RowDefinition Height="1*"/>
                 <!--Row 1-->
             </Grid.RowDefinitions>
-            <Image Grid.Column="0" HorizontalAlignment="Center" Stretch="Uniform" Width="Auto" Grid.Row="0" VerticalAlignment="Top" Source="/test/seasonal_books.jpg"/>
+            <!--<Image Grid.Column="0" HorizontalAlignment="Center" Stretch="Uniform" Width="Auto" Grid.Row="0" VerticalAlignment="Top" Source="/test/seasonal_books.jpg"/>-->
         </Grid>
 
 
@@ -104,13 +104,13 @@
                 <RowDefinition Height="1*"/>
                 <!--Row 1-->
             </Grid.RowDefinitions>
-            <Image HorizontalAlignment="Left" Stretch="Uniform" Width="Auto" VerticalAlignment="Center" Source="/Resources/Images/christmas_market.jpg"/>
+            <!--<Image HorizontalAlignment="Left" Stretch="Uniform" Width="Auto" VerticalAlignment="Center" Source="/Resources/Images/christmas_market.jpg"/>-->
         </Grid>
 
         <!--Footer-->
 
 
     </Grid>
-  
+  </ScrollViewer>
 
 </Page>

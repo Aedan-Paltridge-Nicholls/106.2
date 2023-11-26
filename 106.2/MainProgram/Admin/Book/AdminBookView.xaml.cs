@@ -1,4 +1,5 @@
 ﻿using _106._2.MainProgram.Admin.Book;
+using Microsoft.Win32;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -377,7 +378,7 @@ namespace _106._2.Admin.Book
         }
         public void RefreshGrid()
         {
-            Booksdatagrid.Items.Refresh();
+            LoadDatagrid();
         }
         public void LoadGenreBox()
         {
@@ -580,6 +581,7 @@ namespace _106._2.Admin.Book
         }
         private void GenreOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+           
             if (SearchOptionBOX.SelectedIndex == 3)
             {
                 string command = "SELECT "
@@ -595,32 +597,54 @@ namespace _106._2.Admin.Book
                             + " order by Book_id;";
                 LoadDatagrid(command);
             }
+            dataStorage.Set_Genre(GenreOptionBOX.SelectedItem.ToString()); 
+        }
+        public string ImagePath {  get; set; } 
+        private void GetImage()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.InitialDirectory = "c:\\";    // Seting a filter for file extensions 
+            ofd.Filter = "\"Image files (*.bmp, *.jpg)|*.bmp;*.jpg|All files (*.*)|*.*\"'";
+            ofd.Multiselect = false;
+            ofd.Title = "Select Cover Image";
+
+            if (ofd.ShowDialog() == true)// Opening the file dialog
+            {
+                // Gets the selected images filename
+                 ImagePath = ofd.FileName.ToString();
+
+            }
+            else
+            {
+                MessageBox.Show("Must Select Cover Image ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                GetImage();
+            }
+
         }
         public void Addbook(String BookID,String Title,String Author, String Genre)
         {
+            ImagePath = " sdsdsdsd";
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
             {
-                if (BookID == "") { MessageBox.Show(" Must enter Book id number"); }
                 try
                 {
+                    if (BookID == ""){throw new Exception("Must enter Book id number ");}
                     SqlCONN.Open();
                     AddBookPopup addBookPopup = new AddBookPopup();
-
-                    string command = "INSERT INTO book (bookID, bookname, author, genre)" +
-                        $" VALUES ( {BookID}, '{Title}', '{Author}', '{Genre}'  );" +
-                        $" INSERT INTO booklog (bookID) VALUES ({BookID}) ";
-
-
                     string info = $"Book ID Number :{BookID} {Environment.NewLine} " +
                                   $"Book Title: {Title}   {Environment.NewLine}" +
                                   $"Book Author: {Author}  {Environment.NewLine}" +
                                   $"Book Genre: {Genre}  {Environment.NewLine}";
                     addBookPopup.BookInfoBox.Text = info;
-                    
                     bool? NotCanceled = addBookPopup.ShowDialog();
+
                     if (NotCanceled != null && NotCanceled == true)
                     {
-
+                        GetImage();
+                        string command = "INSERT INTO book (bookID, bookname, author, genre, image)" +
+                        $" VALUES ( {BookID}, '{Title}', '{Author}', '{Genre}', '{ImagePath}' );" +
+                        $" INSERT INTO booklog (bookID) VALUES ({BookID}) ";
                         var cmd = new NpgsqlCommand(command, SqlCONN);
                        cmd.ExecuteNonQuery();
                     }
@@ -630,7 +654,7 @@ namespace _106._2.Admin.Book
                     MessageBox.Show(ex.Message);
                 }
                 finally { SqlCONN.Close(); }
-
+                RefreshGrid();
             }
         }
         private void AddBookBUTTON_Click(object sender, RoutedEventArgs e)
@@ -767,7 +791,7 @@ namespace _106._2.Admin.Book
                     MessageBox.Show(ex.Message);
                 }
                 finally { SqlCONN.Close(); }
-
+                RefreshGrid();
             }
         }
         private void ChangeBookInfoBUTTON_Click(object sender, RoutedEventArgs e)

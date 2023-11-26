@@ -34,5 +34,10 @@ namespace _106._2.MainProgram.Admin.Book
         {
             this.DialogResult = false; this.Close();
         }
+
+        private void Updatecover_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

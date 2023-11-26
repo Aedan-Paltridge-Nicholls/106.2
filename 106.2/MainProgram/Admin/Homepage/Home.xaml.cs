@@ -48,8 +48,8 @@ namespace _106._2.MainProgram.Homepage
             NpgsqlConnection connectionString = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
 
             // SQL query to retrieve book data 
-            ////  string query = "SELECT bookid, image, bookname, author, genre FROM book";
-            string query = "SELECT bookid, bookname, author, genre FROM book";
+             string query = "SELECT * FROM book";
+          
             try
             {
                 // Open the connection
@@ -61,13 +61,14 @@ namespace _106._2.MainProgram.Homepage
                     using (NpgsqlDataReader reader = command.ExecuteReader())
                     {
                         // Iterate through the results and populate the Books collection
+                        int i =0;
                         while (reader.Read())
                         {
+                            ++i;
                             Books.Add(new Book
                             {
-                                ////ImagePath = reader["image"].ToString(),
-                                ImagePath = "/MainProgram/Images/56600013.JPG",
-                                Title = reader["bookname"].ToString(),
+                                ImagePath = reader["image"].ToString(),
+                                Title = reader["bookname"].ToString() + $"\t {i}",
                                 Author = reader["author"].ToString(),
                                 Genre = reader["genre"].ToString(),
                             });

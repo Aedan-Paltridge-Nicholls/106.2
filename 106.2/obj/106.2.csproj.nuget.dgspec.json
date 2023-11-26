@@ -45,6 +45,10 @@
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
           "dependencies": {
+            "CoreHtmlToImage": {
+              "target": "Package",
+              "version": "[1.0.6, )"
+            },
             "Extended.Wpf.Toolkit": {
               "target": "Package",
               "version": "[4.5.1, )"

@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CoreHtmlToImage" Version="1.0.6" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.1" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="3.11.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
@@ -32,6 +33,10 @@
   <ItemGroup>
     <Resource Include="56600013.JPG.JPG" />
     <Resource Include="MainProgram\Images\logo_color 1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MainProgram\Images\Home\" />
   </ItemGroup>
 
 </Project>

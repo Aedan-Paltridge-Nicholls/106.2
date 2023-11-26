@@ -5,23 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local2="clr-namespace:_106._2"
              xmlns:local="clr-namespace:_106._2.MainProgram.Homepage"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" FontFamily="Calibri"
              d:DesignHeight="450" d:DesignWidth="800">
     <!--Book template UI elements-->
     <Grid  Background="AliceBlue"  Margin="10,10,1,1">
 
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
 
         </Grid.RowDefinitions>
 
-        <Image Grid.Row="3" x:Name="a" Source="Images/56600013.JPG"    Stretch="Uniform" />
-        <TextBlock Grid.Row="0" Text="{Binding Title}" FontWeight="Bold" TextWrapping="WrapWithOverflow"/>
-        <TextBlock Grid.Row="1" Text="{Binding Author}" TextWrapping="WrapWithOverflow"/>
-        <TextBlock Grid.Row="2" Text="{Binding Genre}" TextWrapping="WrapWithOverflow"/>
+        <Image Grid.Row="0" x:Name="a" Source="{Binding ImagePath}"    Stretch="Uniform" />
+        <TextBlock Grid.Row="1" Text="{Binding Title}" FontWeight="Bold" TextWrapping="WrapWithOverflow"/>
+        <TextBlock Grid.Row="2" Text="{Binding Author}" TextWrapping="WrapWithOverflow"/>
+        <TextBlock Grid.Row="3" Text="{Binding Genre}" TextWrapping="WrapWithOverflow"/>
     </Grid>
 </UserControl>

@@ -6,6 +6,14 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
+      "CoreHtmlToImage/1.0.6": {
+        "runtime": {
+          "lib/netstandard2.0/CoreHtmlToImage.dll": {
+            "assemblyVersion": "1.0.6.0",
+            "fileVersion": "1.0.6.0"
+          }
+        }
+      },
       "Extended.Wpf.Toolkit/4.5.1": {
         "runtime": {
           "lib/net5.0/Xceed.Wpf.AvalonDock.NET5.dll": {
@@ -1663,6 +1671,13 @@
     }
   },
   "libraries": {
+    "CoreHtmlToImage/1.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-O5TZhjxIV4T3ayZPLJqLQ/KFhu5NllrLqKi+YbKbmjLs11fPGAxrZkidYAvOSCTFqlEJ92AQX0Epb8m2Q4EH7Q==",
+      "path": "corehtmltoimage/1.0.6",
+      "hashPath": "corehtmltoimage.1.0.6.nupkg.sha512"
+    },
     "Extended.Wpf.Toolkit/4.5.1": {
       "type": "package",
       "serviceable": true,

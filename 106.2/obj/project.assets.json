@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net5.0-windows7.0": {
+      "CoreHtmlToImage/1.0.6": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/CoreHtmlToImage.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/CoreHtmlToImage.dll": {}
+        }
+      },
       "Extended.Wpf.Toolkit/4.5.1": {
         "type": "package",
         "compile": {
@@ -2046,6 +2055,18 @@
     }
   },
   "libraries": {
+    "CoreHtmlToImage/1.0.6": {
+      "sha512": "O5TZhjxIV4T3ayZPLJqLQ/KFhu5NllrLqKi+YbKbmjLs11fPGAxrZkidYAvOSCTFqlEJ92AQX0Epb8m2Q4EH7Q==",
+      "type": "package",
+      "path": "corehtmltoimage/1.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "corehtmltoimage.1.0.6.nupkg.sha512",
+        "corehtmltoimage.nuspec",
+        "lib/netstandard2.0/CoreHtmlToImage.dll"
+      ]
+    },
     "Extended.Wpf.Toolkit/4.5.1": {
       "sha512": "Z0AL4oOORLZsKUediAaXOVt+nQI8owUcv05RDuoup0JaS96cqN/2zeIVr2TLX5oDK6VOrm1NkJKV1zrQCj3Deg==",
       "type": "package",
@@ -6278,6 +6299,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
+      "CoreHtmlToImage >= 1.0.6",
       "Extended.Wpf.Toolkit >= 4.5.1",
       "Microsoft.CodeAnalysis >= 3.11.0",
       "Microsoft.Extensions.Logging >= 6.0.0",
@@ -6329,6 +6351,10 @@
       "net5.0-windows7.0": {
         "targetAlias": "net5.0-windows",
         "dependencies": {
+          "CoreHtmlToImage": {
+            "target": "Package",
+            "version": "[1.0.6, )"
+          },
           "Extended.Wpf.Toolkit": {
             "target": "Package",
             "version": "[4.5.1, )"

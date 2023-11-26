@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
             <RowDefinition/>
-            <RowDefinition Height=".3*"/>
+            <RowDefinition Height=".2*"/>
         </Grid.RowDefinitions>
         <Border  Grid.Row="0" Grid.Column="1" Margin="10,0"  BorderThickness="1">
             <Border.BorderBrush>
@@ -39,11 +39,11 @@
                 <RowDefinition Height=".1*" />
                 <RowDefinition Height="*"/>
                 <RowDefinition Height=".1*"/>
-
+                 
             </Grid.RowDefinitions>
-        
-            <Button FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="Addbutton" Background="#C6C5FF" Foreground="#0A66C2" Grid.Row="1" Grid.Column="1"  Click="Addbutton_Click_1">Add Member</Button>
-            <Button FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="cancelbutton" Background="#FF1010" Foreground="White" Grid.Row="1" Grid.Column="3"  Click="CancelButton_Click">Cancel</Button>
+             
+            <Button IsDefault="True" FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="Addbutton" Background="#C6C5FF" Foreground="#0A66C2" Grid.Row="1" Grid.Column="1"  Click="Addbutton_Click_1">Add Book</Button>
+            <Button IsCancel="True" FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="cancelbutton" Background="#FF1010" Foreground="White" Grid.Row="1" Grid.Column="3"  Click="CancelButton_Click">Cancel</Button>
             
 
         </Grid>
