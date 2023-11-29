@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\App.xaml
-131365465131
+15-198273686
 11328433308
-16900426000
+18-168892363
 219-1293659568
-MainProgram\Admin\Book\AddBookPopup.xaml;MainProgram\Admin\Book\AdminBookView.xaml;MainProgram\Admin\Book\UpdateBookPopup.xaml;MainProgram\Admin\Book\WithdrawBookPopup.xaml;MainProgram\Admin\Homepage\Booktemplate.xaml;MainProgram\Admin\Homepage\Home.xaml;MainProgram\Admin\Members\Addmemberpopup.xaml;MainProgram\Admin\Members\AdminLoginView.xaml;MainProgram\Admin\Members\UpdateloginPopup.xaml;MainProgram\Admin\Members\Updatememberpopup.xaml;MainProgram\login.xaml;MainProgram\MainWindow.xaml;MainProgram\User\UserLoginView.xaml;
+MainProgram\Admin\Book\AddBookPopup.xaml;MainProgram\Admin\Book\AdminBookView.xaml;MainProgram\Admin\Book\UpdateBookPopup.xaml;MainProgram\Admin\Book\WithdrawBookPopup.xaml;MainProgram\Admin\Members\Addmemberpopup.xaml;MainProgram\Admin\Members\AdminLoginView.xaml;MainProgram\Admin\Members\UpdateloginPopup.xaml;MainProgram\Admin\Members\Updatememberpopup.xaml;MainProgram\Homepage\BookPopUP.xaml;MainProgram\Homepage\Booktemplate.xaml;MainProgram\Homepage\Home.xaml;MainProgram\Images\ImagePopup.xaml;MainProgram\login.xaml;MainProgram\MainWindow.xaml;MainProgram\User\UserLoginView.xaml;
 
 False
 

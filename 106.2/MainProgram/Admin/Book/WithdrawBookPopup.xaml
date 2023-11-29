@@ -50,7 +50,7 @@
                 <TextBlock IsEnabled="False" TextWrapping="Wrap" Background="White" x:Name="MemberInfo"/>
             </Border>
             <Border  Grid.Row="5" Grid.RowSpan="1"  Grid.ColumnSpan="3"  Grid.Column="1" >
-                <DatePicker Name="DueDatePicker"  Background="White"  />
+                <DatePicker Name="DueDatePicker"  Background="White" SelectedDateChanged="DueDatePicker_SelectedDateChanged"  />
             </Border>
             <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>

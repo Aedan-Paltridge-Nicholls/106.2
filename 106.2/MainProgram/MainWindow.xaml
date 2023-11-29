@@ -187,8 +187,143 @@
         <Frame NavigationUIVisibility="Hidden"  Grid.Row="2" x:Name="Main" Background="Aqua">
             
         </Frame>
-        <Grid x:Name="footer" Background="Black" Grid.Column="0" Grid.Row="3">
+        <Grid x:Name="FooterSection" Background="Black" ShowGridLines="True" Grid.Column="0" Grid.Row="3">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <!--Column 0-->
+                <ColumnDefinition Width="235*"/>
+                <!--Column 1-->
+                <ColumnDefinition Width="136*"/>
+                <!--Column 2-->
+                <ColumnDefinition Width="122*"/>
+                <ColumnDefinition Width="125*"/>
+                <!--Column 3-->
+                <ColumnDefinition Width="167*"/>
+                <!--Column 4-->
+                <ColumnDefinition Width="8*"/>
+                <!--Column 5-->
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <!--Row 0-->
+                <RowDefinition Height="10*"/>
+                <!--Row 1-->
+                <RowDefinition Height="1*"/>
+                <!--Row 2-->
+            </Grid.RowDefinitions>
+
+            <!--Yoobee logo grid section-->
+            <Grid x:Name="footerLogo" Grid.Column="1"  Grid.RowSpan="3" Grid.ColumnSpan="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <!--Column 1-->
+                    <ColumnDefinition Width="0.1*"/>
+                    <!--Column 2-->
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <!--Row 0-->
+                    <RowDefinition Height="1*"/>
+                    <!--Row 1-->
+                </Grid.RowDefinitions>
+                <Image Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="0" VerticalAlignment="Top" Source="/MainProgram/Images/logo_color 1.png" />
+
+                <TextBlock Foreground="White" Grid.Column="0" Grid.Row="2" FontSize="11"> LIBRARY OF YOOBEE COLLEGE</TextBlock>
+            </Grid>
+
+            <!--About Yoobraree text grid section-->
+            <Grid x:Name="AboutYoobraree" Grid.Column="2" HorizontalAlignment="Left" Margin="0,5,0,5" Grid.RowSpan="3"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <!--Column 0-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--Column 1-->
+                    <ColumnDefinition Width="0.1*"/>
+                    <!--Column 2-->
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <!--Row 0-->
+                    <RowDefinition Height="2*"/>
+                    <!--Row 1-->
+                    <RowDefinition Height="1*"/>
+                    <!--Row 2-->
+                </Grid.RowDefinitions>
+                <TextBlock Foreground="White" Grid.Column="1" Grid.Row="1">About Yoobraree</TextBlock>
+            </Grid>
+
+            <!--Contact us text grid section-->
+            <Grid x:Name="ContactUs" Grid.Column="3" HorizontalAlignment="Center" Margin="0,5,0,5" Grid.RowSpan="3"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="9*"/>
+                    <!--Column 0-->
+                    <ColumnDefinition Width="66*"/>
+                    <!--Column 1-->
+                    <ColumnDefinition Width="32*"/>
+                    <!--Column 2-->
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <!--Row 0-->
+                    <RowDefinition Height="2*"/>
+                    <!--Row 1-->
+                    <RowDefinition Height="1*"/>
+                    <!--Row 2-->
+                </Grid.RowDefinitions>
+                <TextBlock Foreground="White" Grid.Column="1" Grid.Row="1" Margin="0,0,0,13" Grid.RowSpan="2">Contact Us</TextBlock>
+            </Grid>
+
+            <!--Stiemap text grid section-->
+            <Grid x:Name="Sitemap" Grid.Column="4" HorizontalAlignment="Center" Margin="0,5,0,5" Grid.RowSpan="3"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="9*"/>
+                    <!--Column 0-->
+                    <ColumnDefinition Width="66*"/>
+                    <!--Column 1-->
+                    <ColumnDefinition Width="32*"/>
+                    <!--Column 2-->
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <!--Row 0-->
+                    <RowDefinition Height="2*"/>
+                    <!--Row 1-->
+                    <RowDefinition Height="1*"/>
+                    <!--Row 2-->
+                </Grid.RowDefinitions>
+                <TextBlock Foreground="White" Grid.Column="1" Grid.Row="1" Margin="0,0,0,13" Grid.RowSpan="2">Sitemap</TextBlock>
+            </Grid>
+
+            <!--Social media image and text grid section-->
+            <Grid x:Name="SocialLinks" Grid.Column="5"  Grid.RowSpan="3" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <!--Column 1-->
+                    <ColumnDefinition Width="0.1*"/>
+                    <!--Column 2-->
+
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <!--Row 0-->
+                    <RowDefinition Height="28"/>
+                    <!--Row 1-->
+                </Grid.RowDefinitions>
+                <Image HorizontalAlignment="Left"  RenderSize="400,100"  Grid.Row="0"     Source="/MainProgram/Images/social_images.PNG" />
+                <TextBlock Foreground="White" TextWrapping="Wrap" Grid.Row="1" FontSize="11"> Level 4, 3 City Road, Auckland +64 (09) 303 3120</TextBlock>
+
+            </Grid>
+
+
 
         </Grid>
     </Grid>
 </Window>
+

@@ -68,7 +68,7 @@ namespace _106._2.MainProgram.Homepage
                             Books.Add(new Book
                             {
                                 ImagePath = reader["image"].ToString(),
-                                Title = reader["bookname"].ToString() + $"\t {i}",
+                                Title = reader["bookname"].ToString() + $"\t book id: {i}",
                                 Author = reader["author"].ToString(),
                                 Genre = reader["genre"].ToString(),
                             });
@@ -92,6 +92,11 @@ namespace _106._2.MainProgram.Homepage
 
             // Set the DataContext to this instance
             DataContext = this;
+        }
+
+        private void Setter_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

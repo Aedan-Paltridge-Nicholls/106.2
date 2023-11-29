@@ -64,7 +64,9 @@ namespace _106._2
         
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new login();
+            login loginwimdow  =  new login();
+            loginwimdow.Show();
+            this.Close();
         }
 
         

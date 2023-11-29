@@ -11,6 +11,7 @@
       Title="AdminBookView">
 
     <Grid Background="White">
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".1*"></ColumnDefinition>
             <ColumnDefinition Width="10*"></ColumnDefinition>
@@ -24,7 +25,9 @@
 
             <RowDefinition Height=".3*"/>
         </Grid.RowDefinitions>
-
+        <!-- DataGrid -->
+        <!-- Row 1: Search (Grid Row 1) -->
+        <!-- Column 1 (Grid Column 1)-->
         <DataGrid x:Name="Booksdatagrid" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False"  SelectedCellsChanged="Booksdatagrid_SelectedCellsChanged" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible">
             <DataGrid.RowBackground>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InfoColorKey}}"/>
@@ -48,9 +51,18 @@
                 <DataGridTextColumn  Header="On Hold to" Binding="{Binding username_holdid}"/>
                 <DataGridTextColumn  Header="Issued id" Binding="{Binding issuedid}"/>
                 <DataGridTextColumn  Header="Issued to" Binding="{Binding username_issuedid}"/>
-
+                <DataGridHyperlinkColumn Header="Book Cover Images" Binding="{Binding image}" >
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="DG_Hyperlink_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <!-- Grid of controls & Inputs -->
+        <!-- Row 2: Search (Grid Row 3) -->
+        <!-- Column 1 (Grid Column 1)-->
         <Grid Grid.Column="1" Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.5*"></ColumnDefinition>
@@ -67,9 +79,11 @@
                 <RowDefinition Height="0.3*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <!-- Search row -->
-            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" >Search:</Label>
             
+            <!-- Row 1: Search (Grid Row 0) -->
+            <!-- Column 1 (Grid Column 0)-->
+            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" >Search:</Label>
+            <!-- Column 2 (Grid Column 1)-->
             <Grid Grid.Column="1" Grid.Row="0"  >
 
                 <Grid.ColumnDefinitions>
@@ -77,7 +91,9 @@
                     <ColumnDefinition Width="1.5*"></ColumnDefinition>
                     <ColumnDefinition Width="1.5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <!-- Column 1 & 2 (Grid Column 0 & 1)-->
                 <TextBox x:Name="SearchBOX" Grid.Column="0" Grid.ColumnSpan="2"  Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="SearchBOX_TextChanged" MaxLines="1" />
+                <!-- Column 3 (Grid Column 2)-->
                 <Button x:Name="ClearSearch" Background="#C6C5FF"  Grid.Column="2" BorderBrush="Black" Margin="1,1,1,1" Click="ClearSearch_Click">Clear Search</Button>
             </Grid>
             <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" >Due-Date:</Label>
@@ -109,10 +125,13 @@
                     <ComboBoxItem>On Hold Returned</ComboBoxItem>
                 </ComboBox>
             </Grid>
-            <!-- row 1  -->
+            
+            <!-- Row 2 (Grid Row 1) -->
+            <!-- Column 1 (Grid Column 0)-->
             <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" >Book No:</Label>
+            <!-- Column 2 (Grid Column 1)-->
             <TextBox x:Name="BookIdnumberBOX" Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="BookIdnumberBOX_TextChanged" MaxLines="1"/>
-
+            <!-- Column 3 (Grid Column 2)-->
             <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" >Search By</Label>
             <ComboBox x:Name="SearchOptionBOX"  IsEditable="False" Grid.Column="3" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="0" SelectionChanged="SearchOptionBOX_SelectionChanged"  >
                 <ComboBoxItem>Book ID </ComboBoxItem>
@@ -129,18 +148,27 @@
                 <ComboBoxItem>Issued id</ComboBoxItem> 
                 <ComboBoxItem>Issued to</ComboBoxItem>
             </ComboBox>
-            <!--row 2-->
+            
+            <!--Row 3 (Grid Row 2)-->
+            <!-- Column 1 (Grid Column 0)-->
             <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" >Title:</Label>
+            <!-- Column 2 (Grid Column 1)-->
             <TextBox x:Name="TitleBOX" Grid.Column="1" Grid.Row="2" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="TitleBOX_TextChanged"/>
-
+            <!-- Column 3 (Grid Column 2)-->
             <Label Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" >Author:</Label>
+            <!-- Column 4 (Grid Column 3)-->
             <TextBox x:Name="AuthorBOX" Grid.Column="3" Grid.Row="2" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="AuthorBOX_TextChanged" MaxLines="1"/>
-            <!--row 3-->
+            
+            <!--Row 4 (Grid Row 3)-->
+            <!-- Column 1 (Grid Column 0)-->
             <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" >Genre:</Label>
+            <!-- Column 2 (Grid Column 1)-->
             <ComboBox x:Name="GenreOptionBOX" ItemsSource="{Binding}" IsEditable="False" SelectedIndex="0" Grid.Column="1" Grid.Row="3" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectionChanged="GenreOptionBOX_SelectionChanged" >
 
             </ComboBox>
+            <!-- Column 3 (Grid Column 1)-->
             <Label Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" >Selected:</Label>
+            <!-- Column 4 (Grid Column 3)-->
             <Grid Grid.Column="3" Grid.Row="3"  >
 
                 <Grid.ColumnDefinitions>
@@ -148,14 +176,16 @@
                     <ColumnDefinition Width="1.5*"></ColumnDefinition>
                     <ColumnDefinition Width="1.5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="SelectedBookID" Grid.Column="0" BorderBrush="Black" MaxLines="2" Margin="1,1,1,1">Book ID: </TextBox>
+                <!-- Column 1 (Grid Column 0)-->
+                <TextBox x:Name="SelectedBookID" Grid.Column="0" BorderBrush="Black" MaxLines="2" Margin="1,1,1,1">Book ID:</TextBox>
+                <!-- Column 2 (Grid Column 1)-->
                 <Button Grid.Column="1" x:Name="ResetBookDataGridSelection" Margin="1,1,1,1" Background="#C6C5FF" BorderBrush="Black" Click="ResetBookDataGridSelection_Click" >Reset selection</Button>
-                <TextBox x:Name="SelectedMemberId" Grid.Column="2" BorderBrush="Black" MaxLines="2" Margin="1,1,1,1">Member ID: </TextBox>
+                <!-- Column 3 (Grid Column 2)-->
+                <TextBox x:Name="SelectedMemberId" Grid.Column="2" BorderBrush="Black" MaxLines="2" Margin="1,1,1,1">Member ID:</TextBox>
             </Grid>
-            <!--row 4-->
-
-
-            <!--Button row-->
+            
+            <!-- Row 5 Buttons (Grid Row 5)-->
+            <!-- Column 1 - 4 (Grid Column 0 - 3)-->
             <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width=".1*"></ColumnDefinition>
@@ -170,10 +200,15 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width=".1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <!-- Column 1 (Grid Column 1)-->
                 <Button Grid.Column="1"  x:Name="AddBookBUTTON" Background="#C6C5FF" Click= "AddBookBUTTON_Click" BorderBrush="Black" >Add Book</Button>
-                <Button Grid.Column="3"  x:Name="ChangeBookInfoBUTTON" Background="#C6C5FF" Click="ChangeBookInfoBUTTON_Click" BorderBrush="Black">Change Info</Button>
+                <!-- Column 2 (Grid Column 3)-->
+                <Button Grid.Column="3"  x:Name="UpdateBookInfoBUTTON" Background="#C6C5FF" Click="UpdateBookInfoBUTTON_Click" BorderBrush="Black">Update Info</Button>
+                <!-- Column 3 (Grid Column 3)-->
                 <Button Grid.Column="5"  x:Name="HoldBookBUTTON" Background="#C6C5FF" Click="HoldBookBUTTON_Click" BorderBrush="Black">Hold Book</Button>
+                <!-- Column 4 (Grid Column 7)-->
                 <Button Grid.Column="7"  x:Name="WithdrawBookBUTTON" Background="#C6C5FF" Click= "WithdrawBookBUTTON_Click" BorderBrush="Black" >Withdraw Book</Button>
+                <!-- Column 5 (Grid Column 9)-->
                 <Button Grid.Column="9"  x:Name="ReturnBookBUTTON" Background="#C6C5FF" Click= "ReturnBookBUTTON_Click" BorderBrush="Black" >Return Book</Button>
 
             </Grid>

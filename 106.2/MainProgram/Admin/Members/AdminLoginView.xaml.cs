@@ -326,13 +326,16 @@
             }
             private void ChangeInfoBUTTON_Click(object sender, RoutedEventArgs e)
             {
+               if (membersdatagrid.SelectedIndex != -1) 
+               { 
                 string OutNumber = Memberdata.Get_number(),
                     OutName = Memberdata.Get_name(),
                     OutPhonenumbers = Memberdata.Get_phonenumbers(),
                     OutEmail = Memberdata.Get_email(),
-                    OutJoindate = Memberdata.Get_joindate(),
+                    OutJoindate = Memberdata.Get_joindate().Remove(Memberdata.Get_joindate().IndexOf(" ")),
                     OutAddress = Memberdata.Get_address();
                 UpdateMember(OutNumber, OutName, OutPhonenumbers, OutEmail, OutJoindate, OutAddress);
+               }
                 RefreshGrid();
             }
             // Textboxes

@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace _106._2.MainProgram.Homepage
 {
     /// <summary>
-    /// Interaction logic for Booktemplate.xaml
+    /// Interaction logic for BookPopUP.xaml
     /// </summary>
-    public partial class Booktemplate : UserControl
+    public partial class BookPopUP : Window
     {
-        public Booktemplate()
+        public BookPopUP()
         {
             InitializeComponent();
         }

@@ -4,6 +4,7 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -123,6 +124,14 @@ namespace _106._2.Admin.Book
             LoadDatagrid();
             LoadGenreBox();
         }
+        private void DG_Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            Hyperlink link = (Hyperlink)e.OriginalSource;
+         
+             
+
+
+        }
         public string searchtypestringer(Searchtype type)
         {
             switch (type)
@@ -165,7 +174,7 @@ namespace _106._2.Admin.Book
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
             string comm = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                        + "book.bookname,book.author,book.genre,"
+                        + "book.bookname,book.author,book.genre,book.image,"
                         + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
@@ -224,7 +233,7 @@ namespace _106._2.Admin.Book
                         int Output = int.Parse(Search);
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                        + "book.bookname,book.author,book.genre,"
+                        + "book.bookname,book.author,book.genre,book.image,"
                         + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
@@ -240,7 +249,7 @@ namespace _106._2.Admin.Book
                     {
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                        + "book.bookname,book.author,book.genre,"
+                        + "book.bookname,book.author,book.genre,book.image,"
                         + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
@@ -257,7 +266,7 @@ namespace _106._2.Admin.Book
 
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                        + "book.bookname,book.author,book.genre,"
+                        + "book.bookname,book.author,book.genre,book.image,"
                         + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
@@ -274,7 +283,7 @@ namespace _106._2.Admin.Book
 
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                        + "book.bookname,book.author,book.genre,"
+                        + "book.bookname,book.author,book.genre,book.image,"
                         + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
@@ -290,7 +299,7 @@ namespace _106._2.Admin.Book
                     {
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                        + "book.bookname,book.author,book.genre,"
+                        + "book.bookname,book.author,book.genre,book.image,"
                         + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
@@ -307,7 +316,7 @@ namespace _106._2.Admin.Book
                         int Output = int.Parse(Search);
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                        + "book.bookname,book.author,book.genre,"
+                        + "book.bookname,book.author,book.genre,book.image,"
                         + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
@@ -323,7 +332,7 @@ namespace _106._2.Admin.Book
                     {
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                        + "book.bookname,book.author,book.genre,"
+                        + "book.bookname,book.author,book.genre,book.image,"
                         + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
@@ -340,7 +349,7 @@ namespace _106._2.Admin.Book
                         int Output = int.Parse(Search);
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                        + "book.bookname,book.author,book.genre,"
+                        + "book.bookname,book.author,book.genre,book.image,"
                         + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
@@ -357,7 +366,7 @@ namespace _106._2.Admin.Book
 
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                        + "book.bookname,book.author,book.genre,"
+                        + "book.bookname,book.author,book.genre,book.image,"
                         + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
@@ -586,7 +595,7 @@ namespace _106._2.Admin.Book
             {
                 string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -687,11 +696,11 @@ namespace _106._2.Admin.Book
                     NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
-                    dt.Rows[1].ToString();
+                    DataRow dataRow = dt.Rows[0];
 
                     string
-                    MemerIDnumber = dt.Rows[0].ToString(),
-                    MemberName = dt.Rows[1].ToString();
+                    MemerIDnumber = dataRow[0].ToString(),
+                    MemberName = dataRow[1].ToString();
                     string Newinfo = $"Book ID Number :{BookID} {Environment.NewLine} " +
                                      $"Book Title: {Title}   {Environment.NewLine}" +
                                      $"Book Author: {Author}  {Environment.NewLine}" +
@@ -704,16 +713,17 @@ namespace _106._2.Admin.Book
 
                     withdrawBookPopup.BookInfo.Text = Oldinfo;
                     withdrawBookPopup.MemberInfo.Text = Newinfo;
-                    bool? NotCanceled = withdrawBookPopup.ShowDialog();
+                    withdrawBookPopup.MemberId = MemberId;
+                    withdrawBookPopup.SelectedBookId = SelectedBookId;
+                    withdrawBookPopup.ShowDialog();
                     string command = "UPDATE  booklog " +
                         $" SET withdrawn = 'true',returned = 'false', issueid = {MemberId}  " +
                         $" WHERE bookID = ({SelectedBookId}) ";
-                    if (NotCanceled != null && NotCanceled == true)
-                    {
+                    
 
-                        var cmd = new NpgsqlCommand(command, SqlCONN);
-                        cmd.ExecuteNonQuery();
-                    }
+                        //var cmd = new NpgsqlCommand(command, SqlCONN);
+                        //cmd.ExecuteNonQuery();
+                    
                 }
                 catch (Exception ex)
                 {
@@ -743,10 +753,12 @@ namespace _106._2.Admin.Book
 
                     SqlCONN.Open();
                     UpdateBookPopup UpadteBookPopup = new UpdateBookPopup();
-
+                    string
+                        SelectedBookId = SelectedBookID.Text.Substring(SelectedBookID.Text.IndexOf(':')+2 ) ;
                     string command = "UPDATE  book " +
                         $" SET bookname = '{Title}',author = '{Author}',genre = '{Genre}'  " +
-                        $" WHERE bookID = ({BookID}) ", SelectedBookId = SelectedBookID.Text.Substring(SelectedBookID.Text.IndexOf(':')+2 ) ;
+                        $" WHERE bookID = ({SelectedBookId}) ";
+                   
                     if (SelectedBookId == "") 
                     {
                         throw new Exception(" Must select a book to update ");
@@ -757,25 +769,25 @@ namespace _106._2.Admin.Book
                     NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
-                    dt.Rows[1].ToString();
+                    DataRow dataRow =  dt.Rows[0];
                     
                     string
-                    OldBookId = dt.Rows[0].ToString(),
-                    OldTitle = dt.Rows[1].ToString(),
-                    OLdAuthor = dt.Rows[2].ToString(),
-                    OldGenre = dt.Rows[3].ToString(); 
-                 string Newinfo = $"Book ID Number :{BookID} {Environment.NewLine} " +
+                    OldBookId = dataRow[0].ToString(),
+                    OldTitle = dataRow[1].ToString(),
+                    OLdAuthor = dataRow[2].ToString(),
+                    OldGenre = dataRow[3].ToString(); 
+                 string Newinfo = $"Book ID Number: {SelectedBookId} {Environment.NewLine} " +
                                   $"Book Title: {Title}   {Environment.NewLine}" +
                                   $"Book Author: {Author}  {Environment.NewLine}" +
                                   $"Book Genre: {Genre}  {Environment.NewLine}",
-                        Oldinfo = $"Book ID Number :{OldBookId} {Environment.NewLine} " +
+                        Oldinfo = $"Book ID Number: {SelectedBookId} {Environment.NewLine} " +
                                   $"Book Title: {OldTitle}   {Environment.NewLine}" +
                                   $"Book Author: {OLdAuthor}  {Environment.NewLine}" +
                                   $"Book Genre: {OldGenre}  {Environment.NewLine}";
 
 
-
-
+                    UpadteBookPopup.Connection = SqlCONN;
+                    UpadteBookPopup.bookid = SelectedBookId;
                     UpadteBookPopup.OldBookInfo.Text = Oldinfo;
                     UpadteBookPopup.NewBookInfo.Text = Newinfo;
                     bool? NotCanceled = UpadteBookPopup.ShowDialog();
@@ -794,7 +806,7 @@ namespace _106._2.Admin.Book
                 RefreshGrid();
             }
         }
-        private void ChangeBookInfoBUTTON_Click(object sender, RoutedEventArgs e)
+        private void UpdateBookInfoBUTTON_Click(object sender, RoutedEventArgs e)
         {
             string BookIdOut = dataStorage.Get_BookID(),
                  BooKTitleOut = dataStorage.Get_Title(),
@@ -849,7 +861,7 @@ namespace _106._2.Admin.Book
                 {
                     string command = "SELECT "
                                 + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                                + "book.bookname,book.author,book.genre,"
+                                + "book.bookname,book.author,book.genre,book.image,"
                                 + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                                 + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                                 + "booklog.issuedid,"
@@ -892,7 +904,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -909,7 +921,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -926,7 +938,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -943,7 +955,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -960,7 +972,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -977,7 +989,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -994,7 +1006,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -1012,7 +1024,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -1029,7 +1041,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -1046,7 +1058,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -1063,7 +1075,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -1080,7 +1092,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -1097,7 +1109,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
@@ -1114,7 +1126,7 @@ namespace _106._2.Admin.Book
 
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,"
+                            + "book.bookname,book.author,book.genre,book.image,"
                             + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"

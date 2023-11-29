@@ -35,8 +35,4 @@
     <Resource Include="MainProgram\Images\logo_color 1.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MainProgram\Images\Home\" />
-  </ItemGroup>
-
 </Project>
