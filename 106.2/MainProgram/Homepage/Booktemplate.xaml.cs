@@ -19,23 +19,47 @@ namespace _106._2.MainProgram.Homepage
     /// Interaction logic for Booktemplate.xaml
     /// </summary>
     public partial class Booktemplate : UserControl
-    {
+    {    
+        public Book GetBook = new Book();
+        public class Book
+        {
+            public string ImagePath { get; set; }
+            public string Title { get; set; }
+            public string Author { get; set; }
+            public string Genre { get; set; }
+
+        }
         public Booktemplate()
         {
+             
             InitializeComponent();
+           
+
         }
+     
+       
 
-
-
-        private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        private void CoverImage_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
+            CoverImage.Source =  new BitmapImage(new Uri("/Images/CoverPlaceH", UriKind.Relative));
 
         }
 
         private void btnPopup_Click(object sender, RoutedEventArgs e)
-        {
+        {   
+            Booktemplate booktemplate = this; 
+            GetBook.ImagePath =  booktemplate.CoverImage.Source.ToString();
+            GetBook.Title = booktemplate.TitleBlock.Text;
+            GetBook.Author = booktemplate.AuthorBlock.Text;
+            GetBook.Genre = booktemplate.GenreBlock.Text;
+            Point point = Mouse.GetPosition(null) ;
             BookPopUP bookPopUP = new BookPopUP();
-           
+            bookPopUP.Top = point.Y - bookPopUP.Height/2;
+            bookPopUP.Left = point.X - bookPopUP.Width / 2;
+            bookPopUP.GetBook.ImagePath = GetBook.ImagePath;
+            bookPopUP.GetBook.Title = GetBook.Title;
+            bookPopUP.GetBook.Author = GetBook.Author;
+            bookPopUP.GetBook.Genre = GetBook.Genre;
             bookPopUP.ShowDialog();
         }
     }

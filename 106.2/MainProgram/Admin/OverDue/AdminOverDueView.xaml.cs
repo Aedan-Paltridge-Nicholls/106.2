@@ -1,14 +1,10 @@
 ﻿using _106._2.MainProgram.Admin.Book;
-using Microsoft.Win32;
 using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,16 +17,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Xml.Linq;
-using static _106._2.AdminLoginView;
+using static _106._2.Admin.Book.AdminBookView;
 
-namespace _106._2.Admin.Book
+namespace _106._2.MainProgram.Admin.OverDue
 {
     /// <summary>
-    /// Interaction logic for AdminBookView.xaml
+    /// Interaction logic for AdminOverDueView.xaml
     /// </summary>
-    public partial class AdminBookView : Page
+    public partial class AdminOverDueView : Page
     {
+        public AdminOverDueView()
+        {
+            CultureInfo Dtfi = CultureInfo.CreateSpecificCulture("en-us");
+            Dtfi.DateTimeFormat.ShortDatePattern = "yyyy/MM/dd";
+            Dtfi.DateTimeFormat.DateSeparator = "-";
+            Thread.CurrentThread.CurrentCulture = Dtfi;
+            InitializeComponent();
+            LoadDatagrid();
+            LoadGenreBox();
+        }
         public class DataStorage
         {
             string BookID,
@@ -114,88 +119,145 @@ namespace _106._2.Admin.Book
         public bool Numericinput = false;
         public bool Boolinput = false;
         public bool Dateinput = false;
-        private DataRow dr;
-
-        public AdminBookView()
+        private void SearchOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CultureInfo Dtfi = CultureInfo.CreateSpecificCulture("en-us");
-            Dtfi.DateTimeFormat.ShortDatePattern = "yyyy/MM/dd";
-            Dtfi.DateTimeFormat.DateSeparator = "-";
-            Thread.CurrentThread.CurrentCulture = Dtfi;
-            InitializeComponent();
-            LoadDatagrid();
-            LoadGenreBox();
-        }
-        private void DG_Hyperlink_Click(object sender, RoutedEventArgs e)
-        {
-            Hyperlink link = (Hyperlink)e.OriginalSource;
-         
-             
-
-
-        }
-        public string searchtypestringer(Searchtype type)
-        {
-            switch (type)
+            switch (SearchOptionBOX.SelectedIndex)
             {
-                case Searchtype.BookID:
-                    return "BookID";
-                case Searchtype.Title:
-                    return "Title";
-                case Searchtype.Author:
-                    return "Author";
-                case Searchtype.Genre:
-                    return "Genre";
-                case Searchtype.OnHold:
-                    return "OnHold";
-                case Searchtype.Withdrawn:
-                    return "Withdrawn";
-                case Searchtype.Overdue:
-                    return "Overdue";
-                case Searchtype.Returned:
-                    return "Returned";
-                case Searchtype.DueDate:
-                    return "DueDate";
-                case Searchtype.HoldID:
-                    return "HoldID";
-                case Searchtype.OnHoldTo:
-                    return "OnHoldTo";
-                case Searchtype.IssuedId:
-                    return "IssuedId";
-                case Searchtype.IssuedTo:
-                    return "IssuedTo";
+                case 0:
+                    {
+                        Dateinput = false;
+                        Boolinput = false;
+                        Numericinput = true;
+                    }
+                    break;
+                case 4:
+                    {
+                        Dateinput = false;
+                        Boolinput = true;
+                        Numericinput = false;
+                    }
+                    break;
+                case 5:
+                    {
+                        Dateinput = false;
+                        Boolinput = true;
+                        Numericinput = false;
+                    }
+                    break;
+                case 6:
+                    {
+                        Dateinput = false;
+                        Boolinput = true;
+                        Numericinput = false;
+                    }
+                    break;
+                case 7:
+                    {
+                        Dateinput = false;
+                        Boolinput = true;
+                        Numericinput = false;
+                    }
+                    break;
+                case 8:
+                    {
+                        Dateinput = true;
+                        Boolinput = false;
+                        Numericinput = false;
+                    }
+                    break;
+                case 9:
+                    {
+                        Dateinput = false;
+                        Boolinput = false;
+                        Numericinput = true;
+                    }
+                    break;
+                case 11:
+                    {
+                        Dateinput = false;
+                        Boolinput = false;
+                        Numericinput = true;
+                    }
+                    break;
                 default:
-                    return "";
-
+                    {
+                        Dateinput = false;
+                        Boolinput = false;
+                        Numericinput = false;
+                    }
+                    break;
             }
-
-
+            if (Boolinput)
+            {
+                SearchBOX.Clear();
+                SearchBOX.Text = "Please use the Statis combobox";
+            }
+            else if (Dateinput)
+            {
+                SearchBOX.Clear();
+                SearchBOX.Text = "Please use the date time picker";
+            }
+            else
+            {
+                SearchBOX.Clear();
+            }
         }
-        public void LoadDatagrid()
+        public void Search(string SearchOut)
         {
-            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-            string comm = "SELECT "
-                        + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                        + "book.bookname,book.author,book.genre,book.image,"
-                        + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                        + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                        + "booklog.issuedid,"
-                        + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                        + " FROM book"
-                        + " inner join booklog on booklog.bookid = book.bookid"
-                        + " order by Book_id;";
-            NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            Booksdatagrid.ItemsSource = dt.DefaultView;
-            Booksdatagrid.DataContext = dt;
-
+            if (string.IsNullOrEmpty(SearchOut)) { LoadDatagrid(); }
+            else
+            {
+                switch (SearchOptionBOX.SelectedIndex)
+                {
+                    case 0:
+                        { searchtype = Searchtype.BookID; }
+                        break;
+                    case 1:
+                        { searchtype = Searchtype.Title; }
+                        break;
+                    case 2:
+                        { searchtype = Searchtype.Author; }
+                        break;
+                    case 3:
+                        { searchtype = Searchtype.Genre; }
+                        break;
+                    case 4:
+                        { searchtype = Searchtype.OnHold; }
+                        break;
+                    case 5:
+                        { searchtype = Searchtype.Withdrawn; }
+                        break;
+                    case 6:
+                        { searchtype = Searchtype.Overdue; }
+                        break;
+                    case 7:
+                        { searchtype = Searchtype.Returned; }
+                        break;
+                    case 8:
+                        { searchtype = Searchtype.DueDate; }
+                        break;
+                    case 9:
+                        { searchtype = Searchtype.HoldID; }
+                        break;
+                    case 10:
+                        { searchtype = Searchtype.OnHoldTo; }
+                        break;
+                    case 11:
+                        { searchtype = Searchtype.IssuedId; }
+                        break;
+                    case 12:
+                        { searchtype = Searchtype.IssuedTo; }
+                        break;
+                    default:
+                        break;
+                }
+                LoadDatagrid(SearchOut, searchtype);
+            }
         }
         public void LoadDatagrid(string comm)
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-            if (comm == null)
+            if (comm != null)
             {
                 LoadDatagrid();
                 return;
@@ -232,7 +294,8 @@ namespace _106._2.Admin.Book
 
                 case "BookID":
                     {
-                        int Output = int.Parse(Search);
+                        int Output;
+                            int.TryParse(Search, out Output);
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,book.image,"
@@ -391,6 +454,27 @@ namespace _106._2.Admin.Book
         {
             LoadDatagrid();
         }
+        private void GenreOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (SearchOptionBOX.SelectedIndex == 3)
+            {
+                string command = "SELECT "
+                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
+                            + "book.bookname,book.author,book.genre,book.image,"
+                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
+                            + "booklog.issuedid,"
+                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
+                            + " FROM book"
+                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
+                            + $" WHERE  genre = \'{GenreOptionBOX.SelectedItem}\' "
+                            + " order by Book_id;";
+                LoadDatagrid(command);
+            }
+            if (GenreOptionBOX.SelectedIndex != -1) { dataStorage.Set_Genre(GenreOptionBOX.SelectedItem.ToString()); }
+
+        }
         public void LoadGenreBox()
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
@@ -407,149 +491,6 @@ namespace _106._2.Admin.Book
             }
             GenreOptionBOX.ItemsSource = Genres;
             SqlCONN.Close();
-        }
-
-
-
-        private void BookIdnumberBOX_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            dataStorage.Set_BookID(BookIdnumberBOX.Text);
-        }
-
-        private void SearchOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            switch (SearchOptionBOX.SelectedIndex)
-            {
-                case 0:
-                    {
-                        Dateinput = false;
-                        Boolinput = false;
-                        Numericinput = true;
-                    }
-                    break;
-                case 4:
-                    {
-                        Dateinput = false;
-                        Boolinput = true;
-                        Numericinput = false;
-                    }
-                    break;
-                case 5:
-                    {
-                        Dateinput = false;
-                        Boolinput = true;
-                        Numericinput = false;
-                    }
-                    break;
-                case 6:
-                    {
-                        Dateinput = false;
-                        Boolinput = true;
-                        Numericinput = false;
-                    }
-                    break;
-                case 7:
-                    {
-                        Dateinput = false;
-                        Boolinput = true;
-                        Numericinput = false;
-                    }
-                    break;
-                case 8:
-                    {
-                        Dateinput = true;
-                        Boolinput = false;
-                        Numericinput = false;
-                    }
-                    break;
-                case 9:
-                    {
-                        Dateinput = false;
-                        Boolinput = false;
-                        Numericinput = true;
-                    }
-                    break;
-                case 11:
-                    {
-                        Dateinput = false;
-                        Boolinput = false;
-                        Numericinput = true;
-                    }
-                    break;
-                default:
-                    {
-                        Dateinput = false;
-                        Boolinput = false;
-                        Numericinput = false;
-                    }
-                    break;
-            }
-            if (Boolinput)
-            {
-                SearchBOX.Clear();
-                SearchBOX.Text = "Please use the Statis combobox";
-            }
-            else if (Dateinput)
-            {
-                SearchBOX.Clear();
-                SearchBOX.Text = "Please use the date time picker";
-            }
-            else
-            {
-                SearchBOX.Clear();
-            }
-        }
-        public void Search(string SearchOut)
-        {
-            if (string.IsNullOrEmpty(SearchOut)) { LoadDatagrid(); }
-            else
-            {
-                switch (SearchOptionBOX.SelectedIndex)
-                {
-                    case 0:
-                        { searchtype = Searchtype.BookID; }
-                        break;
-                    case 1:
-                        { searchtype = Searchtype.Title; }
-                        break;
-                    case 2:
-                        { searchtype = Searchtype.Author; }
-                        break;
-                    case 3:
-                        { searchtype = Searchtype.Genre; }
-                        break;
-                    case 4:
-                        { searchtype = Searchtype.OnHold; }
-                        break;
-                    case 5:
-                        { searchtype = Searchtype.Withdrawn; }
-                        break;
-                    case 6:
-                        { searchtype = Searchtype.Overdue; }
-                        break;
-                    case 7:
-                        { searchtype = Searchtype.Returned; }
-                        break;
-                    case 8:
-                        { searchtype = Searchtype.DueDate; }
-                        break;
-                    case 9:
-                        { searchtype = Searchtype.HoldID; }
-                        break;
-                    case 10:
-                        { searchtype = Searchtype.OnHoldTo; }
-                        break;
-                    case 11:
-                        { searchtype = Searchtype.IssuedId; }
-                        break;
-                    case 12:
-                        { searchtype = Searchtype.IssuedTo; }
-                        break;
-                    default:
-                        break;
-                }
-                LoadDatagrid(SearchOut, searchtype);
-            }
         }
         private void SearchBOX_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -580,375 +521,76 @@ namespace _106._2.Admin.Book
                 Search(SearchOut);
             }
         }
-
-        private void TitleBOX_TextChanged(object sender, TextChangedEventArgs e)
+        public string searchtypestringer(Searchtype type)
         {
-            dataStorage.Set_Title(TitleBOX.Text.Trim());
-        }
-        private void AuthorBOX_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            dataStorage.Set_Author(AuthorBOX.Text.Trim());
-
-        }
-        private void GenreOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-           
-            if (SearchOptionBOX.SelectedIndex == 3)
+            switch (type)
             {
-                string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + $" WHERE  genre = \'{GenreOptionBOX.SelectedItem}\' "
-                            + " order by Book_id;";
-                LoadDatagrid(command);
-            }
-            if (GenreOptionBOX.SelectedIndex != -1) {  dataStorage.Set_Genre(GenreOptionBOX.SelectedItem.ToString()); }
-           
-        }
-        public string ImagePath {  get; set; } 
-        private void GetImage()
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-
-            ofd.InitialDirectory = "c:\\";    // Seting a filter for file extensions 
-            ofd.Filter = "\"Image files (*.bmp, *.jpg)|*.bmp;*.jpg|All files (*.*)|*.*\"'";
-            ofd.Multiselect = false;
-            ofd.Title = "Select Cover Image";
-
-            if (ofd.ShowDialog() == true)// Opening the file dialog
-            {
-                // Gets the selected images filename
-                 ImagePath = ofd.FileName.ToString();
+                case Searchtype.BookID:
+                    return "BookID";
+                case Searchtype.Title:
+                    return "Title";
+                case Searchtype.Author:
+                    return "Author";
+                case Searchtype.Genre:
+                    return "Genre";
+                case Searchtype.OnHold:
+                    return "OnHold";
+                case Searchtype.Withdrawn:
+                    return "Withdrawn";
+                case Searchtype.Overdue:
+                    return "Overdue";
+                case Searchtype.Returned:
+                    return "Returned";
+                case Searchtype.DueDate:
+                    return "DueDate";
+                case Searchtype.HoldID:
+                    return "HoldID";
+                case Searchtype.OnHoldTo:
+                    return "OnHoldTo";
+                case Searchtype.IssuedId:
+                    return "IssuedId";
+                case Searchtype.IssuedTo:
+                    return "IssuedTo";
+                default:
+                    return "";
 
             }
-            else
-            {
-                MessageBox.Show("Must Select Cover Image ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                GetImage();
-            }
+
 
         }
-        public void Addbook(String BookID,String Title,String Author, String Genre)
+        public void LoadDatagrid()
         {
-            ImagePath = " sdsdsdsd";
-            using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
-            {
-                try
-                {
-                    if (BookID == ""){throw new Exception("Must enter Book id number ");}
-                    SqlCONN.Open();
-                    AddBookPopup addBookPopup = new AddBookPopup();
-                    string info = $"Book ID Number :{BookID} {Environment.NewLine} " +
-                                  $"Book Title: {Title}   {Environment.NewLine}" +
-                                  $"Book Author: {Author}  {Environment.NewLine}" +
-                                  $"Book Genre: {Genre}  {Environment.NewLine}";
-                    addBookPopup.BookInfoBox.Text = info;
-                    bool? NotCanceled = addBookPopup.ShowDialog();
-
-                    if (NotCanceled != null && NotCanceled == true)
-                    {
-                        GetImage();
-                        string command = "INSERT INTO book (bookID, bookname, author, genre, image)" +
-                        $" VALUES ( {BookID}, '{Title}', '{Author}', '{Genre}', '{ImagePath}' );" +
-                        $" INSERT INTO booklog (bookID) VALUES ({BookID}) ";
-                        var cmd = new NpgsqlCommand(command, SqlCONN);
-                       cmd.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally { SqlCONN.Close(); }
-                RefreshGrid();
-            }
-        }
-        private void AddBookBUTTON_Click(object sender, RoutedEventArgs e)
-        {
-            string BookIdOut = dataStorage.Get_BookID(),
-                BooKTitleOut = dataStorage.Get_Title(),
-                BookAuthorOut = dataStorage.Get_Author(),
-                BookGenreOut = dataStorage.Get_Genre();
-            Addbook(BookIdOut,BooKTitleOut,BookAuthorOut,BookGenreOut);
-            RefreshGrid();
-        }
-        public void withdrawBook(String BookID, String Title, String Author, String Genre, string MemberId)
-        {
-            using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
+            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
+            string comm = "SELECT "
+                        + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
+                        + "book.bookname,book.author,book.genre,book.image,"
+                        + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                        + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
+                        + "booklog.issuedid,"
+                        + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
+                        + " FROM book"
+                        + " inner join booklog on booklog.bookid = book.bookid"
+                        + " order by Book_id;";
+            NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            dt.Columns.Add("Owed");
+            int i = 0;
+            foreach (DataRow dr in dt.Rows)
             {
 
-                try
-                {
-
-                    SqlCONN.Open();
-                    WithdrawBookPopup withdrawBookPopup = new WithdrawBookPopup();
-                    string SelectedBookId = SelectedBookID.Value.ToString(),
-                     MemberIdOut = SelectedBookID.Value.ToString();
-
-                    DataTable dataTable = new DataTable();
-
-                    NpgsqlCommand cmd1 = new NpgsqlCommand($"Select * FROM members WHERE number = {MemberId}", SqlCONN);
-                    NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-                    DataRow dataRow = dt.Rows[0];
-
-                    string
-                    MemerIDnumber = dataRow[0].ToString(),
-                    MemberName = dataRow[1].ToString();
-                    string BookInfo = $"Book ID Number :{BookID} {Environment.NewLine} " +
-                                     $"Book Title: {Title}   {Environment.NewLine}" +
-                                     $"Book Author: {Author}  {Environment.NewLine}" +
-                                     $"Book Genre: {Genre}  {Environment.NewLine}",
-                           MemberInfo = $"Member ID Number :{MemerIDnumber} {Environment.NewLine} " +
-                                     $"Member Name: {MemberName}   {Environment.NewLine};";
-
-
-
-
-                    withdrawBookPopup.BookInfo.Text = BookInfo;
-                    withdrawBookPopup.MemberInfo.Text = MemberInfo ;
-                    withdrawBookPopup.MemberId = MemberId;
-                    withdrawBookPopup.SelectedBookId = SelectedBookId;
-                    withdrawBookPopup.ShowDialog();
-                    
-                    
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally { SqlCONN.Close(); }
+                dt.Columns[11].Table.Rows[i].BeginEdit();
+                var row = dt.Columns[11].Table.Rows[i];
+                row["Owed"] = row["bookid"].ToString();
 
             }
-            RefreshGrid();
-        }
-        private void WithdrawBookBUTTON_Click(object sender, RoutedEventArgs e)
-        {
-            string SelectedBookId = SelectedBookID.Value.ToString(),
-                     MemberIdOut = SelectedBookID.Value.ToString();
-            if (SelectedBookId == ""){ MessageBox.Show(" Must select a book to Issuse "); return; }
-            string BookIdOut = dataStorage.Get_BookID(),
-                   BooKTitleOut = dataStorage.Get_Title(),
-                   BookAuthorOut = dataStorage.Get_Author(),
-                   BookGenreOut = dataStorage.Get_Genre();
-                   
-            if (MemberIdOut == "") { MessageBox.Show(" Must select a Member Issue the book to "); return; }
-            withdrawBook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut, MemberIdOut);
-                  
-        }
-        public void Updatebook(String BookID, String Title, String Author, String Genre)
-        {
-            using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
-            {
-                
-                try
-                {
-
-                    SqlCONN.Open();
-                    UpdateBookPopup UpadteBookPopup = new UpdateBookPopup();
-                    string
-                        SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedBookID.Value.ToString() ;
-                    string command = "UPDATE  book " +
-                        $" SET bookname = '{Title}',author = '{Author}',genre = '{Genre}'  " +
-                        $" WHERE bookID = ({SelectedBookId}) ";
-                   
-                    if (SelectedBookId == "") 
-                    {
-                        throw new Exception(" Must select a book to update ");
-                    }
-                    DataTable dataTable = new DataTable();
-
-                    NpgsqlCommand cmd1 = new NpgsqlCommand($"Select * FROM book WHERE bookid = {SelectedBookId}", SqlCONN);
-                    NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-                    DataRow dataRow =  dt.Rows[0];
-                    
-                    string
-                    OldBookId = dataRow[0].ToString(),
-                    OldTitle = dataRow[1].ToString(),
-                    OLdAuthor = dataRow[2].ToString(),
-                    OldGenre = dataRow[3].ToString(); 
-                 string Newinfo = $"Book ID Number: {SelectedBookId} {Environment.NewLine} " +
-                                  $"Book Title: {Title}   {Environment.NewLine}" +
-                                  $"Book Author: {Author}  {Environment.NewLine}" +
-                                  $"Book Genre: {Genre}  {Environment.NewLine}",
-                        Oldinfo = $"Book ID Number: {SelectedBookId} {Environment.NewLine} " +
-                                  $"Book Title: {OldTitle}   {Environment.NewLine}" +
-                                  $"Book Author: {OLdAuthor}  {Environment.NewLine}" +
-                                  $"Book Genre: {OldGenre}  {Environment.NewLine}";
-
-
-                    UpadteBookPopup.Connection = SqlCONN;
-                    UpadteBookPopup.bookid = SelectedBookId;
-                    UpadteBookPopup.OldBookInfo.Text = Oldinfo;
-                    UpadteBookPopup.NewBookInfo.Text = Newinfo;
-                    bool? NotCanceled = UpadteBookPopup.ShowDialog();
-                    if (NotCanceled != null && NotCanceled == true)
-                    {
-
-                        var cmd = new NpgsqlCommand(command, SqlCONN);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally { SqlCONN.Close(); }
-                RefreshGrid();
-            }
-          
-        }
-       
-        private void UpdateBookInfoBUTTON_Click(object sender, RoutedEventArgs e)
-        {
-            string BookIdOut = dataStorage.Get_BookID(),
-                 BooKTitleOut = dataStorage.Get_Title(),
-                 BookAuthorOut = dataStorage.Get_Author(),
-                 BookGenreOut = dataStorage.Get_Genre();
-            Updatebook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut);
-            RefreshBookGrid();
+         
+            Booksdatagrid.ItemsSource = dt.DefaultView;
+            Booksdatagrid.DataContext = dt;
 
         }
-        public void HoldBook(String BookID, String Title, String Author, String Genre, string MemberId)
-        {
-            using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
-            {
-
-                try
-                {
-
-                    SqlCONN.Open();
-                    HoldBookPopup HoldBookPopup = new HoldBookPopup();
-                    DataTable dataTable = new DataTable();
-                    string SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedBookID.Value.ToString();
-
-                    NpgsqlCommand cmd1 = new NpgsqlCommand($"Select * FROM members WHERE number = {MemberId}", SqlCONN);
-                    NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-                    DataRow dataRow = dt.Rows[0];
-
-                    string
-                    MemerIDnumber = dataRow[0].ToString(),
-                    MemberName = dataRow[1].ToString();
-                    string BookInfo = $"Book ID Number :{BookID} {Environment.NewLine} " +
-                                     $"Book Title: {Title}   {Environment.NewLine}" +
-                                     $"Book Author: {Author}  {Environment.NewLine}" +
-                                     $"Book Genre: {Genre}  {Environment.NewLine}",
-                           MemberInfo = $"Member ID Number :{MemerIDnumber} {Environment.NewLine} " +
-                                     $"Member Name: {MemberName}   {Environment.NewLine};";
-
-
-
-
-                    HoldBookPopup.BookInfo.Text = BookInfo;
-                    HoldBookPopup.MemberInfo.Text = MemberInfo;
-                    HoldBookPopup.MemberId = MemberId;
-                    HoldBookPopup.SelectedBookId = SelectedBookId;
-                    HoldBookPopup.ShowDialog();
-
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally { SqlCONN.Close(); }
-
-            }
-            RefreshGrid();
-        }
-       
-    
-        private void HoldBookBUTTON_Click(object sender, RoutedEventArgs e)
-        {
-            string SelectedBookId = SelectedBookID.Value.ToString(),
-                     MemberIdOut = SelectedBookID.Value.ToString();
-            if (SelectedBookId == "") { MessageBox.Show(" Must select a book to return "); return; }
-            string BookIdOut = dataStorage.Get_BookID(),
-                   BooKTitleOut = dataStorage.Get_Title(),
-                   BookAuthorOut = dataStorage.Get_Author(),
-                   BookGenreOut = dataStorage.Get_Genre();
-
-            if (MemberIdOut == "") { MessageBox.Show(" Must select the Member the book is Issued too "); return; }
-            HoldBook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut, MemberIdOut);
-        }
-        public void ReturnBook(String BookID, String Title, String Author, String Genre, string MemberId)
-        {
-            using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
-            {
-
-                try
-                {
-
-                    SqlCONN.Open();
-                    ReturnBookPopup returnBookPopup = new ReturnBookPopup();
-                    DataTable dataTable = new DataTable();
-                    string SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedBookID.Value.ToString();
-
-                    NpgsqlCommand cmd1 = new NpgsqlCommand($"Select * FROM members WHERE number = {MemberId}", SqlCONN);
-                    NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-                    DataRow dataRow = dt.Rows[0];
-
-                    string
-                    MemerIDnumber = dataRow[0].ToString(),
-                    MemberName = dataRow[1].ToString();
-                    string BookInfo = $"Book ID Number :{BookID} {Environment.NewLine} " +
-                                     $"Book Title: {Title}   {Environment.NewLine}" +
-                                     $"Book Author: {Author}  {Environment.NewLine}" +
-                                     $"Book Genre: {Genre}  {Environment.NewLine}",
-                           MemberInfo = $"Member ID Number :{MemerIDnumber} {Environment.NewLine} " +
-                                     $"Member Name: {MemberName}   {Environment.NewLine};";
-
-
-
-
-                    returnBookPopup.BookInfo.Text = BookInfo;
-                    returnBookPopup.MemberInfo.Text = MemberInfo;
-                    returnBookPopup.MemberId = MemberId;
-                    returnBookPopup.SelectedBookId = SelectedBookId;
-                    returnBookPopup.ShowDialog();
-
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally { SqlCONN.Close(); }
-
-            }
-            RefreshGrid();
-        }
-        private void ReturnBookBUTTON_Click(object sender, RoutedEventArgs e)
-        {
-            string SelectedBookId = SelectedBookID.Value.ToString(),
-                     MemberIdOut = SelectedBookID.Value.ToString();
-            if (SelectedBookId == "") { MessageBox.Show(" Must select a book to return "); return; }
-            string BookIdOut = dataStorage.Get_BookID(),
-                   BooKTitleOut = dataStorage.Get_Title(),
-                   BookAuthorOut = dataStorage.Get_Author(),
-                   BookGenreOut = dataStorage.Get_Genre();
-
-            if (MemberIdOut == "") { MessageBox.Show(" Must select the Member the book is Issued too "); return; }
-            ReturnBook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut, MemberIdOut);
-        }
-        private void RefreshBookGrid() 
-        {
-            LoadDatagrid();
-        }
-        private void Booksdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+         private void Booksdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
            
             if (Booksdatagrid.SelectedIndex != -1)
@@ -956,42 +598,45 @@ namespace _106._2.Admin.Book
                 string number ="";
                 DataGrid dg = (DataGrid )sender;
                 DataRowView selectedRow = dg.SelectedItem as DataRowView;
-                number = selectedRow.Row[0].ToString();
-                BookIdnumberBOX.Text = number;
-                TitleBOX.Text = selectedRow.Row[1].ToString();
-                AuthorBOX.Text = selectedRow.Row[2].ToString();
+                number = selectedRow.Row[0].ToString();         
                 GenreOptionBOX.Text = selectedRow.Row[3].ToString();
-                DuedateDatepicker.Text = selectedRow.Row[8].ToString();
-                SelectedBookID.Text = selectedRow.Row[0].ToString();
-
+              
+                SelectedBookID.Text = number;
+                
             }
           
         }
-
-        private void DuedateDatepicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+       
+        private void ClearSearch_Click(object sender, RoutedEventArgs e)
         {
-            string Date = DuedateDatepicker.SelectedDate.ToString();
-            if (Booksdatagrid.SelectedIndex == -1)
-            {
-                Date = Date.Remove(Date.IndexOf(' '));
+            SearchBOX.Clear();
+            SearchOptionBOX.SelectedIndex = -1;
+            RefreshGrid();
+        }
 
-                dataStorage.Set_DueDate(Date);
-                if (Dateinput)
-                {
-                    string command = "SELECT "
-                                + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                                + "book.bookname,book.author,book.genre,book.image,"
-                                + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                                + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                                + "booklog.issuedid,"
-                                + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                                + " FROM book"
-                                + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                                + $" WHERE  duedate = \'{Date}\' "
-                                + " order by Book_id;";
-                    LoadDatagrid(command);
-                    
-                }
+        private void ResetBookDataGridSelection_Click(object sender, RoutedEventArgs e)
+        {
+      
+            GenreOptionBOX.SelectedIndex = -1;
+            
+            Booksdatagrid.SelectedIndex = -1;
+            RefreshGrid();
+        }
+
+
+
+        
+        private void Booksdatagrid_SelectedCellsChanged_1(object sender, SelectedCellsChangedEventArgs e)
+        {
+            if (Booksdatagrid.SelectedIndex != -1)
+            {
+                string number = "";
+                DataGrid dg = (DataGrid)sender;
+                DataRowView selectedRow = dg.SelectedItem as DataRowView;
+                number = selectedRow.Row[0].ToString();            
+                GenreOptionBOX.Text = selectedRow.Row[3].ToString();
+                SelectedBookID.Text = selectedRow.Row[0].ToString();
+
             }
         }
 
@@ -1013,8 +658,8 @@ namespace _106._2.Admin.Book
              Returned 
              On Hold Returned 
           */
-           if (Boolinput)
-           { 
+            if (Boolinput)
+            {
                 switch (StatisBOX.SelectedIndex)
                 {
                     // true
@@ -1261,42 +906,89 @@ namespace _106._2.Admin.Book
                         break;
 
                 }
-           }
+            }
 
         }
 
-        private void ClearSearch_Click(object sender, RoutedEventArgs e)
+
+
+        public void ReturnBook(String BookID, String Title, String Author, String Genre, string MemberId)
         {
-            SearchBOX.Clear();
-            SearchOptionBOX.SelectedIndex = -1;
+            using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
+            {
+
+                try
+                {
+
+                    SqlCONN.Open();
+                    ReturnBookPopup returnBookPopup = new ReturnBookPopup();
+                    DataTable dataTable = new DataTable();
+                    string SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedBookID.Value.ToString();
+
+                    NpgsqlCommand cmd1 = new NpgsqlCommand($"Select * FROM members WHERE number = {MemberId}", SqlCONN);
+                    NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    DataRow dataRow = dt.Rows[0];
+
+                    string
+                    MemerIDnumber = dataRow[0].ToString(),
+                    MemberName = dataRow[1].ToString();
+                    string BookInfo = $"Book ID Number :{BookID} {Environment.NewLine} " +
+                                     $"Book Title: {Title}   {Environment.NewLine}" +
+                                     $"Book Author: {Author}  {Environment.NewLine}" +
+                                     $"Book Genre: {Genre}  {Environment.NewLine}",
+                           MemberInfo = $"Member ID Number :{MemerIDnumber} {Environment.NewLine} " +
+                                     $"Member Name: {MemberName}   {Environment.NewLine};";
+
+
+
+
+                    returnBookPopup.BookInfo.Text = BookInfo;
+                    returnBookPopup.MemberInfo.Text = MemberInfo;
+                    returnBookPopup.MemberId = MemberId;
+                    returnBookPopup.SelectedBookId = SelectedBookId;
+                    returnBookPopup.ShowDialog();
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally { SqlCONN.Close(); }
+
+            }
             RefreshGrid();
         }
+        private void ReturnBookBUTTON_Click(object sender, RoutedEventArgs e)
+        {
+            string SelectedBookId = SelectedBookID.Value.ToString(),
+                     MemberIdOut = SelectedBookID.Value.ToString();
+            if (SelectedBookId == "") { MessageBox.Show(" Must select a book to return "); return; }
+            string BookIdOut = dataStorage.Get_BookID(),
+                   BooKTitleOut = dataStorage.Get_Title(),
+                   BookAuthorOut = dataStorage.Get_Author(),
+                   BookGenreOut = dataStorage.Get_Genre();
 
-        private void ResetBookDataGridSelection_Click(object sender, RoutedEventArgs e)
-        {  
-            BookIdnumberBOX.Clear() ;
-            TitleBOX.Clear();
-            GenreOptionBOX.SelectedIndex = -1;
-            AuthorBOX.Clear();
-            
-            Booksdatagrid.SelectedIndex = -1;
-            RefreshGrid();
+            if (MemberIdOut == "") { MessageBox.Show(" Must select the Member the book is Issued too "); return; }
+            ReturnBook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut, MemberIdOut);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
             string comm = "SELECT  COUNT(bookid) FROM  book  AS COUNT";
-                       
+
             NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             adapter.Fill(dt);
             DataRow dr = dt.Rows[0] as DataRow;
-            string COUNT =dr[0].ToString();
-            SelectedBookID.Maximum = int.Parse(COUNT); 
+            string COUNT = dr[0].ToString();
+            SelectedBookID.Maximum = int.Parse(COUNT);
             string comm2 = "SELECT  COUNT(number) FROM  members  AS COUNT";
-                       
+
             NpgsqlCommand cmd2 = new NpgsqlCommand(comm2, SqlCONN);
             NpgsqlDataAdapter adapter2 = new NpgsqlDataAdapter(cmd2);
             DataTable dt2 = new DataTable();
@@ -1309,12 +1001,36 @@ namespace _106._2.Admin.Book
         private void SelectedBookID_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             string OUTNUMB = SelectedBookID.Value.ToString();
-          Booksdatagrid.SelectedIndex = Convert.ToInt32(OUTNUMB);
+            Booksdatagrid.SelectedIndex = Convert.ToInt32(OUTNUMB);
         }
 
-        private void SelectedMemberId_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
 
+
+        private void DuedateDatepicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string Date = DuedateDatepicker.SelectedDate.ToString();
+            if (Booksdatagrid.SelectedIndex == -1)
+            {
+                Date = Date.Remove(Date.IndexOf(' '));
+
+                dataStorage.Set_DueDate(Date);
+                if (Dateinput)
+                {
+                    string command = "SELECT "
+                                + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
+                                + "book.bookname,book.author,book.genre,book.image,"
+                                + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                                + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
+                                + "booklog.issuedid,"
+                                + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
+                                + " FROM book"
+                                + " INNER JOIN booklog ON booklog.bookid = book.bookid"
+                                + $" WHERE  duedate = \'{Date}\' "
+                                + " order by Book_id;";
+                    LoadDatagrid(command);
+
+                }
+            }
         }
     }
 }

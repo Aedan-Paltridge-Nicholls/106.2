@@ -13,6 +13,12 @@
     <Compile Update="MainProgram\Admin\Book\AdminBookView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MainProgram\Admin\Book\HoldBookPopup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MainProgram\Admin\Book\ReturnBookPopup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MainProgram\Admin\Book\UpdateBookPopup.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -23,6 +29,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MainProgram\Admin\Members\AdminLoginView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MainProgram\Admin\OverDue\AdminOverDueView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MainProgram\Homepage\BookPopUP.xaml.cs">
@@ -46,15 +55,18 @@
     <Compile Update="MainProgram\Admin\Members\Updatememberpopup.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MainProgram\User\UserLoginView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainProgram\Admin\Book\AddBookPopup.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainProgram\Admin\Book\AdminBookView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainProgram\Admin\Book\HoldBookPopup.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainProgram\Admin\Book\ReturnBookPopup.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainProgram\Admin\Book\UpdateBookPopup.xaml">
@@ -67,6 +79,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainProgram\Admin\Members\AdminLoginView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainProgram\Admin\OverDue\AdminOverDueView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainProgram\Homepage\BookPopUP.xaml">
@@ -91,9 +106,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainProgram\Admin\Members\Updatememberpopup.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MainProgram\User\UserLoginView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

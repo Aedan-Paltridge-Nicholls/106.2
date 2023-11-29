@@ -29,8 +29,6 @@ namespace _106._2.MainProgram.Homepage
         public ObservableCollection<Book> Books { get; set; }
         public class Book
         {
-            public double BookTemplateWidth { get; set; }
-            public double BookTemplateHeight { get; set; }
             public string ImagePath { get; set; }
             public string Title { get; set; }
             public string Author { get; set; }
@@ -68,7 +66,7 @@ namespace _106._2.MainProgram.Homepage
                             Books.Add(new Book
                             {
                                 ImagePath = reader["image"].ToString(),
-                                Title = reader["bookname"].ToString() + $"\t book id: {i}",
+                                Title = reader["bookname"].ToString(),
                                 Author = reader["author"].ToString(),
                                 Genre = reader["genre"].ToString(),
                             });

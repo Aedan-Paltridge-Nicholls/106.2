@@ -112,7 +112,7 @@
                 NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
                 NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
-                adapter.Fill(ds, "members");
+              adapter.Fill(ds, "members");
                 membersdatagrid.ItemsSource = ds.Tables["members"].DefaultView;
                 membersdatagrid.DataContext = ds;
            

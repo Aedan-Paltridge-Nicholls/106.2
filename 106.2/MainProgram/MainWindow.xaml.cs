@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using _106._2.Admin.Book;
 using _106._2.MainProgram;
+using _106._2.MainProgram.Admin.OverDue;
 using _106._2.MainProgram.Homepage;
 using Npgsql;
 using static System.Net.Mime.MediaTypeNames;
@@ -49,8 +50,7 @@ namespace _106._2
 
         private void DuedateButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Imagegen imagegen = new Imagegen();
-            imagegen.stuff(@"C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\MainProgram\Images\Home");
+            Main.Content = new AdminOverDueView();
 
 
         }

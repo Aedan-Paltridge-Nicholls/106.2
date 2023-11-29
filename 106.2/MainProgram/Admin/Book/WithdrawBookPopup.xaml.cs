@@ -22,8 +22,11 @@ namespace _106._2.MainProgram.Admin.Book
     /// </summary>
     public partial class WithdrawBookPopup : Window
     {
+        
         public WithdrawBookPopup()
         {
+            
+            
             CultureInfo Dtfi = CultureInfo.CreateSpecificCulture("en-us");
             Dtfi.DateTimeFormat.ShortDatePattern = "yyyy/MM/dd";
             Dtfi.DateTimeFormat.DateSeparator = "-";
@@ -31,7 +34,7 @@ namespace _106._2.MainProgram.Admin.Book
             InitializeComponent();
             DueDatePicker.BlackoutDates.AddDatesInPast();
             DueDatePicker.BlackoutDates.Add(new CalendarDateRange(DateTime.Now , DateTime.Now.AddDays(10)));
-         
+
 
         }
         public string MemberId { get; set; }
@@ -41,24 +44,34 @@ namespace _106._2.MainProgram.Admin.Book
         {
             using(NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
             {
+                SqlCONN.Open();
                 string command = "UPDATE  booklog " +
-                                       $" SET withdrawn = 'true',returned = 'false', issueid = {MemberId} , duedate " +
-                                       $" WHERE bookID = ({SelectedBookId}) ";
+                                       $" SET withdrawn = 'true',returned = 'false', overdue ='false', issuedid = {MemberId} , duedate = '{DueDate}' " +
+                                       $" WHERE bookID = {SelectedBookId} ";
                             var cmd = new NpgsqlCommand(command, SqlCONN);
                             cmd.ExecuteNonQuery();
+                SqlCONN.Close();
 
             }
-            
+            this.Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void DueDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DueDate = DueDatePicker.SelectedDate.ToString();
+            DueDate = DueDate.Remove(DueDate.IndexOf(' '));
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+          
+
+
         }
     }
 }

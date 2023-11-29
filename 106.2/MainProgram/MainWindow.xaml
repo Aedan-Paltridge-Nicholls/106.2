@@ -187,7 +187,7 @@
         <Frame NavigationUIVisibility="Hidden"  Grid.Row="2" x:Name="Main" Background="Aqua">
             
         </Frame>
-        <Grid x:Name="FooterSection" Background="Black" ShowGridLines="True" Grid.Column="0" Grid.Row="3">
+        <Grid x:Name="FooterSection" Background="Black" ShowGridLines="False" Grid.Column="0" Grid.Row="3">
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="8*"/>
@@ -316,7 +316,7 @@
                     <RowDefinition Height="28"/>
                     <!--Row 1-->
                 </Grid.RowDefinitions>
-                <Image HorizontalAlignment="Left"  RenderSize="400,100"  Grid.Row="0"     Source="/MainProgram/Images/social_images.PNG" />
+                <Image HorizontalAlignment="Left"  RenderSize="400,100"  Grid.Row="0"     Source="/MainProgram/social_images.PNG" />
                 <TextBlock Foreground="White" TextWrapping="Wrap" Grid.Row="1" FontSize="11"> Level 4, 3 City Road, Auckland +64 (09) 303 3120</TextBlock>
 
             </Grid>

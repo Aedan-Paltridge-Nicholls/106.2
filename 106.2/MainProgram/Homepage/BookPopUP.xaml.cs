@@ -21,7 +21,43 @@ namespace _106._2.MainProgram.Homepage
     {
         public BookPopUP()
         {
+           
             InitializeComponent();
+           
+
+        }
+        
+        public Book GetBook = new Book();   
+        public class Book
+        {
+            public string ImagePath { get; set; }
+            public string Title { get; set; }
+            public string Author { get; set; }
+            public string Genre { get; set; }
+
+        }
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void BorrowButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void HoldButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Image.Source = new BitmapImage(new Uri(GetBook.ImagePath));
+            Title.Text = GetBook.Title;
+            Author.Text = GetBook.Author;
+            Genre.Text = GetBook.Genre;
         }
     }
 }

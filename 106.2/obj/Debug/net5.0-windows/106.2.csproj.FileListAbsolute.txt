@@ -323,3 +323,9 @@ C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-wind
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Images\ImagePopup.baml
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Homepage\BookPopUP.g.cs
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Homepage\BookPopUP.baml
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Book\HoldBookPopup.g.cs
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Book\HoldBookPopup.baml
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\OverDue\AdminOverDueView.g.cs
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\OverDue\AdminOverDueView.baml
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Book\ReturnBookPopup.g.cs
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Admin\Book\ReturnBookPopup.baml
