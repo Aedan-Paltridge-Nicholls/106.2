@@ -9,3 +9,5 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = _106._2
 build_property.ProjectDir = C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

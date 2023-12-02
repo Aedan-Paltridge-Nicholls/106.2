@@ -26,8 +26,8 @@ namespace _106._2
     /// </summary>
     public partial class MainWindow : Window
     {
-      
-        
+
+        public string AdminId { get; set; }
         public MainWindow()
         {   
             

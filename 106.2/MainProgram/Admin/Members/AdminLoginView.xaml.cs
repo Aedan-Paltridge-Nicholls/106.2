@@ -105,14 +105,14 @@
             public void LoadDatagrid(string comm)
             {
                 NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-                comm = (comm == null) ? "SELECT members.*, logins.username,logins.isadmin  " +
+                comm = (comm == "") ? "SELECT members.*, logins.username,logins.isadmin  " +
                 "FROM members  FULL JOIN logins ON logins.userid  = number ORDER BY number; " : comm;
                 int Memberindex = (membersdatagrid.SelectedIndex != -1)? membersdatagrid.SelectedIndex :  -1;
 
                 NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
                 NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
-              adapter.Fill(ds, "members");
+                adapter.Fill(ds, "members");
                 membersdatagrid.ItemsSource = ds.Tables["members"].DefaultView;
                 membersdatagrid.DataContext = ds;
            
@@ -144,7 +144,7 @@
             }
             public void RefreshGrid() 
             {
-              LoadDatagrid(null);
+              LoadDatagrid("");
             }
             public void LoadDatagrid(string Search,Searchtype type)
             {
@@ -175,7 +175,6 @@
                     default:
                         break;
                 };
-                RefreshGrid();
 
 
             }
@@ -353,7 +352,7 @@
             private void JoinDataBOX_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
             {
                 string Date = JoinDataBOX.SelectedDate.ToString();
-                if (membersdatagrid.SelectedIndex == 0)
+                if (membersdatagrid.SelectedIndex == -1)
                 {
                     Date = Date.Remove(Date.IndexOf(' '));
                     Memberdata.Set_joindate(Date);

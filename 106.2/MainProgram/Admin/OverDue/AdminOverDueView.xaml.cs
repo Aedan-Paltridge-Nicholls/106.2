@@ -28,13 +28,31 @@ namespace _106._2.MainProgram.Admin.OverDue
     {
         public AdminOverDueView()
         {
+
             CultureInfo Dtfi = CultureInfo.CreateSpecificCulture("en-us");
             Dtfi.DateTimeFormat.ShortDatePattern = "yyyy/MM/dd";
             Dtfi.DateTimeFormat.DateSeparator = "-";
             Thread.CurrentThread.CurrentCulture = Dtfi;
             InitializeComponent();
-            LoadDatagrid();
+            LoadDatagrid("");
             LoadGenreBox();
+            FindOverdue();
+        }
+
+        public void FindOverdue()
+        {
+            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
+            string comm = "UPDATE booklog " 
+                        + "SET overdue = "
+                        + $"CASE WHEN duedate < \'{DateTime.Now.ToString("yyyy-MM-dd")}\' THEN TRUE "
+                        + "ELSE FALSE "
+                        + "END; ";
+            NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
+            SqlCONN.Open();
+            cmd.ExecuteNonQuery();
+            SqlCONN.Close();
+
+
         }
         public class DataStorage
         {
@@ -139,40 +157,19 @@ namespace _106._2.MainProgram.Admin.OverDue
                     break;
                 case 5:
                     {
-                        Dateinput = false;
-                        Boolinput = true;
+                        Dateinput = true;
+                        Boolinput = false;
                         Numericinput = false;
                     }
                     break;
                 case 6:
                     {
                         Dateinput = false;
-                        Boolinput = true;
-                        Numericinput = false;
-                    }
-                    break;
-                case 7:
-                    {
-                        Dateinput = false;
-                        Boolinput = true;
-                        Numericinput = false;
-                    }
-                    break;
-                case 8:
-                    {
-                        Dateinput = true;
-                        Boolinput = false;
-                        Numericinput = false;
-                    }
-                    break;
-                case 9:
-                    {
-                        Dateinput = false;
                         Boolinput = false;
                         Numericinput = true;
                     }
                     break;
-                case 11:
+                case 8:
                     {
                         Dateinput = false;
                         Boolinput = false;
@@ -190,7 +187,7 @@ namespace _106._2.MainProgram.Admin.OverDue
             if (Boolinput)
             {
                 SearchBOX.Clear();
-                SearchBOX.Text = "Please use the Statis combobox";
+                SearchBOX.Text = "Please use the Status combobox";
             }
             else if (Dateinput)
             {
@@ -202,9 +199,9 @@ namespace _106._2.MainProgram.Admin.OverDue
                 SearchBOX.Clear();
             }
         }
-        public void Search(string SearchOut)
+        public void Search(string SearchOut)// the start of the search Process 
         {
-            if (string.IsNullOrEmpty(SearchOut)) { LoadDatagrid(); }
+            if (string.IsNullOrEmpty(SearchOut)) { LoadDatagrid(""); }
             else
             {
                 switch (SearchOptionBOX.SelectedIndex)
@@ -223,29 +220,20 @@ namespace _106._2.MainProgram.Admin.OverDue
                         break;
                     case 4:
                         { searchtype = Searchtype.OnHold; }
-                        break;
+                        break;                  
                     case 5:
-                        { searchtype = Searchtype.Withdrawn; }
-                        break;
-                    case 6:
-                        { searchtype = Searchtype.Overdue; }
-                        break;
-                    case 7:
-                        { searchtype = Searchtype.Returned; }
-                        break;
-                    case 8:
                         { searchtype = Searchtype.DueDate; }
                         break;
-                    case 9:
+                    case 6:
                         { searchtype = Searchtype.HoldID; }
                         break;
-                    case 10:
+                    case 7:
                         { searchtype = Searchtype.OnHoldTo; }
                         break;
-                    case 11:
+                    case 8:
                         { searchtype = Searchtype.IssuedId; }
                         break;
-                    case 12:
+                    case 9:
                         { searchtype = Searchtype.IssuedTo; }
                         break;
                     default:
@@ -254,40 +242,10 @@ namespace _106._2.MainProgram.Admin.OverDue
                 LoadDatagrid(SearchOut, searchtype);
             }
         }
-        public void LoadDatagrid(string comm)
-        {
-            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-            if (comm != null)
-            {
-                LoadDatagrid();
-                return;
-            }
 
-            NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            Booksdatagrid.ItemsSource = dt.DefaultView;
-            Booksdatagrid.DataContext = dt;
-
-        }
         public void LoadDatagrid(string Search, Searchtype type)
         {
-            /*
-            BookID, int
-            Title, string
-            Author, string
-            Genre, string
-            OnHold, bool
-            Withdrawn, bool
-            Overdue,  bool
-            Returned, bool
-            DueDate,  date
-            HoldID,   int
-            OnHoldTo, string
-            IssuedId, int
-            IssuedTo string
-          */
+
             string typeNow = searchtypestringer(type);
             switch (typeNow)
             {
@@ -299,13 +257,13 @@ namespace _106._2.MainProgram.Admin.OverDue
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,book.image,"
-                        + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                        + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
                         + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                         + " FROM book"
                         + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                        + $" WHERE  (SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) = {Output}  "
+                        + $" WHERE  (SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) = {Output} AND overdue = 'true'  "
                         + " order by Book_id;";
                         LoadDatagrid($"{command}");
                     }
@@ -315,13 +273,13 @@ namespace _106._2.MainProgram.Admin.OverDue
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,book.image,"
-                        + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                        + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
                         + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                         + " FROM book"
                         + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                        + $" WHERE {typeNow.ToLower()} ILIKE \'%{Search}%\'"
+                        + $" WHERE {typeNow.ToLower()} ILIKE \'%{Search}%\' AND overdue = 'true'"
                         + " order by Book_id;";
                         LoadDatagrid($"{command}");
                     }
@@ -332,13 +290,13 @@ namespace _106._2.MainProgram.Admin.OverDue
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,book.image,"
-                        + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                        + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
                         + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                         + " FROM book"
                         + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                        + $" WHERE {typeNow.ToLower()} ILIKE \'%{Search}%\'"
+                        + $" WHERE {typeNow.ToLower()} ILIKE \'%{Search}%\'  AND overdue = 'true' "
                         + " order by Book_id;";
                         LoadDatagrid($"{command}");
                     }
@@ -349,13 +307,13 @@ namespace _106._2.MainProgram.Admin.OverDue
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,book.image,"
-                        + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                        + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
                         + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                         + " FROM book"
                         + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                        + $" WHERE {typeNow.ToLower()} ILIKE \'%{Search}%\'"
+                        + $" WHERE {typeNow.ToLower()} ILIKE \'%{Search}%\'  AND overdue = 'true'"
                         + " order by Book_id;";
                         LoadDatagrid($"{command}");
                     }
@@ -365,13 +323,13 @@ namespace _106._2.MainProgram.Admin.OverDue
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,book.image,"
-                        + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                        + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
                         + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                         + " FROM book"
                         + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                        + $" WHERE {typeNow.ToLower()} = \'{Search}\' "
+                        + $" WHERE {typeNow.ToLower()} = \'{Search}\'  AND overdue = 'true' "
                         + " order by Book_id;";
                         LoadDatagrid($"{command}");
                     }
@@ -382,13 +340,13 @@ namespace _106._2.MainProgram.Admin.OverDue
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,book.image,"
-                        + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                        + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
                         + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                         + " FROM book"
                         + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                        + $" WHERE   {typeNow.ToLower()} = {Output}  "
+                        + $" WHERE   {typeNow.ToLower()} = {Output}  AND overdue = 'true' "
                         + " order by Book_id;";
                         LoadDatagrid($"{command}");
                     }
@@ -398,13 +356,13 @@ namespace _106._2.MainProgram.Admin.OverDue
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,book.image,"
-                        + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                        + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
                         + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                         + " FROM book"
                         + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                        + $" WHERE (SELECT name FROM  members  WHERE number = holdid ) ILIKE \'%{Search}%\'"
+                        + $" WHERE (SELECT name FROM  members  WHERE number = holdid ) ILIKE \'%{Search}%\'  AND overdue = 'true'"
                         + " order by Book_id;";
                         LoadDatagrid($"{command}");
                     }
@@ -421,7 +379,7 @@ namespace _106._2.MainProgram.Admin.OverDue
                         + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                         + " FROM book"
                         + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                        + $" WHERE   {typeNow.ToLower()} = {Output}  "
+                        + $" WHERE   {typeNow.ToLower()} = {Output}   AND overdue = 'true' "
                         + " order by Book_id;";
                         LoadDatagrid($"{command}");
                     }
@@ -432,13 +390,13 @@ namespace _106._2.MainProgram.Admin.OverDue
                         string command = "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,book.image,"
-                        + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                        + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
                         + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                         + " FROM book"
                         + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                        + $" WHERE (SELECT name FROM members WHERE number = issuedid  ) ILIKE \'%{Search}%\'"
+                        + $" WHERE (SELECT name FROM members WHERE number = issuedid  ) ILIKE \'%{Search}%\'  AND overdue = 'true'"
                         + " order by Book_id;";
                         LoadDatagrid($"{command}");
                     }
@@ -452,7 +410,7 @@ namespace _106._2.MainProgram.Admin.OverDue
         }
         public void RefreshGrid()
         {
-            LoadDatagrid();
+            LoadDatagrid("");
         }
         private void GenreOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -462,13 +420,13 @@ namespace _106._2.MainProgram.Admin.OverDue
                 string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                             + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                            + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
                             + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                             + " FROM book"
                             + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + $" WHERE  genre = \'{GenreOptionBOX.SelectedItem}\' "
+                            + $" WHERE  genre = \'{GenreOptionBOX.SelectedItem}\'  AND overdue = 'true' "
                             + " order by Book_id;";
                 LoadDatagrid(command);
             }
@@ -513,7 +471,7 @@ namespace _106._2.MainProgram.Admin.OverDue
             }
             else if (Boolinput)
             {
-                SearchBOX.Text = " Use the Statis combobox To search";
+                SearchBOX.Text = " Use the Status combobox To search";
             }
             else
             {
@@ -535,12 +493,6 @@ namespace _106._2.MainProgram.Admin.OverDue
                     return "Genre";
                 case Searchtype.OnHold:
                     return "OnHold";
-                case Searchtype.Withdrawn:
-                    return "Withdrawn";
-                case Searchtype.Overdue:
-                    return "Overdue";
-                case Searchtype.Returned:
-                    return "Returned";
                 case Searchtype.DueDate:
                     return "DueDate";
                 case Searchtype.HoldID:
@@ -558,39 +510,45 @@ namespace _106._2.MainProgram.Admin.OverDue
 
 
         }
-        public void LoadDatagrid()
+        public void LoadDatagrid(string comm)
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-            string comm = "SELECT "
+             comm = (comm == "")? "SELECT "
                         + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                         + "book.bookname,book.author,book.genre,book.image,"
-                        + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                        + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                         + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                         + "booklog.issuedid,"
                         + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                         + " FROM book"
-                        + " inner join booklog on booklog.bookid = book.bookid"
-                        + " order by Book_id;";
+                        + " INNER JOIN booklog ON booklog.bookid = book.bookid"
+                        + " WHERE overdue = 'true' "
+                        + " order by Book_id;" : comm;
             NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             adapter.Fill(dt);
             dt.Columns.Add("Owed");
             int i = 0;
+            DateTime today = DateTime.Now;
             foreach (DataRow dr in dt.Rows)
             {
-
-                dt.Columns[11].Table.Rows[i].BeginEdit();
-                var row = dt.Columns[11].Table.Rows[i];
-                row["Owed"] = row["bookid"].ToString();
-
+                
+                dt.Columns[12].Table.Rows[i].BeginEdit();
+                var row = dt.Columns[12].Table.Rows[i];
+                DateTime DueDate = DateTime.Parse(row["duedate"].ToString());
+                TimeSpan span = today -  DueDate  ;
+                double owing = span.TotalHours / 2;
+                row["Owed"] = (owing).ToString("N2"); 
+                dt.Columns[12].Table.Rows[i].EndEdit();
+                i++;
             }
          
             Booksdatagrid.ItemsSource = dt.DefaultView;
             Booksdatagrid.DataContext = dt;
 
         }
-         private void Booksdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        private void Booksdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
            
             if (Booksdatagrid.SelectedIndex != -1)
@@ -600,8 +558,14 @@ namespace _106._2.MainProgram.Admin.OverDue
                 DataRowView selectedRow = dg.SelectedItem as DataRowView;
                 number = selectedRow.Row[0].ToString();         
                 GenreOptionBOX.Text = selectedRow.Row[3].ToString();
-              
-                SelectedBookID.Text = number;
+                SelectedBookID.Text = selectedRow.Row[0].ToString();
+                SelectedMemberId.Text = selectedRow.Row[10].ToString();
+                dataStorage.Set_BookID(selectedRow.Row[0].ToString());
+                dataStorage.Set_Title(selectedRow.Row[1].ToString());
+                dataStorage.Set_Author(selectedRow.Row[2].ToString());
+                dataStorage.Set_Genre(selectedRow.Row[3].ToString());
+
+                
                 
             }
           
@@ -610,57 +574,35 @@ namespace _106._2.MainProgram.Admin.OverDue
         private void ClearSearch_Click(object sender, RoutedEventArgs e)
         {
             SearchBOX.Clear();
+            GenreOptionBOX.SelectedIndex = -1;
             SearchOptionBOX.SelectedIndex = -1;
+            StatusBOX.SelectedIndex = -1;
             RefreshGrid();
         }
-
+        // 
         private void ResetBookDataGridSelection_Click(object sender, RoutedEventArgs e)
         {
       
             GenreOptionBOX.SelectedIndex = -1;
-            
+            SelectedBookID.Value = null;
+            SelectedMemberId.Value = null;
             Booksdatagrid.SelectedIndex = -1;
             RefreshGrid();
         }
 
 
+       
 
-        
-        private void Booksdatagrid_SelectedCellsChanged_1(object sender, SelectedCellsChangedEventArgs e)
-        {
-            if (Booksdatagrid.SelectedIndex != -1)
-            {
-                string number = "";
-                DataGrid dg = (DataGrid)sender;
-                DataRowView selectedRow = dg.SelectedItem as DataRowView;
-                number = selectedRow.Row[0].ToString();            
-                GenreOptionBOX.Text = selectedRow.Row[3].ToString();
-                SelectedBookID.Text = selectedRow.Row[0].ToString();
 
-            }
-        }
 
-        private void StatisBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {/* - true
-             On Hold
-             Withdrawn
-             Overdue 
-             On Hold Withdrawn 
-             On Hold Overdue 
-             Returned 
-             On Hold Returned 
-            - False
-             On Hold 
-             Withdrawn 
-             Overdue 
-             On Hold Withdrawn 
-             On Hold Overdue 
-             Returned 
-             On Hold Returned 
+        private void StatusBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {/* 
+          * On Hold
+          * Not On Hold
           */
             if (Boolinput)
             {
-                switch (StatisBOX.SelectedIndex)
+                switch (StatusBOX.SelectedIndex + 1)
                 {
                     // true
                     case 1:
@@ -669,13 +611,13 @@ namespace _106._2.MainProgram.Admin.OverDue
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                             + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                            + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
                             + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                             + " FROM book"
                             + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE  onhold  = true "
+                            + " WHERE  onhold  = true AND overdue = true "
                             + " order by Book_id;";
                             LoadDatagrid($"{command}");
                         }
@@ -686,222 +628,18 @@ namespace _106._2.MainProgram.Admin.OverDue
                             string command = "SELECT "
                             + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                             + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                            + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                             + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                             + "booklog.issuedid,"
                             + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                             + " FROM book"
                             + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE  withdrawn  = true "
+                            + " WHERE  onhold  = false  AND overdue = true "
                             + " order by Book_id;";
                             LoadDatagrid($"{command}");
                         }
                         break;
-                    case 3:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE  overdue  = true "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
-                    case 4:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE  onhold  = true AND withdrawn  = true "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
-                    case 5:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE   onhold  = true AND overdue  = true "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
-                    case 6:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE returned = true "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
-                    case 7:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE  onhold  = true AND returned = true "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
-                    //   false
-                    case 9:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE  onhold  = false "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
-                    case 10:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE  withdrawn  = false "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
-                    case 11:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE  overdue  = false "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
-                    case 12:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE  onhold  = false AND withdrawn  = false "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
-                    case 13:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE   onhold  = false AND overdue  = false "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
-                    case 14:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE returned = false "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
-                    case 15:
-                        {
-
-                            string command = "SELECT "
-                            + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
-                            + "book.bookname,book.author,book.genre,book.image,"
-                            + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
-                            + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
-                            + "booklog.issuedid,"
-                            + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
-                            + " FROM book"
-                            + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                            + " WHERE  onhold  = false AND returned = false "
-                            + " order by Book_id;";
-                            LoadDatagrid($"{command}");
-                        }
-                        break;
+                   
                     default:
                         break;
 
@@ -923,7 +661,8 @@ namespace _106._2.MainProgram.Admin.OverDue
                     SqlCONN.Open();
                     ReturnBookPopup returnBookPopup = new ReturnBookPopup();
                     DataTable dataTable = new DataTable();
-                    string SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedBookID.Value.ToString();
+                    string SelectedBookId = SelectedBookID.Value.ToString();
+                    string MemberIdOut = SelectedMemberId.Value.ToString();
 
                     NpgsqlCommand cmd1 = new NpgsqlCommand($"Select * FROM members WHERE number = {MemberId}", SqlCONN);
                     NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
@@ -964,7 +703,7 @@ namespace _106._2.MainProgram.Admin.OverDue
         private void ReturnBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
             string SelectedBookId = SelectedBookID.Value.ToString(),
-                     MemberIdOut = SelectedBookID.Value.ToString();
+                     MemberIdOut = SelectedMemberId.Value.ToString();
             if (SelectedBookId == "") { MessageBox.Show(" Must select a book to return "); return; }
             string BookIdOut = dataStorage.Get_BookID(),
                    BooKTitleOut = dataStorage.Get_Title(),
@@ -975,38 +714,35 @@ namespace _106._2.MainProgram.Admin.OverDue
             ReturnBook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut, MemberIdOut);
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-            string comm = "SELECT  COUNT(bookid) FROM  book  AS COUNT";
-
-            NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            DataRow dr = dt.Rows[0] as DataRow;
-            string COUNT = dr[0].ToString();
-            SelectedBookID.Maximum = int.Parse(COUNT);
-            string comm2 = "SELECT  COUNT(number) FROM  members  AS COUNT";
-
-            NpgsqlCommand cmd2 = new NpgsqlCommand(comm2, SqlCONN);
-            NpgsqlDataAdapter adapter2 = new NpgsqlDataAdapter(cmd2);
-            DataTable dt2 = new DataTable();
-            adapter2.Fill(dt2);
-            DataRow dr2 = dt2.Rows[0] as DataRow;
-            string COUNT2 = dr2[0].ToString();
-            SelectedBookID.Maximum = int.Parse(COUNT2);
-        }
+        
 
         private void SelectedBookID_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            string OUTNUMB = SelectedBookID.Value.ToString();
-            Booksdatagrid.SelectedIndex = Convert.ToInt32(OUTNUMB);
+
+            int i = 0;
+            SelectedBookID.Maximum =  commander("SELECT COUNT(*) FROM book", i); 
+        }
+        private void SelectedMemberId_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {            
+            int i = 0;
+            SelectedMemberId.Maximum = commander("SELECT COUNT(number) FROM members", i);
+        }
+        //Excutes sql commands  
+        public int commander(string CMD, int input)
+        {
+            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
+            SqlCONN.Open();
+            using var command = new NpgsqlCommand(CMD, SqlCONN);
+            var count = (long)command.ExecuteScalar();
+            SqlCONN.Close();
+            input = (int)count;
+            return input;
         }
 
-
-
-        private void DuedateDatepicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+            /* This searches the BookDataGrid via the DuedateDatepicker
+            * when a new date is selected and the SearchOptionBox is set to Duedate
+            */
+        private void DuedateDatepicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)  
         {
             string Date = DuedateDatepicker.SelectedDate.ToString();
             if (Booksdatagrid.SelectedIndex == -1)
@@ -1019,18 +755,20 @@ namespace _106._2.MainProgram.Admin.OverDue
                     string command = "SELECT "
                                 + "(SELECT bookid FROM  book  WHERE book.bookid = booklog.bookid) AS Book_id,"
                                 + "book.bookname,book.author,book.genre,book.image,"
-                                + "booklog.onhold,booklog.withdrawn,booklog.overdue,booklog.returned,booklog.duedate,booklog.holdid,"
+                                + "booklog.onhold,booklog.overdue,booklog.duedate,booklog.holdid,"
                                 + "(SELECT name FROM  members WHERE number = holdid  ) AS username_holdid,"
                                 + "booklog.issuedid,"
                                 + "(SELECT name FROM members WHERE number = issuedid  ) AS username_issuedid"
                                 + " FROM book"
                                 + " INNER JOIN booklog ON booklog.bookid = book.bookid"
-                                + $" WHERE  duedate = \'{Date}\' "
+                                + $" WHERE  duedate = \'{Date}\'  AND overdue = true "
                                 + " order by Book_id;";
                     LoadDatagrid(command);
 
                 }
             }
         }
+
+        
     }
 }

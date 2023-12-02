@@ -1,4 +1,5 @@
 ﻿using _106._2.MainProgram.Admin.Book;
+using _106._2.MainProgram.Admin.OverDue;
 using Microsoft.Win32;
 using Npgsql;
 using System;
@@ -125,6 +126,8 @@ namespace _106._2.Admin.Book
             InitializeComponent();
             LoadDatagrid();
             LoadGenreBox();
+            AdminOverDueView overDueView = new AdminOverDueView();
+            overDueView.FindOverdue();
         }
         private void DG_Hyperlink_Click(object sender, RoutedEventArgs e)
         {
@@ -487,7 +490,7 @@ namespace _106._2.Admin.Book
             if (Boolinput)
             {
                 SearchBOX.Clear();
-                SearchBOX.Text = "Please use the Statis combobox";
+                SearchBOX.Text = "Please use the Status combobox";
             }
             else if (Dateinput)
             {
@@ -572,7 +575,7 @@ namespace _106._2.Admin.Book
             }
             else if (Boolinput)
             {
-                SearchBOX.Text = " Use the Statis combobox To search";
+                SearchBOX.Text = " Use the Status combobox To search";
             }
             else
             {
@@ -689,7 +692,7 @@ namespace _106._2.Admin.Book
                     SqlCONN.Open();
                     WithdrawBookPopup withdrawBookPopup = new WithdrawBookPopup();
                     string SelectedBookId = SelectedBookID.Value.ToString(),
-                     MemberIdOut = SelectedBookID.Value.ToString();
+                     MemberIdOut = SelectedMemberId.Value.ToString();
 
                     DataTable dataTable = new DataTable();
 
@@ -732,7 +735,7 @@ namespace _106._2.Admin.Book
         private void WithdrawBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
             string SelectedBookId = SelectedBookID.Value.ToString(),
-                     MemberIdOut = SelectedBookID.Value.ToString();
+                     MemberIdOut = SelectedMemberId.Value.ToString();
             if (SelectedBookId == ""){ MessageBox.Show(" Must select a book to Issuse "); return; }
             string BookIdOut = dataStorage.Get_BookID(),
                    BooKTitleOut = dataStorage.Get_Title(),
@@ -754,7 +757,7 @@ namespace _106._2.Admin.Book
                     SqlCONN.Open();
                     UpdateBookPopup UpadteBookPopup = new UpdateBookPopup();
                     string
-                        SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedBookID.Value.ToString() ;
+                        SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedMemberId.Value.ToString() ;
                     string command = "UPDATE  book " +
                         $" SET bookname = '{Title}',author = '{Author}',genre = '{Genre}'  " +
                         $" WHERE bookID = ({SelectedBookId}) ";
@@ -829,7 +832,7 @@ namespace _106._2.Admin.Book
                     SqlCONN.Open();
                     HoldBookPopup HoldBookPopup = new HoldBookPopup();
                     DataTable dataTable = new DataTable();
-                    string SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedBookID.Value.ToString();
+                    string SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedMemberId.Value.ToString();
 
                     NpgsqlCommand cmd1 = new NpgsqlCommand($"Select * FROM members WHERE number = {MemberId}", SqlCONN);
                     NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
@@ -872,7 +875,7 @@ namespace _106._2.Admin.Book
         private void HoldBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
             string SelectedBookId = SelectedBookID.Value.ToString(),
-                     MemberIdOut = SelectedBookID.Value.ToString();
+                     MemberIdOut = SelectedMemberId.Value.ToString();
             if (SelectedBookId == "") { MessageBox.Show(" Must select a book to return "); return; }
             string BookIdOut = dataStorage.Get_BookID(),
                    BooKTitleOut = dataStorage.Get_Title(),
@@ -893,7 +896,7 @@ namespace _106._2.Admin.Book
                     SqlCONN.Open();
                     ReturnBookPopup returnBookPopup = new ReturnBookPopup();
                     DataTable dataTable = new DataTable();
-                    string SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedBookID.Value.ToString();
+                    string SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedMemberId.Value.ToString();
 
                     NpgsqlCommand cmd1 = new NpgsqlCommand($"Select * FROM members WHERE number = {MemberId}", SqlCONN);
                     NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd1);
@@ -934,7 +937,7 @@ namespace _106._2.Admin.Book
         private void ReturnBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
             string SelectedBookId = SelectedBookID.Value.ToString(),
-                     MemberIdOut = SelectedBookID.Value.ToString();
+                     MemberIdOut = SelectedMemberId.Value.ToString();
             if (SelectedBookId == "") { MessageBox.Show(" Must select a book to return "); return; }
             string BookIdOut = dataStorage.Get_BookID(),
                    BooKTitleOut = dataStorage.Get_Title(),
@@ -963,6 +966,8 @@ namespace _106._2.Admin.Book
                 GenreOptionBOX.Text = selectedRow.Row[3].ToString();
                 DuedateDatepicker.Text = selectedRow.Row[8].ToString();
                 SelectedBookID.Text = selectedRow.Row[0].ToString();
+                SelectedMemberId.Text = (selectedRow.Row[12].ToString() != "" && selectedRow.Row[12].ToString() != "0") 
+                    ? selectedRow.Row[12].ToString() : selectedRow.Row[10].ToString();
 
             }
           
@@ -995,7 +1000,7 @@ namespace _106._2.Admin.Book
             }
         }
 
-        private void StatisBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void StatusBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {/* - true
              On Hold
              Withdrawn
@@ -1015,7 +1020,7 @@ namespace _106._2.Admin.Book
           */
            if (Boolinput)
            { 
-                switch (StatisBOX.SelectedIndex)
+                switch (StatusBOX.SelectedIndex)
                 {
                     // true
                     case 1:
@@ -1283,38 +1288,26 @@ namespace _106._2.Admin.Book
             RefreshGrid();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-            string comm = "SELECT  COUNT(bookid) FROM  book  AS COUNT";
-                       
-            NpgsqlCommand cmd = new NpgsqlCommand(comm, SqlCONN);
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            DataRow dr = dt.Rows[0] as DataRow;
-            string COUNT =dr[0].ToString();
-            SelectedBookID.Maximum = int.Parse(COUNT); 
-            string comm2 = "SELECT  COUNT(number) FROM  members  AS COUNT";
-                       
-            NpgsqlCommand cmd2 = new NpgsqlCommand(comm2, SqlCONN);
-            NpgsqlDataAdapter adapter2 = new NpgsqlDataAdapter(cmd2);
-            DataTable dt2 = new DataTable();
-            adapter2.Fill(dt2);
-            DataRow dr2 = dt2.Rows[0] as DataRow;
-            string COUNT2 = dr2[0].ToString();
-            SelectedBookID.Maximum = int.Parse(COUNT2);
-        }
-
         private void SelectedBookID_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            string OUTNUMB = SelectedBookID.Value.ToString();
-          Booksdatagrid.SelectedIndex = Convert.ToInt32(OUTNUMB);
+            int i = 0;
+            SelectedBookID.Maximum = commander("SELECT COUNT(*) FROM book", i);
         }
-
         private void SelectedMemberId_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-
+            int i = 0;
+            SelectedMemberId.Maximum = commander("SELECT COUNT(*) FROM members", i);
+        }
+        //Excutes sql commands  
+        public int commander(string CMD, int input)
+        {
+            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
+            SqlCONN.Open();
+            using var command = new NpgsqlCommand(CMD, SqlCONN);
+            var count = (long)command.ExecuteScalar();
+            SqlCONN.Close();
+            input = (int)count;
+            return input;
         }
     }
 }

@@ -36,22 +36,23 @@ namespace _106._2
             DataTable dataTable = new DataTable();
             adapter.Fill(dataTable);
             if (dataTable.Rows.Count > 0 ) 
-            {
+            {           
+                DataRow dataRow = dataTable.Rows[0];
+
                 MainWindow mainWindow = new MainWindow();
-                this.Close();                           
-                mainWindow.Show();
-                string IsAdmin = dataTable.Columns.IndexOf("isadmin").ToString() ;
-                if (IsAdmin == "true")
+                                        
+                string IsAdmin = dataRow[3].ToString();
+                if (IsAdmin.ToLower() == "true")
                 {
-                    LoginId = dataTable.Columns.IndexOf("userid").ToString();
-                     mainWindow = new MainWindow();
+                    LoginId = dataRow[0].ToString();
+                    mainWindow = new MainWindow();
                     mainWindow.Show (); 
                     this.Close();
                 }
-                else if (IsAdmin == "false") 
+                else if (IsAdmin.ToLower() == "false") 
                 {
-                    LoginId = dataTable.Columns.IndexOf("userid").ToString();
-                    UserLoginView userLoginView = new UserLoginView();
+                    LoginId = dataRow[0].ToString();
+                    UserLoginView userLoginView = new UserLoginView(LoginId);
                     userLoginView.Show();
                     this.Close();
                 }

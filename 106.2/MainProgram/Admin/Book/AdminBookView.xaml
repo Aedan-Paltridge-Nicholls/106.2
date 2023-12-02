@@ -5,7 +5,7 @@
            xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:_106._2.Admin.Book"
-      mc:Ignorable="d" Loaded="Page_Loaded"
+      mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       FontFamily="Calibri"
       
@@ -106,8 +106,8 @@
                     <ColumnDefinition Width="1.5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <DatePicker x:Name="DuedateDatepicker" BorderBrush="Black" Grid.Column="0" Margin="1,1,1,1" SelectedDateChanged="DuedateDatepicker_SelectedDateChanged"></DatePicker>
-                <Label Grid.Column="1" HorizontalAlignment="Center" >Statis</Label>
-                <ComboBox x:Name="StatisBOX" Grid.Column="2" BorderBrush="Black"  Margin="1,1,1,1" SelectionChanged="StatisBOX_SelectionChanged">
+                <Label Grid.Column="1" HorizontalAlignment="Center" >Status</Label>
+                <ComboBox x:Name="StatusBOX" Grid.Column="2" BorderBrush="Black"  Margin="1,1,1,1" SelectionChanged="StatusBOX_SelectionChanged">
                     <ComboBoxItem>~ True ~</ComboBoxItem>
                     <ComboBoxItem>On Hold</ComboBoxItem>
                     <ComboBoxItem>Withdrawn</ComboBoxItem>

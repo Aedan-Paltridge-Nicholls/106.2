@@ -38,7 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MainProgram\User\" />
+    <Folder Include="MainProgram\User\Book\" />
+    <Folder Include="MainProgram\User\Overdue\" />
   </ItemGroup>
 
 </Project>

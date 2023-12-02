@@ -5,9 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       xmlns:local="clr-namespace:_106._2.MainProgram.Admin.OverDue"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"  
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminOverDueView">
+    <!-- Main grid -->
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".5*"></ColumnDefinition>
@@ -22,13 +23,15 @@
             <RowDefinition Height=".5*"/>
 
         </Grid.RowDefinitions>
+        <!-- Grid for top half Of page -->
         <Grid  Grid.Column="1" Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition Height=".5*"/>
 
             </Grid.RowDefinitions>
-            <DataGrid x:Name="Booksdatagrid" ItemsSource="{Binding}"  Grid.Row="0" IsReadOnly="True" AutoGenerateColumns="False"  SelectedCellsChanged="Booksdatagrid_SelectedCellsChanged_1" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible">
+            <!--Book DataGrid for displaying the books and their info-->
+            <DataGrid x:Name="Booksdatagrid" ItemsSource="{Binding}"  Grid.Row="0" IsReadOnly="True" AutoGenerateColumns="False"  SelectedCellsChanged="Booksdatagrid_SelectedCellsChanged" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible">
                 <DataGrid.RowBackground>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InfoColorKey}}"/>
                 </DataGrid.RowBackground>
@@ -43,8 +46,6 @@
                     <DataGridTextColumn Header="Author" Binding="{Binding author}"/>
                     <DataGridTextColumn Header="Genre" Binding="{Binding genre}"/>
                     <DataGridCheckBoxColumn  Header="On Hold" Binding="{Binding onhold}"/>
-                    <DataGridCheckBoxColumn  Header="Withdrawn" Binding="{Binding withdrawn}"/>
-                    <DataGridCheckBoxColumn  Header="Overdue" Binding="{Binding overdue}"/>
                     <DataGridTextColumn Header="Due-date" Binding="{Binding duedate, StringFormat='yyyy-MM-dd'}" />
                     <DataGridTextColumn  Header="Hold ID" Binding="{Binding holdid}"/>
                     <DataGridTextColumn  Header="On Hold to" Binding="{Binding username_holdid}"/>
@@ -53,6 +54,7 @@
                     <DataGridTextColumn  Header="Amount Owing" Binding="{Binding Owed}"/>
                 </DataGrid.Columns>
             </DataGrid>
+            <!-- Grid for Bottom half Of page -->
             <Grid Grid.Column="1" Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.5*"></ColumnDefinition>
@@ -69,23 +71,16 @@
                     <RowDefinition Height="20*"/>
                 
                 </Grid.RowDefinitions>
-
+                <!-- Book Search TextBox for searching  books via text input -->
                 <xctk:WatermarkTextBox 
                     Watermark="Search" x:Name="SearchBOX"  Grid.Column="0" 
                     Grid.ColumnSpan="2"  Background="White" BorderBrush="Black"
                     Margin="1,1,1,1" TextChanged="SearchBOX_TextChanged" MaxLines="1" />
-
+                <!--Button for Clearing the SearchBox and SearchOptionBox-->
                 <Button x:Name="ClearSearch" Background="#C6C5FF"  Grid.Column="3" BorderBrush="Black" Margin="1,1,1,1" Click="ClearSearch_Click">Clear Search</Button>
-
-
-
-
-
-
                 <!-- Row 2 (Grid Row 1) -->
                 <!-- Column 1 (Grid Column 0)-->
-
-
+                <!-- Book Search Option ComboBox for selecting a search option -->
                 <xctk:WatermarkComboBox  x:Name="SearchOptionBOX"  IsEditable="False" Grid.Column="4" Grid.Row="0"
                           Background="White" BorderBrush="Black" Margin="1,1,1,1"  
                           SelectionChanged="SearchOptionBOX_SelectionChanged"  Watermark="Search By" >
@@ -94,44 +89,28 @@
                     <ComboBoxItem>Author</ComboBoxItem>
                     <ComboBoxItem>Genre</ComboBoxItem>
                     <ComboBoxItem>On Hold</ComboBoxItem>
-                    <ComboBoxItem>Withdrawn</ComboBoxItem>
-                    <ComboBoxItem>Overdue</ComboBoxItem>
-                    <ComboBoxItem>Returned</ComboBoxItem>
                     <ComboBoxItem>Due-date</ComboBoxItem>
                     <ComboBoxItem>Hold ID</ComboBoxItem>
                     <ComboBoxItem>On Hold to</ComboBoxItem>
                     <ComboBoxItem>Issued id</ComboBoxItem>
                     <ComboBoxItem>Issued to</ComboBoxItem>
                 </xctk:WatermarkComboBox>
-                <xctk:WatermarkComboBox x:Name="StatisBOX" Grid.Column="5"  Grid.Row="0" BorderBrush="Black"
-                          Watermark="Statis" Margin="1,1,1,1" SelectionChanged="StatisBOX_SelectionChanged">
-                    <ComboBoxItem>~ True ~</ComboBoxItem>
+                <!-- Book Status ComboBox for searching  books by their status -->
+                <xctk:WatermarkComboBox x:Name="StatusBOX" Grid.Column="5"  Grid.Row="0" BorderBrush="Black"
+                          Watermark="Status" Margin="1,1,1,1" SelectionChanged="StatusBOX_SelectionChanged">
                     <ComboBoxItem>On Hold</ComboBoxItem>
-                    <ComboBoxItem>Withdrawn</ComboBoxItem>
-                    <ComboBoxItem>Overdue</ComboBoxItem>
-                    <ComboBoxItem>On Hold Withdrawn</ComboBoxItem>
-                    <ComboBoxItem>On Hold Overdue</ComboBoxItem>
-                    <ComboBoxItem>Returned</ComboBoxItem>
-                    <ComboBoxItem>On Hold Returned</ComboBoxItem>
-                    <ComboBoxItem>~ False ~</ComboBoxItem>
-                    <ComboBoxItem>On Hold</ComboBoxItem>
-                    <ComboBoxItem>Withdrawn</ComboBoxItem>
-                    <ComboBoxItem>Overdue</ComboBoxItem>
-                    <ComboBoxItem>On Hold Withdrawn</ComboBoxItem>
-                    <ComboBoxItem>On Hold Overdue</ComboBoxItem>
-                    <ComboBoxItem>Returned</ComboBoxItem>
-                    <ComboBoxItem>On Hold Returned</ComboBoxItem>
+                    <ComboBoxItem>Not On Hold</ComboBoxItem>
                 </xctk:WatermarkComboBox>
-
-
-
+                <!-- Book Genre ComboBox for searching  books by their Genre -->
                 <xctk:WatermarkComboBox 
                     Watermark="Genre" x:Name="GenreOptionBOX" ItemsSource="{Binding}"
-                    IsEditable="False" SelectedIndex="0" Grid.Column="2" Grid.Row="0"
+                    IsEditable="False" SelectedIndex="-1" Grid.Column="2" Grid.Row="0"
                     Background="White" BorderBrush="Black" Margin="1,1,1,1" 
                     SelectionChanged="GenreOptionBOX_SelectionChanged" >
 
                 </xctk:WatermarkComboBox>
+                <!--Grid for Buttons and other controls  -->
+                
                 <Grid Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width=".1*"></ColumnDefinition>
@@ -141,7 +120,8 @@
                         <ColumnDefinition Width=".1*"></ColumnDefinition>
 
                     </Grid.ColumnDefinitions>
-
+                    <!-- Bottom  Left Grid  -->
+                    <!-- Column 1 (Grid Column 1)-->
                     <Grid Grid.Column="1" Margin="0,5,0,0" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -149,10 +129,14 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
 
                         </Grid.ColumnDefinitions>
+                        <!--Button for Returning a book-->
                         <Button x:Name="ReturnBookButton" Background="#C6C5FF" Click="ReturnBookBUTTON_Click">Return Book</Button>
+                        <!-- Book Date picker  for searching  books via  their Due Date -->
                         <DatePicker x:Name="DuedateDatepicker" BorderBrush="Black" Grid.Column="2" Margin="1,1,1,1" SelectedDateChanged="DuedateDatepicker_SelectedDateChanged"></DatePicker>
 
                     </Grid>
+                    <!-- Bottom  Right Grid  -->
+                    <!-- Column 2 (Grid Column 3)-->
                     <Grid Grid.Column="3" Margin="0,5,0,0" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -160,12 +144,15 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
 
                         </Grid.ColumnDefinitions>
-                        <xctk:IntegerUpDown  Watermark="Book ID:" x:Name="SelectedBookID" Grid.Column="0" BorderBrush="Black"  Margin="1,1,1,1">
-                        </xctk:IntegerUpDown>
+                        <!-- Book Id Up / Down picker  for selecting  books via Id Numbers -->
+                        <!-- Column 1 (Grid Column 0)-->
+                        <xctk:IntegerUpDown  Watermark="Book ID:" Minimum="0" x:Name="SelectedBookID" ValueChanged="SelectedBookID_ValueChanged" Grid.Column="0"  BorderBrush="Black"  Margin="1,1,1,1"/>
                         <!-- Column 2 (Grid Column 1)-->
+                        <!-- Resets the SelectedBookID & SelectedMemberId boxes and the selected index of the BookDataGrid-->
                         <Button Grid.Column="1" x:Name="ResetBookDataGridSelection" Margin="1,1,1,1" Background="#C6C5FF" BorderBrush="Black" Click="ResetBookDataGridSelection_Click" >Reset selection</Button>
                         <!-- Column 3 (Grid Column 2)-->
-                        <xctk:IntegerUpDown Watermark="Member ID:" x:Name="SelectedMemberId" Grid.Column="2" BorderBrush="Black" Margin="1,1,1,1"></xctk:IntegerUpDown>
+                        <!-- Member Id Up / Down picker  for selecting  members via Id Numbers -->
+                        <xctk:IntegerUpDown Watermark="Member ID:" Minimum="0" x:Name="SelectedMemberId" ValueChanged="SelectedMemberId_ValueChanged"  Grid.Column="2" BorderBrush="Black" Margin="1,1,1,1"/>
                     </Grid>
                 </Grid>
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_106._2.MainProgram.User"
         mc:Ignorable="d" FontFamily="Calibri"
-        Title="UserLoginView" Height="450" Width="800">
+        Title="UserLoginView" MinHeight="600" MinWidth="900" >
     <Grid >
 
         <Grid.ColumnDefinitions>
@@ -16,6 +16,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="1.5*"/>
+            
         </Grid.RowDefinitions>
 
         <Grid x:Name="Header" Background="Black" Grid.Column="0" Grid.Row="0">
@@ -128,7 +129,7 @@
                     <RowDefinition Height="1*"/>
                     <!--Row 2-->
                 </Grid.RowDefinitions>
-                <Button x:Name="Logout" Grid.Column="1" Grid.Row="1" Background="#FF1010"  Foreground="White">Logout</Button>
+                <Button x:Name="Logout" Grid.Column="1" Grid.Row="1" Background="#FF1010" Click="Logout_Click"  Foreground="White">Logout</Button>
             </Grid>
         </Grid>
 
@@ -150,7 +151,7 @@
             <Viewbox x:Name="HomeButton" Grid.Row="1" Grid.Column="1"  MouseDown="HomeButton_MouseDown"   >
                 <TextBlock Margin=" 1.5,1.5,1.5,1.5" TextWrapping="Wrap" Text="Home" />
             </Viewbox>
-            <Viewbox x:Name="AdminBookButton" StretchDirection="Both" Stretch="Uniform"  Grid.Row="1" Grid.Column="2"  MouseDown="AdminBookButton_MouseDown">
+            <Viewbox x:Name="BookButton" StretchDirection="Both" Stretch="Uniform"  Grid.Row="1" Grid.Column="2"  MouseDown="BookButton_MouseDown">
                 <TextBlock Margin=" 1.5,1.5,1.5,1.5" TextWrapping="Wrap" Text="Book" />
             </Viewbox>
             <Viewbox x:Name="DuedateButton"  Grid.Row="1" Grid.Column="3"  MouseDown="DuedateButton_MouseDown"  >

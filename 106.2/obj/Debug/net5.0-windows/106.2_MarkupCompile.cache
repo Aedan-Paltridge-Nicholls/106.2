@@ -16,5 +16,5 @@ C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\App.xaml
 219-1293659568
 MainProgram\Admin\Book\AddBookPopup.xaml;MainProgram\Admin\Book\AdminBookView.xaml;MainProgram\Admin\Book\HoldBookPopup.xaml;MainProgram\Admin\Book\ReturnBookPopup.xaml;MainProgram\Admin\Book\UpdateBookPopup.xaml;MainProgram\Admin\Book\WithdrawBookPopup.xaml;MainProgram\Admin\Members\Addmemberpopup.xaml;MainProgram\Admin\Members\AdminLoginView.xaml;MainProgram\Admin\Members\UpdateloginPopup.xaml;MainProgram\Admin\Members\Updatememberpopup.xaml;MainProgram\Admin\OverDue\AdminOverDueView.xaml;MainProgram\Homepage\BookPopUP.xaml;MainProgram\Homepage\Booktemplate.xaml;MainProgram\Homepage\Home.xaml;MainProgram\Images\ImagePopup.xaml;MainProgram\login.xaml;MainProgram\MainWindow.xaml;MainProgram\User\UserLoginView.xaml;
 
-False
+True
 
