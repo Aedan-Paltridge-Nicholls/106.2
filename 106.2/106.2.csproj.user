@@ -37,6 +37,9 @@
     <Compile Update="MainProgram\Homepage\BookPopUP.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MainProgram\Homepage\BookSearchPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MainProgram\Homepage\Booktemplate.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -53,6 +56,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MainProgram\Admin\Members\Updatememberpopup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MainProgram\User\Userbook\UsersBooksView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MainProgram\User\Userbook\UsersOverDueBookView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -87,6 +96,9 @@
     <Page Update="MainProgram\Homepage\BookPopUP.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="MainProgram\Homepage\BookSearchPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainProgram\Homepage\Booktemplate.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -106,6 +118,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainProgram\Admin\Members\Updatememberpopup.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainProgram\User\Userbook\UsersBooksView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainProgram\User\Userbook\UsersOverDueBookView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

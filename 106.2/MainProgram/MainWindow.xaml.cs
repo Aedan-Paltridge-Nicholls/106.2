@@ -69,6 +69,10 @@ namespace _106._2
             this.Close();
         }
 
-        
+        private void search_Click(object sender, RoutedEventArgs e)
+        {
+            BookSearchPage bookSearchPage = new BookSearchPage(SearchBOX.Text);
+            Main.Content = bookSearchPage;
+        }
     }
 }

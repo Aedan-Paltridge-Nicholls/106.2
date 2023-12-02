@@ -1,4 +1,5 @@
 ﻿using _106._2.MainProgram.Homepage;
+using _106._2.MainProgram.User.Userbook;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,8 @@ namespace _106._2.MainProgram.User
         public static string UserId { get; set; }
         private void BookButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-          //  UserBookView userBookView = new UserBookView(UserId);
-          // Main.Content = userBookView;
+            UsersBooksView BookView = new UsersBooksView(UserId);
+            Main.Content = BookView;
         }
 
         private void HomeButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -43,7 +44,8 @@ namespace _106._2.MainProgram.User
 
         private void DuedateButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            UsersOverDueBookView BookView = new UsersOverDueBookView(UserId);
+            Main.Content = BookView;
         }
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
@@ -52,6 +54,17 @@ namespace _106._2.MainProgram.User
             this.Close();
         }
 
-        
+      
+
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void search_Click(object sender, RoutedEventArgs e)
+        {
+            BookSearchPage bookSearchPage = new BookSearchPage(searchBox.Text);
+            Main.Content = bookSearchPage;
+        }
     }
 }

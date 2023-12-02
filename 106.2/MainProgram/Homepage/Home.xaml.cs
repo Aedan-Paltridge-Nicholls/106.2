@@ -29,6 +29,7 @@ namespace _106._2.MainProgram.Homepage
         public ObservableCollection<Book> Books { get; set; }
         public class Book
         {
+            public string BookID { get; set; }
             public string ImagePath { get; set; }
             public string Title { get; set; }
             public string Author { get; set; }
@@ -46,7 +47,7 @@ namespace _106._2.MainProgram.Homepage
             NpgsqlConnection connectionString = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
 
             // SQL query to retrieve book data 
-             string query = "SELECT * FROM book";
+             string query = "SELECT * FROM book ORDER BY bookid ";
           
             try
             {
@@ -59,18 +60,19 @@ namespace _106._2.MainProgram.Homepage
                     using (NpgsqlDataReader reader = command.ExecuteReader())
                     {
                         // Iterate through the results and populate the Books collection
-                        int i =0;
                         while (reader.Read())
                         {
-                            ++i;
+                           
                             Books.Add(new Book
                             {
+                                BookID = reader["bookid"].ToString(),
                                 ImagePath = reader["image"].ToString(),
                                 Title = reader["bookname"].ToString(),
                                 Author = reader["author"].ToString(),
                                 Genre = reader["genre"].ToString(),
                             });
-                        }
+                             
+                        } 
                     }
                 }
             }

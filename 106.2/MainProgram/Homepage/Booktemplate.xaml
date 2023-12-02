@@ -9,24 +9,34 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <!--Book template UI elements-->
 
-        <Grid  Background="AliceBlue" Margin="10,10" Grid.Row="1" Grid.Column="1">
+    <Grid  Background="AliceBlue" Margin="10,10" Grid.Row="1" Grid.Column="1">
 
-        
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
 
-            </Grid.RowDefinitions>
-            
-            <Button x:Name="btnPopup" Width="Auto" Height="Auto" Background="Transparent" BorderBrush="White" Click="btnPopup_Click">
-            <Image x:Name="CoverImage" ImageFailed="CoverImage_ImageFailed" Grid.Row="0"  Source="{Binding  ImagePath }"   Stretch="Uniform" Cursor="Hand" />
-            </Button>
-           <TextBlock x:Name="TitleBlock" Grid.Row="1" Text="{Binding Title}" FontWeight="Bold" TextWrapping="WrapWithOverflow"/>
-           <TextBlock x:Name="AuthorBlock" Grid.Row="2" Text="{Binding Author}" TextWrapping="WrapWithOverflow"/>
-           <TextBlock x:Name="GenreBlock" Grid.Row="3" Text="{Binding Genre}" TextWrapping="WrapWithOverflow"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+
+        </Grid.RowDefinitions>
+
+        <Button x:Name="btnPopup" Width="Auto" Height="Auto" Background="Transparent" BorderBrush="White" Click="btnPopup_Click">
+            <Image x:Name="CoverImage" ImageFailed="CoverImage_ImageFailed" Grid.Row="0"  Source="{Binding  ImagePath}"   Stretch="Uniform" Cursor="Hand" />
+        </Button>
+        <TextBlock x:Name="TitleBlock" Grid.Row="1" Text="{Binding Title}" FontWeight="Bold" TextWrapping="WrapWithOverflow"/>
+        <TextBlock x:Name="AuthorBlock" Grid.Row="2" Text="{Binding Author}" TextWrapping="WrapWithOverflow"/>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="GenreBlock" Grid.Column="0" Text="{Binding Genre}" TextWrapping="WrapWithOverflow"/>
+            <TextBlock x:Name="IDBlock" Grid.Column="1"   Text="{Binding BookID,StringFormat= Book ID : {0} }" TextWrapping="WrapWithOverflow"/>
         </Grid>
-    
-    
+       
+
+    </Grid>
+
+
 </UserControl>

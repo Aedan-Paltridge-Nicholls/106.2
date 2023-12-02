@@ -37,9 +37,4 @@
     <Resource Include="MainProgram\social_images.PNG" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MainProgram\User\Book\" />
-    <Folder Include="MainProgram\User\Overdue\" />
-  </ItemGroup>
-
 </Project>

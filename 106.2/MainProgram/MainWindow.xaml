@@ -92,10 +92,10 @@
                     <RowDefinition Height="1*"/>
 
                 </Grid.RowDefinitions>
-                
-                <xctk:WatermarkTextBox Watermark="Search" x:Name="textBox" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=RowDefinitions[2].ActualHeight }"   MaxLines="1" VerticalContentAlignment="Center"/>
+
+                <xctk:WatermarkTextBox Watermark="Search" x:Name="SearchBOX" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=RowDefinitions[2].ActualHeight }"   MaxLines="1" VerticalContentAlignment="Center"/>
                 <Button x:Name="search" Grid.Column="3" Grid.RowSpan="3"  FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=RowDefinitions[2].ActualHeight }"
-                        Grid.Row="1" >Search</Button>
+                        Grid.Row="1"  Click="search_Click">Search</Button>
             </Grid>
             <Grid x:Name="ButtonOne" Grid.Column="3" Grid.Row="1" >
                 <Grid.ColumnDefinitions>

@@ -36,19 +36,19 @@ namespace _106._2
             this.DialogResult = false; this.Close();
             
         }
-
+        public string CMD {  get; set; }
         private void Addbutton_Click_1(object sender, RoutedEventArgs e)
         {
             NpgsqlConnection conn = SqlCONN;
             conn.Open();
 
-            string idnumber , number = IdNumberBOX.Text , Name = txtUser.Text,password = txtPassword.Password ;
-            int Removetext = number.IndexOf(':') + 4;
+            string idnumber , number = IdNumberBOX.Text , Name = txtUser.Text.Trim(),password = txtPassword.Password.Trim();
+            int Removetext = number.IndexOf(':') + 3;
             idnumber = number.Remove(0, Removetext);
             if (txtUser.Text != "" || txtPassword.Text != ""|| number == "")
             {
-                string loginQuery = "INSERT INTO logins(username,userpassword,isadmin,Userid)" +
-                                   $"VALUES (\'{Name}\',\'{password}\',\'{Admin.ToString()}\',(SELECT number FROM members WHERE number = {idnumber} ) )";
+                string loginQuery = CMD + " " + "INSERT INTO logins(username,userpassword,isadmin,Userid)" +
+                                   $"VALUES (\'{Name}\',\'{password}\',\'{Admin.ToString()}\',(SELECT number FROM members WHERE number = {idnumber}  ))";
                 NpgsqlCommand command = new NpgsqlCommand(loginQuery, conn);
                 command.ExecuteNonQuery();
                 conn.Close();

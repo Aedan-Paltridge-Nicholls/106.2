@@ -27,11 +27,11 @@ namespace _106._2
         {
             InitializeComponent();
         }
-        public string LoginId {  get; set; }
+        public static string LoginId {  get; set; }
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-            NpgsqlCommand command = new NpgsqlCommand($"SELECT * FROM logins WHERE userpassword = \'{Password.Password}\' AND username = \'{Username.Text}\' ", SqlCONN);
+            NpgsqlCommand command = new NpgsqlCommand($"SELECT * FROM logins WHERE userpassword = \'{Password.Password.Trim()}\' AND username = \'{Username.Text.Trim()}\' ", SqlCONN);
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
             DataTable dataTable = new DataTable();
             adapter.Fill(dataTable);

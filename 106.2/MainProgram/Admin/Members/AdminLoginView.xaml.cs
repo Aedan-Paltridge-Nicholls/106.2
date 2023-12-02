@@ -215,7 +215,7 @@
                         Addmemberpopup addmemberpopup = new Addmemberpopup();
 
                         string command = "insert into members (number, name, phonenumbers, email, joindate, address)" +
-                            $" values ( {number}, '{name}', '{phonenumbers}', '{email}', '{joindate}', '{address}' );";
+                            $" values ( {number}, '{name}', '{phonenumbers}', '{email}', '{joindate}', '{address}' );"+';';
                     
                     
                         string info = $"Member ID Number :{number} {Environment.NewLine} " +
@@ -224,6 +224,7 @@
                                       $"Member Email: {email}  {Environment.NewLine}" +
                                       $"Member Join-Date: {joindate}   {Environment.NewLine}" +
                                       $"Member Address: {address}   {Environment.NewLine}";
+                        addmemberpopup.CMD = command;
                         addmemberpopup.MemberInfoBox.Text = info;
                         addmemberpopup.IdNumberBOX.Text = $"ID Number :{Environment.NewLine}{number}";
                         bool? NotCanceled = addmemberpopup.ShowDialog();

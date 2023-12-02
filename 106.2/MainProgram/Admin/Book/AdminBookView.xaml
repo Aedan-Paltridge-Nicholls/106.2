@@ -178,14 +178,14 @@
                     <ColumnDefinition Width="1.5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <!-- Column 1 (Grid Column 0)-->
-                <xctk:IntegerUpDown  Watermark="Book ID:"  AllowTextInput="False"  FormatString="N0" Maximum="{Binding count}"
-                                     Minimum="0" x:Name="SelectedBookID" ValueChanged="SelectedBookID_ValueChanged" Grid.Column="0" 
+                <xctk:IntegerUpDown  Watermark="Book ID:"  AllowTextInput="True"  FormatString="N0" Maximum="{Binding count}"
+                                     Minimum="0" x:Name="SelectedBookID" ValueChanged="SelectedBookID_ValueChanged"  Grid.Column="0" 
                                      BorderBrush="Black"  Margin="1,1,1,1">
                 </xctk:IntegerUpDown>
                 <!-- Column 2 (Grid Column 1)-->
                 <Button Grid.Column="1" x:Name="ResetBookDataGridSelection" Margin="1,1,1,1" Background="#C6C5FF" BorderBrush="Black" Click="ResetBookDataGridSelection_Click" >Reset selection</Button>
                 <!-- Column 3 (Grid Column 2)-->
-                <xctk:IntegerUpDown Watermark="Member ID:" AllowTextInput="False"  FormatString="N0" Maximum="{Binding count}" Minimum="0" 
+                <xctk:IntegerUpDown Watermark="Member ID:" AllowTextInput="True"   FormatString="N0" Maximum="{Binding count}" Minimum="0" 
                                     x:Name="SelectedMemberId" ValueChanged="SelectedMemberId_ValueChanged" Grid.Column="2" BorderBrush="Black" 
                                     Margin="1,1,1,1"></xctk:IntegerUpDown>
             </Grid>

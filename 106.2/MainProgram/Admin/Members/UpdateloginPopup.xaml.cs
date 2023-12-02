@@ -36,7 +36,7 @@ namespace _106._2
         {
             NpgsqlConnection conn = SqlCONN;
             conn.Open();
-            string idnumber, number = IdNumberBOX.Text, Name = txtUser.Text, password = txtPassword.Password;
+            string idnumber, number = IdNumberBOX.Text, Name = txtUser.Text.Trim(), password = txtPassword.Password.Trim();
             int Removetext = number.IndexOf(':') ;
             idnumber = number.Remove(0, (Removetext + 4));
             if (txtUser.Text != null || txtPassword.Password != null)

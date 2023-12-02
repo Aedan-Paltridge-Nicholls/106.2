@@ -40,12 +40,12 @@ namespace _106._2.MainProgram.Admin.Book
                 SqlCONN.Close();
 
             }
-            this.Close();
+            this.DialogResult = true; this.Close();
         }
 
         private void Cancelbutton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false; this.Close();
         }
     }
 }

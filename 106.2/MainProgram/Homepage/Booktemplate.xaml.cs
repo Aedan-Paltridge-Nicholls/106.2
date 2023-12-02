@@ -23,6 +23,7 @@ namespace _106._2.MainProgram.Homepage
         public Book GetBook = new Book();
         public class Book
         {
+            public string[] BookID { get; set; }
             public string ImagePath { get; set; }
             public string Title { get; set; }
             public string Author { get; set; }
@@ -41,13 +42,14 @@ namespace _106._2.MainProgram.Homepage
 
         private void CoverImage_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
-            CoverImage.Source =  new BitmapImage(new Uri("/Images/CoverPlaceH", UriKind.Relative));
+            CoverImage.Source =  new BitmapImage(new Uri("/Images/CoverPlaceholder", UriKind.Relative));
 
         }
 
         private void btnPopup_Click(object sender, RoutedEventArgs e)
         {   
-            Booktemplate booktemplate = this; 
+            Booktemplate booktemplate = this;
+            GetBook.BookID = booktemplate.IDBlock.Text.Split(':'); 
             GetBook.ImagePath =  booktemplate.CoverImage.Source.ToString();
             GetBook.Title = booktemplate.TitleBlock.Text;
             GetBook.Author = booktemplate.AuthorBlock.Text;
@@ -56,6 +58,7 @@ namespace _106._2.MainProgram.Homepage
             BookPopUP bookPopUP = new BookPopUP();
             bookPopUP.Top = point.Y - bookPopUP.Height/2;
             bookPopUP.Left = point.X - bookPopUP.Width / 2;
+            bookPopUP.GetBook.BookID = GetBook.BookID[1];
             bookPopUP.GetBook.ImagePath = GetBook.ImagePath;
             bookPopUP.GetBook.Title = GetBook.Title;
             bookPopUP.GetBook.Author = GetBook.Author;

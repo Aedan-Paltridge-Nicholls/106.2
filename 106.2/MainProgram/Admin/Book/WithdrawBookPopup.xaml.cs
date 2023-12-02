@@ -44,6 +44,7 @@ namespace _106._2.MainProgram.Admin.Book
         {
             using(NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
             {
+                if(DueDatePicker.Text == "") { MessageBox.Show("Must select a due date."); return; }
                 SqlCONN.Open();
                 string command = "UPDATE  booklog " +
                                        $" SET withdrawn = 'true',returned = 'false', overdue ='false', issuedid = {MemberId} , duedate = '{DueDate}' " +

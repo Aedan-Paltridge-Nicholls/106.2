@@ -637,7 +637,7 @@ namespace _106._2.Admin.Book
             }
 
         }
-        public void Addbook(String BookID,String Title,String Author, String Genre)
+        public void Addbook(string BookID,string Title,string Author, string Genre)
         {
             ImagePath = " sdsdsdsd";
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
@@ -681,7 +681,7 @@ namespace _106._2.Admin.Book
             Addbook(BookIdOut,BooKTitleOut,BookAuthorOut,BookGenreOut);
             RefreshGrid();
         }
-        public void withdrawBook(String BookID, String Title, String Author, String Genre, string MemberId)
+        public void withdrawBook(string BookID, string Title, string Author, string Genre, string MemberId)
         {
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
             {
@@ -746,7 +746,7 @@ namespace _106._2.Admin.Book
             withdrawBook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut, MemberIdOut);
                   
         }
-        public void Updatebook(String BookID, String Title, String Author, String Genre)
+        public void Updatebook(string BookID, string Title, string Author, string Genre)
         {
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
             {
@@ -821,7 +821,7 @@ namespace _106._2.Admin.Book
             RefreshBookGrid();
 
         }
-        public void HoldBook(String BookID, String Title, String Author, String Genre, string MemberId)
+        public void HoldBook(string BookID, string Title, string Author, string Genre, string MemberId)
         {
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
             {
@@ -885,7 +885,7 @@ namespace _106._2.Admin.Book
             if (MemberIdOut == "") { MessageBox.Show(" Must select the Member the book is Issued too "); return; }
             HoldBook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut, MemberIdOut);
         }
-        public void ReturnBook(String BookID, String Title, String Author, String Genre, string MemberId)
+        public void ReturnBook(string BookID, string Title, string Author, string Genre, string MemberId)
         {
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
             {
@@ -1291,14 +1291,26 @@ namespace _106._2.Admin.Book
         private void SelectedBookID_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             int i = 0;
-            SelectedBookID.Maximum = commander("SELECT COUNT(*) FROM book", i);
+            SelectedBookID.Maximum = Convert.ToInt32(commander("SELECT bookid FROM book ORDER BY bookid DESC LIMIT 1 "));
         }
         private void SelectedMemberId_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            int i = 0;
-            SelectedMemberId.Maximum = commander("SELECT COUNT(*) FROM members", i);
+       
+            SelectedMemberId.Maximum = Convert.ToInt32(commander("SELECT number FROM members ORDER BY number DESC LIMIT 1 "));
         }
-        //Excutes sql commands  
+        //Excutes sql commands
+        public string commander(string CMD)
+        {
+            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
+            SqlCONN.Open();
+            using var command = new NpgsqlCommand(CMD, SqlCONN);
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            DataRow dataRow = dt.Rows[0];
+            string Output = dataRow[0].ToString();
+            return Output;
+        }
         public int commander(string CMD, int input)
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");

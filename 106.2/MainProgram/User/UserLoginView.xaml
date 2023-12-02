@@ -88,8 +88,8 @@
                     <!--Row 2-->
                 </Grid.RowDefinitions>
 
-                <TextBox x:Name="textBox" Grid.Column="1" Grid.Row="1" MaxLines="1" VerticalContentAlignment="Center"/>
-                <Button x:Name="search" Grid.Column="3" Grid.Row="1" >Search</Button>
+                <TextBox x:Name="searchBox" Grid.Column="1" Grid.Row="1" MaxLines="1" TextChanged="searchBox_TextChanged" VerticalContentAlignment="Center"/>
+                <Button x:Name="search" Grid.Column="3" Grid.Row="1" Click="search_Click" >Search</Button>
             </Grid>
             <Grid x:Name="ButtonOne" Grid.Column="3" Grid.Row="1" >
                 <Grid.ColumnDefinitions>
@@ -158,7 +158,7 @@
                 <TextBlock Margin=" 1.5,1.5,1.5,1.5" TextWrapping="Wrap" Text="Due-date" />
             </Viewbox>
         </Grid>
-        <Frame NavigationUIVisibility="Hidden"  Grid.Row="2" x:Name="Main" Background="Aqua">
+        <Frame NavigationUIVisibility="Hidden"  Grid.Row="2" x:Name="Main" Background="AliceBlue">
 
         </Frame>
         <Grid x:Name="FooterSection" Background="Black" ShowGridLines="False" Grid.Column="0" Grid.Row="3">
