@@ -21,23 +21,47 @@ namespace _106._2.MainProgram.Admin.Book
     /// </summary>
     public partial class UpdateBookPopup : Window
     {
+        /// <summary>
+        /// This Stores a Connection string
+        /// </summary>
         public NpgsqlConnection Connection { get; set; }
+        /// <summary>
+        /// This is a Popup to update a Book
+        /// </summary>
         public UpdateBookPopup()
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// This  stores a books id
+        /// </summary>
         public string bookid { set; get; }
+        /// <summary>
+        /// This Button Updates the book
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateBook_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true; this.Close();
 
         }
-
+        /// <summary>
+        /// This Button cancels Updating the book
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false; this.Close();
         }
+        /// <summary>
+        /// This stores the image path for the cover of a book
+        /// </summary>
         public string ImagePath { get; set; }
+        /// <summary>
+        /// This is to update  the  book cover
+        /// </summary>
         private void GetImage()
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -60,6 +84,11 @@ namespace _106._2.MainProgram.Admin.Book
             }
 
         }
+        /// <summary>
+        /// This button updates the books cover by calling 'GetImage()'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Updatecover_Click(object sender, RoutedEventArgs e)
         {
             GetImage();

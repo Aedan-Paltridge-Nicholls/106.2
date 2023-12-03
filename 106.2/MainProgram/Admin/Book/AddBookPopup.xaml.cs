@@ -21,16 +21,27 @@ namespace _106._2.MainProgram.Admin.Book
     /// </summary>
     public partial class AddBookPopup : Window
     {
+        /// <summary>
+        /// This is a pop-up for confirming the adding a book to the database
+        /// </summary>
         public AddBookPopup()
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// This Cancels the adding of the book 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false; this.Close();
         }
-
+        /// <summary>
+        /// This  confirms adding a book the database 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Addbutton_Click_1(object sender, RoutedEventArgs e)
         { 
             this.DialogResult = true; this.Close();

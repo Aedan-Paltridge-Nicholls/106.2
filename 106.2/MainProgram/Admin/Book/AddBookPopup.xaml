@@ -8,17 +8,24 @@
         Title="AddBookPopup"  Height="350" Width="300"
            FontFamily="Calibri" MinHeight="350" MinWidth="300"
         MaxHeight="350" MaxWidth="300">
+    <!--Main Grid-->
     <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
+            <!--Column 0-->
             <ColumnDefinition Width=".1*"/>
+            <!--Column 1-->
             <ColumnDefinition Width="10*" />
+            <!--Column 2-->
             <ColumnDefinition Width=".1*"/>
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
+            <!--Row 0-->
             <RowDefinition/>
+            <!--Row 1-->
             <RowDefinition Height=".2*"/>
         </Grid.RowDefinitions>
+        <!--Book info Goes here Row 1 (Grid Row 0)-->
         <Border  Grid.Row="0" Grid.Column="1" Margin="10,0"  BorderThickness="1">
             <Border.BorderBrush>
                 <SolidColorBrush  Color="Black"/>
@@ -27,24 +34,36 @@
 
             </TextBlock>
         </Border>
+        <!--Buttons here Row 2 (Grid Row 1)-->
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
+                <!--Column 0-->
                 <ColumnDefinition Width=".1*"/>
+                <!--Column 1-->
                 <ColumnDefinition />
+                <!--Column 2-->
                 <ColumnDefinition Width=".3*"/>
+                <!--Column 3-->
                 <ColumnDefinition />
+                <!--Column 4-->
                 <ColumnDefinition Width=".1*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <!--Row 0-->
                 <RowDefinition Height=".1*" />
+                <!--Row 1-->
                 <RowDefinition Height="*"/>
+                <!--Row 2-->
                 <RowDefinition Height=".1*"/>
                  
             </Grid.RowDefinitions>
-             
-            <Button IsDefault="True" FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="Addbutton" Background="#C6C5FF" Foreground="#0A66C2" Grid.Row="1" Grid.Column="1"  Click="Addbutton_Click_1">Add Book</Button>
-            <Button IsCancel="True" FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="cancelbutton" Background="#FF1010" Foreground="White" Grid.Row="1" Grid.Column="3"  Click="CancelButton_Click">Cancel</Button>
-            
+            <!--Row 1 column 1  (Grid Row 1 Column 1)--> <!-- This is the Button to add a book  -->
+            <Button IsDefault="True" FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="Addbutton" 
+                    Background="#C6C5FF" Foreground="#0A66C2" Grid.Row="1" Grid.Column="1"  Click="Addbutton_Click_1" Content="Add Book"/>
+            <!--Row 2 column 2 (Grid Row 3 Column 3)--> <!-- This is the Button to Cancel adding a book  -->
+            <Button IsCancel="True" FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="cancelbutton" 
+                    Background="#FF1010" Foreground="White" Grid.Row="1" Grid.Column="3"  Click="CancelButton_Click" Content="Cancel"/>
+
 
         </Grid>
 

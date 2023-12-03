@@ -20,13 +20,26 @@ namespace _106._2.MainProgram.Admin.Book
     /// </summary>
     public partial class ReturnBookPopup : Window
     {
+        /// <summary>
+        /// This is a popup for Returning a book 
+        /// </summary>
         public ReturnBookPopup()
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// This stores the members id
+        /// </summary>
         public string MemberId { get; set; }
+        /// <summary>
+        /// This stores the Selected Book Id 
+        /// </summary>
         public string SelectedBookId { get; set; }
-        public string DueDate { get; set; }
+        /// <summary>
+        /// this Returns a book 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReturnBook_Click(object sender, RoutedEventArgs e)
         {
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
@@ -42,7 +55,11 @@ namespace _106._2.MainProgram.Admin.Book
             }
             this.DialogResult = true; this.Close();
         }
-
+        /// <summary>
+        /// This Button Cancels Returning a book 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cancelbutton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false; this.Close();

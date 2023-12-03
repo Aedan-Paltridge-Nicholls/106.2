@@ -22,7 +22,9 @@ namespace _106._2.MainProgram.Admin.Book
     /// </summary>
     public partial class WithdrawBookPopup : Window
     {
-        
+        /// <summary>
+        /// This is a popup for issuing / Withdrawing a book
+        /// </summary>
         public WithdrawBookPopup()
         {
             
@@ -37,9 +39,23 @@ namespace _106._2.MainProgram.Admin.Book
 
 
         }
+        /// <summary>
+        /// This stores the members id
+        /// </summary>
         public string MemberId { get; set; }
+        /// <summary>
+        /// This stores the Selected Book Id 
+        /// </summary>
         public string SelectedBookId { get; set; }
+        /// <summary>
+        /// This stores the DueDate 
+        /// </summary>
         public string DueDate { get; set; }
+        /// <summary>
+        /// this Button Issues a book
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WithdrawBook_Click(object sender, RoutedEventArgs e)
         {
             using(NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
@@ -56,23 +72,26 @@ namespace _106._2.MainProgram.Admin.Book
             }
             this.Close();
         }
-
+        /// <summary>
+        /// This Button Cancels issuing a book 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
+        /// <summary>
+        ///  This lets a member set the duedate 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DueDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DueDate = DueDatePicker.SelectedDate.ToString();
             DueDate = DueDate.Remove(DueDate.IndexOf(' '));
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-          
 
-
-        }
     }
 }

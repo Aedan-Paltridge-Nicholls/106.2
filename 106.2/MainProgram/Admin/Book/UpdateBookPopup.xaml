@@ -11,61 +11,92 @@
 
     <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
+            <!--Column 0-->
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
+            <!--Row 0-->
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" >
             <Grid.ColumnDefinitions>
+                <!--Column 0-->
                 <ColumnDefinition Width=".05*" />
+                <!--Column 1-->
                 <ColumnDefinition Width="1.48*"/>
+                <!--Column 2-->
                 <ColumnDefinition Width=".05*" />
+                <!--Column 3-->
                 <ColumnDefinition Width="1.48*"/>
+                <!--Column 4-->
                 <ColumnDefinition Width=".05*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions >
+                <!--Row 0-->
                 <RowDefinition Height=".05*"/>
+                <!--Row 1-->
                 <RowDefinition Height=".1*"/>
+                <!--Row 2-->
                 <RowDefinition Height=".05*"/>
+                <!--Row 3-->
                 <RowDefinition/>
+                <!--Row 4-->
                 <RowDefinition Height="0.2*"/>
+
             </Grid.RowDefinitions>
 
-            <!--Label's-->
 
+            <!--Label's-->
+            <!-- Row 1 (Grid Row 1) -->
+            <!-- Column 1 (Grid Column 1)-->
             <TextBox Grid.Row="1" BorderBrush="#000000"  Grid.Column="1" TextWrapping="WrapWithOverflow" TextAlignment="Center"  Background="White" Text="New Book Info" MaxLines="1" />
+            <!-- Column 2 (Grid Column 3)-->
             <TextBox Grid.Row="1"  BorderBrush="#000000"  Grid.Column="3" TextWrapping="WrapWithOverflow" TextAlignment="Center"  Background="White" Text="Old Book Info" MaxLines="1" />
 
             <!--content-->
-
+            <!-- Row 2 (Grid Row 3) -->
+            <!-- Column 1 (Grid Column 1)-->
             <Border  Grid.Row="3"  Grid.Column="1" BorderBrush="#000000" BorderThickness="1" >
                 <TextBlock IsEnabled="False" TextWrapping="Wrap"  Background="White" x:Name="OldBookInfo"/>
             </Border>
+            <!-- Column 2 (Grid Column 3)-->
             <Border  Grid.Row="3"  Grid.Column="3" BorderBrush="#000000" BorderThickness="1" >
                 <TextBlock IsEnabled="False" TextWrapping="Wrap" Background="White" x:Name="NewBookInfo"/>
             </Border>
-            <!--Buttons-->
+            <!-- Row 4 (Grid Row 5) -->
+            <!-- Column 1&2&3 (Grid Column 1&2&3)-->
             <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
-
+                    <!--Column 0-->
                     <ColumnDefinition Width="1.1*"/>
+                    <!--Column 1-->
                     <ColumnDefinition Width=".05*"/>
+                    <!--Column 2-->
                     <ColumnDefinition Width="1.1*"/>
+                    <!--Column 3-->
                     <ColumnDefinition Width=".05*"/>
+                    <!--Column 4-->
                     <ColumnDefinition Width="1.1*"/>
 
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <!--Row 0-->
                     <RowDefinition Height=".5*"/>
+                    <!--Row 1-->
                     <RowDefinition Height="3*"/>
+                    <!--Row 2-->
                     <RowDefinition Height=".5*"/>
                 </Grid.RowDefinitions>
-                <!--column 1 (grid column 0) -->
+                <!--Buttons-->
+                <!-- Row 1 (Grid Row 1) -->
+                <!-- Column 1 (Grid Column 0)-->
+                <!-- This is the Button to Update a Book  -->
                 <Button x:Name="UpdateBook" Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="0"  Click="UpdateBook_Click"  FontWeight="Bold">Update Book</Button>
                 <!--column 2  -->
+                <!-- This is the Button to Update  a books Cover  -->
                 <Button x:Name="Updatecover" Foreground="#000000" Background="#c9c9c9"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="2"  Click="Updatecover_Click"  FontWeight="Bold">Update Cover</Button>
                 <!--column 3 (grid column 4) -->
+                <!-- This is the Button to Cancel Updating a Book-->
                 <Button x:Name="Cancelbutton" Foreground="#FFFFFF" Background="#FF1010"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="4"  Click="CancelButton_Click"  FontWeight="Bold">Cancel Update</Button>
 
 

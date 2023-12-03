@@ -10,50 +10,79 @@
            FontFamily="Calibri" MinHeight="350" MinWidth="300">
     <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
+            <!-- Column 0-->
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
+            <!-- Row 0-->
             <RowDefinition/>
+            <!-- Row 1-->
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <!--This Holds a Members Info-->
         <Border Grid.Row="0" Grid.Column="0" Margin="10,0" BorderBrush="Black" BorderThickness="1">
-            
-            <TextBlock  Background="White" x:Name="MemberInfoBox" TextWrapping="Wrap" IsEnabled="False"  >
-
-            </TextBlock>
+            <TextBlock  Background="White" x:Name="MemberInfoBox" TextWrapping="Wrap" IsEnabled="False"  />
         </Border>
         <!-- Lower Grid-->
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
+                <!-- Column 0-->
                 <ColumnDefinition Width=".5*"/>
+                <!-- Column 1-->
                 <ColumnDefinition/>
+                <!-- Column 2-->
                 <ColumnDefinition/>
+                <!-- Column 3-->
                 <ColumnDefinition  Width=".5*"/>
+                <!-- Column 4-->
                 <ColumnDefinition/>
+                <!-- Column 5-->
                 <ColumnDefinition  Width=".5*"/>
+                <!-- Column 6-->
                 <ColumnDefinition/>
+                <!-- Column 7-->
                 <ColumnDefinition Width=".5*"/>
+                <!-- Column 8-->
                 <ColumnDefinition Width=".5*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <!-- Row 0-->
                 <RowDefinition Height=".5*" />
+                <!-- Row 1-->
                 <RowDefinition/>
+                <!-- Row 2-->
                 <RowDefinition Height=".5*"/>
+                <!-- Row 3-->
                 <RowDefinition/>
+                <!-- Row 4-->
                 <RowDefinition Height=".5*"/>
+                <!-- Row 5-->
                 <RowDefinition/>
+                <!-- Row 6-->
                 <RowDefinition Height=".5*"/>
 
             </Grid.RowDefinitions>
             <!-- ROW 1-->
+            <!-- Column 1 (Grid columns 1&2&3&4 )-->
+            <!--This is for entering a Username for a member-->
             <xctk:WatermarkTextBox BorderBrush="Black" x:Name="txtUser" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"  TextAlignment="Justify" FontSize="20" MaxLines="1" Watermark="User Name"/>
+            <!-- Column 2 (Grid columns 6&7)-->
+            <!--This displays the members id-->
             <TextBlock Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="2" TextWrapping="Wrap" IsEnabled="False" x:Name="IdNumberBOX"  TextAlignment="Center"  Text="ID Number :" Background="White" />
             <Border BorderBrush="Black" BorderThickness="1" Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2"/>
             <!-- ROW 2(grid row 3)-->
+            <!-- Column 1 (Grid columns 1&2&3&4 )-->
+            <!--This is for entering a Password for a member-->
             <xctk:WatermarkPasswordBox BorderBrush="Black" x:Name="txtPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4"  TextAlignment="Justify" FontSize="20" MaxLines="1" Watermark="Password"/>
+            <!-- Column 2 (Grid columns 6&7)-->
+            <!--This is for Selecting if a member is going to be a admin-->
             <CheckBox x:Name="IsAdminCheckBox" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="3" VerticalContentAlignment="Center" Content=" Is Admin " Checked="IsAdminCheckBox_Checked" Unchecked="IsAdminCheckBox_Unchecked" />
             <!-- ROW 3(grid row 5)-->
+            <!-- Column 1 (Grid columns 1&2&3 )-->
+            <!--This Adds a member-->
             <Button IsDefault="True" FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="Addbutton" Background="#C6C5FF" Foreground="#0A66C2" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"  Click="Addbutton_Click_1">Add Member</Button>
+            <!-- Column 1 (Grid columns 5&6&7 )-->
+            <!--This cancels Adding a member-->
             <Button IsCancel="True" FontWeight="Bold" FontSize="17" BorderBrush="Black" x:Name="cancelbutton" Background="#FF1010" Foreground="White" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="3"  Click="CancelButton_Click">Cancel</Button>
 
         </Grid>

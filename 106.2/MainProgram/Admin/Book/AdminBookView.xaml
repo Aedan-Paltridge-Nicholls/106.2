@@ -10,33 +10,43 @@
       FontFamily="Calibri"
       
       Title="AdminBookView">
-
+    <!--Main Grid-->
     <Grid Background="White">
         
         <Grid.ColumnDefinitions>
+            <!--Column 0-->
             <ColumnDefinition Width=".1*"></ColumnDefinition>
+            <!--Column 1-->
             <ColumnDefinition Width="10*"></ColumnDefinition>
+            <!--Column 2-->
             <ColumnDefinition Width=".1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".3*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height=".3*"/>
-            <RowDefinition Height="5*"/>
 
+            <!--Row 0-->
+            <RowDefinition Height=".3*"/>
+            <!--Row 1-->
+            <RowDefinition Height="5*"/>
+            <!--Row 2-->
+            <RowDefinition Height=".3*"/>
+            <!--Row 3-->
+            <RowDefinition Height="5*"/>
+            <!--Row 4-->
             <RowDefinition Height=".3*"/>
         </Grid.RowDefinitions>
-        <!-- DataGrid -->
+        <!-- DataGrid  --> <!-- This displays the books info from the database-->
         <!-- Row 1: Search (Grid Row 1) -->
         <!-- Column 1 (Grid Column 1)-->
-        <DataGrid x:Name="Booksdatagrid" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False"  SelectedCellsChanged="Booksdatagrid_SelectedCellsChanged" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible">
+        <DataGrid x:Name="Booksdatagrid" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="1" IsReadOnly="True" 
+                  AutoGenerateColumns="False"  SelectedCellsChanged="Booksdatagrid_SelectedCellsChanged" SelectionMode="Single" 
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible">
             <DataGrid.RowBackground>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InfoColorKey}}"/>
             </DataGrid.RowBackground>
             <DataGrid.AlternatingRowBackground>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionColorKey}}"/>
             </DataGrid.AlternatingRowBackground>
-
+            <!--These are the columns of the DataGrid -->
             <DataGrid.Columns >
                 <DataGridComboBoxColumn/>
                 <DataGridTextColumn Header="Book ID" Binding="{Binding book_id}"/>
@@ -66,155 +76,211 @@
         <!-- Column 1 (Grid Column 1)-->
         <Grid Grid.Column="1" Grid.Row="3">
             <Grid.ColumnDefinitions>
+                <!--Column 0-->
                 <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                <!--Column 1-->
                 <ColumnDefinition Width="5*"></ColumnDefinition>
+                <!--Column 2-->
                 <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                <!--Column 3-->
                 <ColumnDefinition Width="5*"></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                <!--Row 0-->
+                <RowDefinition/>
+                <!--Row 1-->
+                <RowDefinition/>
+                <!--Row 2-->
+                <RowDefinition/>
+                <!--Row 3-->
+                <RowDefinition/>
+                <!--Row 4-->
                 <RowDefinition Height="0.3*"/>
-                <RowDefinition Height="1*"/>
+                <!--Row 5-->
+                <RowDefinition/>
             </Grid.RowDefinitions>
             
             <!-- Row 1: Search (Grid Row 0) -->
             <!-- Column 1 (Grid Column 0)-->
-            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" >Search:</Label>
+            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Content="Search:"/> 
             <!-- Column 2 (Grid Column 1)-->
             <Grid Grid.Column="1" Grid.Row="0"  >
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <!--Column 0-->
+                    <ColumnDefinition/>
+                    <!--Column 1-->
+                    <ColumnDefinition/>
+                    <!--Column 2-->
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <!-- Column 1 & 2 (Grid Column 0 & 1)-->
-                <TextBox x:Name="SearchBOX" Grid.Column="0" Grid.ColumnSpan="2"  Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="SearchBOX_TextChanged" MaxLines="1" />
-                <!-- Column 3 (Grid Column 2)-->
-                <Button x:Name="ClearSearch" Background="#C6C5FF"  Grid.Column="2" BorderBrush="Black" Margin="1,1,1,1" Click="ClearSearch_Click">Clear Search</Button>
+                <!-- Column 1 & 2 (Grid Column 0 & 1)--> <!--this Search Box is for user inputs -->
+                <TextBox x:Name="SearchBOX" Grid.Column="0" Grid.ColumnSpan="2"  Background="White" 
+                         BorderBrush="Black" Margin="1,1,1,1" TextChanged="SearchBOX_TextChanged" MaxLines="1" />
+                <!-- Column 3 (Grid Column 2)--> <!--this Clears the Search Box of user input -->
+                <Button x:Name="ClearSearch" Background="#C6C5FF"  Grid.Column="2" BorderBrush="Black" 
+                        Margin="1,1,1,1" Click="ClearSearch_Click" Content="Clear Search"/> 
             </Grid>
-            <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" >Due-Date:</Label>
+            <!-- Column 3 (Grid Column 2)-->
+            <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" Content="Due-Date:" /> 
+            <!-- Column 4 (Grid Column 3)--> 
             <Grid Grid.Column="3" Grid.Row="0"  >
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <!--Column 0-->
+                    <ColumnDefinition />
+                    <!--Column 1-->
+                    <ColumnDefinition />
+                    <!--Column 2-->
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <DatePicker x:Name="DuedateDatepicker" BorderBrush="Black" Grid.Column="0" Margin="1,1,1,1" SelectedDateChanged="DuedateDatepicker_SelectedDateChanged"></DatePicker>
-                <Label Grid.Column="1" HorizontalAlignment="Center" >Status</Label>
+                <!-- Column 1 (Grid Column 0)--> 
+                <!--This is for Searching books by their  duedate -->
+                <DatePicker x:Name="DuedateDatepicker" BorderBrush="Black" Grid.Column="0" 
+                            Margin="1,1,1,1" SelectedDateChanged="DuedateDatepicker_SelectedDateChanged"/>
+                <!-- Column 2 (Grid Column 1)-->
+                <Label Grid.Column="1" HorizontalAlignment="Center" Content="Status" />
+                <!-- Column 1 (Grid Column 0)--> 
+                <!-- This is for searching by the status of a book in the database-->
                 <ComboBox x:Name="StatusBOX" Grid.Column="2" BorderBrush="Black"  Margin="1,1,1,1" SelectionChanged="StatusBOX_SelectionChanged">
-                    <ComboBoxItem>~ True ~</ComboBoxItem>
-                    <ComboBoxItem>On Hold</ComboBoxItem>
-                    <ComboBoxItem>Withdrawn</ComboBoxItem>
-                    <ComboBoxItem>Overdue</ComboBoxItem>
-                    <ComboBoxItem>On Hold Withdrawn</ComboBoxItem>
-                    <ComboBoxItem>On Hold Overdue</ComboBoxItem>
-                    <ComboBoxItem>Returned</ComboBoxItem>
-                    <ComboBoxItem>On Hold Returned</ComboBoxItem>
-                    <ComboBoxItem>~ False ~</ComboBoxItem>
-                    <ComboBoxItem>On Hold</ComboBoxItem>
-                    <ComboBoxItem>Withdrawn</ComboBoxItem>
-                    <ComboBoxItem>Overdue</ComboBoxItem>
-                    <ComboBoxItem>On Hold Withdrawn</ComboBoxItem>
-                    <ComboBoxItem>On Hold Overdue</ComboBoxItem>
-                    <ComboBoxItem>Returned</ComboBoxItem>
-                    <ComboBoxItem>On Hold Returned</ComboBoxItem>
+                    <ComboBoxItem Content=" ~ True ~"/>
+                    <ComboBoxItem Content="On Hold"/> 
+                    <ComboBoxItem Content="Withdrawn"/> 
+                    <ComboBoxItem Content="Overdue"/> 
+                    <ComboBoxItem Content="On Hold Withdrawn"/> 
+                    <ComboBoxItem Content="On Hold Overdue"/> 
+                    <ComboBoxItem Content="Returned"/> 
+                    <ComboBoxItem Content="On Hold Returned"/> 
+                    <ComboBoxItem Content="~ False ~"/> 
+                    <ComboBoxItem Content="On Hold"/> 
+                    <ComboBoxItem Content="Withdrawn"/> 
+                    <ComboBoxItem Content="Overdue"/> 
+                    <ComboBoxItem Content="On Hold Withdrawn"/> 
+                    <ComboBoxItem Content="On Hold Overdue"/> 
+                    <ComboBoxItem Content="Returned"/> 
+                    <ComboBoxItem Content="On Hold Returned"/> 
                 </ComboBox>
             </Grid>
             
             <!-- Row 2 (Grid Row 1) -->
             <!-- Column 1 (Grid Column 0)-->
-            <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" >Book No:</Label>
+            <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Content="Book No:"/>
             <!-- Column 2 (Grid Column 1)-->
+            <!-- This is for searching by the Id of a book in the database-->
             <TextBox x:Name="BookIdnumberBOX" Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="BookIdnumberBOX_TextChanged" MaxLines="1"/>
             <!-- Column 3 (Grid Column 2)-->
-            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" >Search By</Label>
-            <ComboBox x:Name="SearchOptionBOX"  IsEditable="False" Grid.Column="3" Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="0" SelectionChanged="SearchOptionBOX_SelectionChanged"  >
-                <ComboBoxItem>Book ID </ComboBoxItem>
-                <ComboBoxItem>Title</ComboBoxItem>
-                <ComboBoxItem>Author </ComboBoxItem>
-                <ComboBoxItem>Genre</ComboBoxItem>
-                <ComboBoxItem>On Hold</ComboBoxItem>
-                <ComboBoxItem>Withdrawn </ComboBoxItem> 
-                <ComboBoxItem>Overdue </ComboBoxItem> 
-                <ComboBoxItem>Returned</ComboBoxItem> 
-                <ComboBoxItem>Due-date</ComboBoxItem> 
-                <ComboBoxItem>Hold ID</ComboBoxItem> 
-                <ComboBoxItem>On Hold to</ComboBoxItem> 
-                <ComboBoxItem>Issued id</ComboBoxItem> 
-                <ComboBoxItem>Issued to</ComboBoxItem>
+            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" Content="Search By" />
+            <!-- Column 4 (Grid Column 3)-->
+            <!--This Is for selecting What To Search by-->
+            <ComboBox x:Name="SearchOptionBOX"  IsEditable="False" Grid.Column="3" Grid.Row="1" Background="White" 
+                      BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="0" SelectionChanged="SearchOptionBOX_SelectionChanged"  >
+                <ComboBoxItem Content="Book ID"/>
+                <ComboBoxItem Content="Title"/> 
+                <ComboBoxItem Content="Author"/> 
+                <ComboBoxItem Content="Genre"/> 
+                <ComboBoxItem Content="On Hold"/> 
+                <ComboBoxItem Content="Withdrawn"/> 
+                <ComboBoxItem Content="Overdue"/> 
+                <ComboBoxItem Content="Returned"/> 
+                <ComboBoxItem Content="Due-date"/> 
+                <ComboBoxItem Content="Hold ID"/>
+                <ComboBoxItem Content="On Hold to"/> 
+                <ComboBoxItem Content="Issued id"/> 
+                <ComboBoxItem Content="Issued to"/> 
             </ComboBox>
             
-            <!--Row 3 (Grid Row 2)-->
+            <!-- Row 3 (Grid Row 2)-->
             <!-- Column 1 (Grid Column 0)-->
-            <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" >Title:</Label>
+            <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Content="Title:"/>
             <!-- Column 2 (Grid Column 1)-->
+            <!-- This is for searching by the title of a book in the database-->
             <TextBox x:Name="TitleBOX" Grid.Column="1" Grid.Row="2" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="TitleBOX_TextChanged"/>
             <!-- Column 3 (Grid Column 2)-->
-            <Label Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" >Author:</Label>
+            <Label Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" Content="Author:"/>
             <!-- Column 4 (Grid Column 3)-->
-            <TextBox x:Name="AuthorBOX" Grid.Column="3" Grid.Row="2" Background="White" BorderBrush="Black" Margin="1,1,1,1" TextChanged="AuthorBOX_TextChanged" MaxLines="1"/>
+            <!-- This is for searching by the Author of a book in the database-->
+            <TextBox x:Name="AuthorBOX" Grid.Column="3" Grid.Row="2" Background="White" BorderBrush="Black" 
+                     Margin="1,1,1,1" TextChanged="AuthorBOX_TextChanged" MaxLines="1"/>
             
             <!--Row 4 (Grid Row 3)-->
             <!-- Column 1 (Grid Column 0)-->
-            <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" >Genre:</Label>
+            <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Content="Genre:" />
             <!-- Column 2 (Grid Column 1)-->
-            <ComboBox x:Name="GenreOptionBOX" ItemsSource="{Binding}" IsEditable="False" SelectedIndex="0" Grid.Column="1" Grid.Row="3" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectionChanged="GenreOptionBOX_SelectionChanged" >
-
-            </ComboBox>
+            <!--This Is for selecting What genre To Search for a book by-->
+            <ComboBox x:Name="GenreOptionBOX" ItemsSource="{Binding}" IsEditable="False" SelectedIndex="0" 
+                      Grid.Column="1" Grid.Row="3" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectionChanged="GenreOptionBOX_SelectionChanged" />
             <!-- Column 3 (Grid Column 1)-->
             <Label Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" >Selected:</Label>
             <!-- Column 4 (Grid Column 3)-->
             <Grid Grid.Column="3" Grid.Row="3"  >
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <!--Column 0-->
+                    <ColumnDefinition />
+                    <!--Column 1-->
+                    <ColumnDefinition />
+                    <!--Column 2-->
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <!-- Column 1 (Grid Column 0)-->
+                <!-- This is for selecting a Book id-->
                 <xctk:IntegerUpDown  Watermark="Book ID:"  AllowTextInput="True"  FormatString="N0" Maximum="{Binding count}"
                                      Minimum="0" x:Name="SelectedBookID" ValueChanged="SelectedBookID_ValueChanged"  Grid.Column="0" 
-                                     BorderBrush="Black"  Margin="1,1,1,1">
-                </xctk:IntegerUpDown>
+                                     BorderBrush="Black"  Margin="1,1,1,1"/>
+
                 <!-- Column 2 (Grid Column 1)-->
-                <Button Grid.Column="1" x:Name="ResetBookDataGridSelection" Margin="1,1,1,1" Background="#C6C5FF" BorderBrush="Black" Click="ResetBookDataGridSelection_Click" >Reset selection</Button>
+                <!-- This is Clearing  selected id's and items-->
+                <Button Grid.Column="1" x:Name="ResetBookDataGridSelection" Margin="1,1,1,1" Background="#C6C5FF" BorderBrush="Black"
+                        Click="ResetBookDataGridSelection_Click" Content="Reset selection" /> 
                 <!-- Column 3 (Grid Column 2)-->
+                <!-- This is for selecting a Member id-->
                 <xctk:IntegerUpDown Watermark="Member ID:" AllowTextInput="True"   FormatString="N0" Maximum="{Binding count}" Minimum="0" 
                                     x:Name="SelectedMemberId" ValueChanged="SelectedMemberId_ValueChanged" Grid.Column="2" BorderBrush="Black" 
-                                    Margin="1,1,1,1"></xctk:IntegerUpDown>
+                                    Margin="1,1,1,1"/>
             </Grid>
             
             <!-- Row 5 Buttons (Grid Row 5)-->
             <!-- Column 1 - 4 (Grid Column 0 - 3)-->
             <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width=".1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width=".1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width=".1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width=".1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width=".1*"></ColumnDefinition>
+                    <!--Column 0-->
+                    <ColumnDefinition Width=".1*"/>
+                    <!--Column 1-->
+                    <ColumnDefinition />
+                    <!--Column 2-->
+                    <ColumnDefinition Width=".1*"/>
+                    <!--Column 3-->
+                    <ColumnDefinition />
+                    <!--Column 4-->
+                    <ColumnDefinition Width=".1*"/>
+                    <!--Column 5-->
+                    <ColumnDefinition />
+                    <!--Column 6-->
+                    <ColumnDefinition Width=".1*"/>
+                    <!--Column 7-->
+                    <ColumnDefinition />
+                    <!--Column 8-->
+                    <ColumnDefinition Width=".1*"/>
+                    <!--Column 9-->
+                    <ColumnDefinition />
+                    <!--Column 10-->
+                    <ColumnDefinition Width=".1*"/>
                 </Grid.ColumnDefinitions>
                 <!-- Column 1 (Grid Column 1)-->
+                <!-- This is for  adding a Book to the database-->
                 <Button Grid.Column="1"  x:Name="AddBookBUTTON" Background="#C6C5FF" Click= "AddBookBUTTON_Click" BorderBrush="Black" >Add Book</Button>
                 <!-- Column 2 (Grid Column 3)-->
+                <!-- This is for  Updating a Book in the database-->
                 <Button Grid.Column="3"  x:Name="UpdateBookInfoBUTTON" Background="#C6C5FF" Click="UpdateBookInfoBUTTON_Click" BorderBrush="Black">Update Info</Button>
                 <!-- Column 3 (Grid Column 3)-->
+                <!-- This is for Putting a Book on hold in the database-->
                 <Button Grid.Column="5"  x:Name="HoldBookBUTTON" Background="#C6C5FF" Click="HoldBookBUTTON_Click" BorderBrush="Black">Hold Book</Button>
                 <!-- Column 4 (Grid Column 7)-->
+                <!-- This is for  Issuing a Book from the database to a Member-->
                 <Button Grid.Column="7"  x:Name="WithdrawBookBUTTON" Background="#C6C5FF" Click= "WithdrawBookBUTTON_Click" BorderBrush="Black" >Withdraw Book</Button>
                 <!-- Column 5 (Grid Column 9)-->
+                <!-- This is for  Returning a Book to the database from a Member-->
                 <Button Grid.Column="9"  x:Name="ReturnBookBUTTON" Background="#C6C5FF" Click= "ReturnBookBUTTON_Click" BorderBrush="Black" >Return Book</Button>
 
             </Grid>

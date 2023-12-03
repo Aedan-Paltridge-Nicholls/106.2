@@ -21,22 +21,42 @@ namespace _106._2
     /// </summary>
     public partial class Addmemberpopup : Window
     {
+        /// <summary>
+        /// This is a Pop up for adding a member
+        /// </summary>
         public Addmemberpopup()
         {
             InitializeComponent();
             
         }
-
+        /// <summary>
+        /// this is the sql Connection string
+        /// </summary>
         public static NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
+       /// <summary>
+       /// this stores is a member is an admin
+       /// </summary>
         public bool Admin = false;
-
+        /// <summary>
+        /// this button cancels adding a member 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
 
             this.DialogResult = false; this.Close();
             
         }
+        /// <summary>
+        /// This  stores a Command
+        /// </summary>
         public string CMD {  get; set; }
+        /// <summary>
+        /// This button adds a member 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Addbutton_Click_1(object sender, RoutedEventArgs e)
         {
             NpgsqlConnection conn = SqlCONN;
@@ -66,12 +86,15 @@ namespace _106._2
 
 
         }
-
+        /// <summary>
+        /// These checks if the check box is clicked or not and sets the admin bool accordingly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IsAdminCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             Admin = true;
         }
-
         private void IsAdminCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             Admin = false;

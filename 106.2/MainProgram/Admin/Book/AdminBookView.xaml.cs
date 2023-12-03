@@ -5,25 +5,11 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml.Linq;
-using static _106._2.AdminLoginView;
 
 namespace _106._2.Admin.Book
 {
@@ -32,6 +18,9 @@ namespace _106._2.Admin.Book
     /// </summary>
     public partial class AdminBookView : Page
     {
+        /// <summary>
+        /// this is for storing data from a member
+        /// </summary>
         public class DataStorage
         {
             string BookID,
@@ -48,6 +37,7 @@ namespace _106._2.Admin.Book
                     IssuedId,
                     IssuedTo;
             // Setters 
+            // These also format the users inputs
             public void Set_BookID(string Input) { BookID = Input.Trim(); }
             public void Set_Title(string Input) { Title = Input.Trim(); }
             public void Set_Author(string Input) { Author = Input.Trim(); }
@@ -76,7 +66,9 @@ namespace _106._2.Admin.Book
             public string Get_OnHoldTo() { return OnHoldTo; }
             public string Get_IssuedId() { return IssuedId; }
             public string Get_IssuedTo() { return IssuedTo; }
-
+            /// <summary>
+            /// this is for storing data from a member
+            /// </summary>
             public DataStorage()
             {
                 Set_BookID("");
@@ -94,6 +86,9 @@ namespace _106._2.Admin.Book
                 Set_IssuedTo("");
             }
         }
+        /// <summary>
+        /// These are the different search types
+        /// </summary>
         public enum Searchtype
         {
             BookID,
@@ -112,11 +107,22 @@ namespace _106._2.Admin.Book
         }
         public Searchtype searchtype = new Searchtype();
         public DataStorage dataStorage = new DataStorage();
+        /// <summary>
+        /// This is for searches that are Numerical
+        /// </summary>
         public bool Numericinput = false;
+        /// <summary>
+        /// This is for searches that are Booleans
+        /// </summary>
         public bool Boolinput = false;
+        /// <summary>
+        /// This is for searches that are Dates 
+        /// </summary>
         public bool Dateinput = false;
-        private DataRow dr;
 
+        /// <summary>
+        /// This Is the Admin book page  
+        /// </summary>
         public AdminBookView()
         {
             CultureInfo Dtfi = CultureInfo.CreateSpecificCulture("en-us");
@@ -137,6 +143,11 @@ namespace _106._2.Admin.Book
 
 
         }
+        /// <summary>
+        /// This checks what the selected  'Searchtype'
+        /// </summary>
+        /// <param name="type">This is the search type Input </param>
+        /// <returns>String With the name of the search type</returns>
         public string searchtypestringer(Searchtype type)
         {
             switch (type)
@@ -174,6 +185,9 @@ namespace _106._2.Admin.Book
 
 
         }
+        /// <summary>
+        /// Loads the BookDatagrid 
+        /// </summary>
         public void LoadDatagrid()
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
@@ -195,6 +209,10 @@ namespace _106._2.Admin.Book
             Booksdatagrid.DataContext = dt;
 
         }
+        /// <summary>
+        /// Loads the BookDatagrid with the result of a query
+        /// </summary>
+        /// <param name="comm">The Command/Query for Loading the datagrid</param>
         public void LoadDatagrid(string comm)
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
@@ -212,6 +230,12 @@ namespace _106._2.Admin.Book
             Booksdatagrid.DataContext = dt;
 
         }
+        /// <summary>
+        /// Loades the BookDatagrid depending on the search type 
+        /// By calling the 'LoadDatagrid(string comm)' function
+        /// </summary>
+        /// <param name="Search">The search String</param>
+        /// <param name="type">The type of search</param>
         public void LoadDatagrid(string Search, Searchtype type)
         {
             /*
@@ -629,6 +653,11 @@ namespace _106._2.Admin.Book
             dataStorage.Set_Author(AuthorBOX.Text.Trim());
 
         }
+        /// <summary>
+        /// Searches the database based on the selected genre 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GenreOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
@@ -650,7 +679,13 @@ namespace _106._2.Admin.Book
             if (GenreOptionBOX.SelectedIndex != -1) {  dataStorage.Set_Genre(GenreOptionBOX.SelectedItem.ToString()); }
            
         }
+        /// <summary>
+        /// Stores the Image path of a book cover
+        /// </summary>
         public string ImagePath {  get; set; } 
+        /// <summary>
+        /// This is get the admin to set a book cover
+        /// </summary>
         private void GetImage()
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -673,9 +708,15 @@ namespace _106._2.Admin.Book
             }
 
         }
+        /// <summary>
+        /// This is the code for Adding a book to the database
+        /// </summary>
+        /// <param name="BookID">The Books Id</param>
+        /// <param name="Title">The Title of the Book</param>
+        /// <param name="Author">The Author of the book</param>
+        /// <param name="Genre">The Genre of the book</param>
         public void Addbook(string BookID,string Title,string Author, string Genre)
         {
-            ImagePath = " sdsdsdsd";
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
             {
                 try
@@ -708,6 +749,11 @@ namespace _106._2.Admin.Book
                 RefreshGrid();
             }
         }
+        /// <summary>
+        /// This is the code for pushing the 'AddBookBUTTON'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
             string BookIdOut = dataStorage.Get_BookID(),
@@ -717,6 +763,14 @@ namespace _106._2.Admin.Book
             Addbook(BookIdOut,BooKTitleOut,BookAuthorOut,BookGenreOut);
             RefreshGrid();
         }
+        /// <summary>
+        /// This is the code for  Issuing a Book from the database to a Member
+        /// </summary>
+        /// <param name="BookID">The Books Id</param>
+        /// <param name="Title">The Title of the Book</param>
+        /// <param name="Author">The Author of the book</param>
+        /// <param name="Genre">The Genre of the book</param>
+        /// <param name="MemberId">The Member who Is getting issued the book</param>
         public void withdrawBook(string BookID, string Title, string Author, string Genre, string MemberId)
         {
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
@@ -739,13 +793,13 @@ namespace _106._2.Admin.Book
                     DataRow dataRow = dt.Rows[0];
 
                     string
-                    MemerIDnumber = dataRow[0].ToString(),
+                    MemberIDNumber = dataRow[0].ToString(),
                     MemberName = dataRow[1].ToString();
                     string BookInfo = $"Book ID Number :{BookID} {Environment.NewLine} " +
                                      $"Book Title: {Title}   {Environment.NewLine}" +
                                      $"Book Author: {Author}  {Environment.NewLine}" +
                                      $"Book Genre: {Genre}  {Environment.NewLine}",
-                           MemberInfo = $"Member ID Number :{MemerIDnumber} {Environment.NewLine} " +
+                           MemberInfo = $"Member ID Number :{MemberIDNumber} {Environment.NewLine} " +
                                      $"Member Name: {MemberName}   {Environment.NewLine};";
 
 
@@ -768,11 +822,16 @@ namespace _106._2.Admin.Book
             }
             RefreshGrid();
         }
+        /// <summary>
+        ///   This is the code for pushing the 'WithdrawBookBUTTON'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WithdrawBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
             string SelectedBookId = SelectedBookID.Value.ToString(),
                      MemberIdOut = SelectedMemberId.Value.ToString();
-            if (SelectedBookId == ""){ MessageBox.Show(" Must select a book to Issuse "); return; }
+            if (SelectedBookId == ""){ MessageBox.Show(" Must select a book to Issue "); return; }
             string BookIdOut = dataStorage.Get_BookID(),
                    BooKTitleOut = dataStorage.Get_Title(),
                    BookAuthorOut = dataStorage.Get_Author(),
@@ -782,6 +841,13 @@ namespace _106._2.Admin.Book
             withdrawBook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut, MemberIdOut);
                   
         }
+        /// <summary>
+        /// This is the code for  Updating a Book in the database
+        /// </summary>
+        /// <param name="BookID">The Books Id</param>
+        /// <param name="Title">The Title of the Book</param>
+        /// <param name="Author">The Author of the book</param>
+        /// <param name="Genre">The Genre of the book</param>
         public void Updatebook(string BookID, string Title, string Author, string Genre)
         {
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
@@ -791,7 +857,7 @@ namespace _106._2.Admin.Book
                 {
 
                     SqlCONN.Open();
-                    UpdateBookPopup UpadteBookPopup = new UpdateBookPopup();
+                    UpdateBookPopup UpdateBookPopup = new UpdateBookPopup();
                     string
                         SelectedBookId = SelectedBookID.Value.ToString(), MemberIdOut = SelectedMemberId.Value.ToString() ;
                     string command = "UPDATE  book " +
@@ -815,21 +881,21 @@ namespace _106._2.Admin.Book
                     OldTitle = dataRow[1].ToString(),
                     OLdAuthor = dataRow[2].ToString(),
                     OldGenre = dataRow[3].ToString(); 
-                 string Newinfo = $"Book ID Number: {SelectedBookId} {Environment.NewLine} " +
+                 string NewInfo = $"Book ID Number: {SelectedBookId} {Environment.NewLine} " +
                                   $"Book Title: {Title}   {Environment.NewLine}" +
                                   $"Book Author: {Author}  {Environment.NewLine}" +
                                   $"Book Genre: {Genre}  {Environment.NewLine}",
-                        Oldinfo = $"Book ID Number: {SelectedBookId} {Environment.NewLine} " +
+                        OldInfo = $"Book ID Number: {SelectedBookId} {Environment.NewLine} " +
                                   $"Book Title: {OldTitle}   {Environment.NewLine}" +
                                   $"Book Author: {OLdAuthor}  {Environment.NewLine}" +
                                   $"Book Genre: {OldGenre}  {Environment.NewLine}";
 
 
-                    UpadteBookPopup.Connection = SqlCONN;
-                    UpadteBookPopup.bookid = SelectedBookId;
-                    UpadteBookPopup.OldBookInfo.Text = Oldinfo;
-                    UpadteBookPopup.NewBookInfo.Text = Newinfo;
-                    bool? NotCanceled = UpadteBookPopup.ShowDialog();
+                    UpdateBookPopup.Connection = SqlCONN;
+                    UpdateBookPopup.bookid = SelectedBookId;
+                    UpdateBookPopup.OldBookInfo.Text = OldInfo;
+                    UpdateBookPopup.NewBookInfo.Text = NewInfo;
+                    bool? NotCanceled = UpdateBookPopup.ShowDialog();
                     if (NotCanceled != null && NotCanceled == true)
                     {
 
@@ -846,7 +912,11 @@ namespace _106._2.Admin.Book
             }
           
         }
-       
+        /// <summary>
+        ///   This is the code for pushing the 'UpdateBookInfoBUTTON'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateBookInfoBUTTON_Click(object sender, RoutedEventArgs e)
         {
             string BookIdOut = dataStorage.Get_BookID(),
@@ -857,6 +927,14 @@ namespace _106._2.Admin.Book
             RefreshBookGrid();
 
         }
+        /// <summary>
+        /// This is the code for Putting a Book on hold in the database
+        /// </summary>
+        /// <param name="BookID">The Books Id</param>
+        /// <param name="Title">The Title of the Book</param>
+        /// <param name="Author">The Author of the book</param>
+        /// <param name="Genre">The Genre of the book</param>
+        /// <param name="MemberId">The Member who Is getting the book put on hold</param>
         public void HoldBook(string BookID, string Title, string Author, string Genre, string MemberId)
         {
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
@@ -877,13 +955,13 @@ namespace _106._2.Admin.Book
                     DataRow dataRow = dt.Rows[0];
 
                     string
-                    MemerIDnumber = dataRow[0].ToString(),
+                    MemberIDnumber = dataRow[0].ToString(),
                     MemberName = dataRow[1].ToString();
                     string BookInfo = $"Book ID Number :{BookID} {Environment.NewLine} " +
                                      $"Book Title: {Title}   {Environment.NewLine}" +
                                      $"Book Author: {Author}  {Environment.NewLine}" +
                                      $"Book Genre: {Genre}  {Environment.NewLine}",
-                           MemberInfo = $"Member ID Number :{MemerIDnumber} {Environment.NewLine} " +
+                           MemberInfo = $"Member ID Number :{MemberIDnumber} {Environment.NewLine} " +
                                      $"Member Name: {MemberName}   {Environment.NewLine};";
 
 
@@ -906,8 +984,11 @@ namespace _106._2.Admin.Book
             }
             RefreshGrid();
         }
-       
-    
+        /// <summary>
+        ///   This is the code for pushing the 'HoldBookBUTTON'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HoldBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
             string SelectedBookId = SelectedBookID.Value.ToString(),
@@ -921,6 +1002,14 @@ namespace _106._2.Admin.Book
             if (MemberIdOut == "") { MessageBox.Show(" Must select the Member the book is Issued too "); return; }
             HoldBook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut, MemberIdOut);
         }
+        /// <summary>
+        /// This is the code for Returning a Book to the database from a Member
+        /// </summary>
+        /// <param name="BookID">The Books Id</param>
+        /// <param name="Title">The Title of the Book</param>
+        /// <param name="Author">The Author of the book</param>
+        /// <param name="Genre">The Genre of the book</param>
+        /// <param name="MemberId">The Member who Is Returning a book</param>
         public void ReturnBook(string BookID, string Title, string Author, string Genre, string MemberId)
         {
             using (NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;"))
@@ -970,6 +1059,11 @@ namespace _106._2.Admin.Book
             }
             RefreshGrid();
         }
+        /// <summary>
+        ///   This is the code for pushing the 'ReturnBookBUTTON'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReturnBookBUTTON_Click(object sender, RoutedEventArgs e)
         {
             string SelectedBookId = SelectedBookID.Value.ToString(),
@@ -983,10 +1077,18 @@ namespace _106._2.Admin.Book
             if (MemberIdOut == "") { MessageBox.Show(" Must select the Member the book is Issued too "); return; }
             ReturnBook(BookIdOut, BooKTitleOut, BookAuthorOut, BookGenreOut, MemberIdOut);
         }
+        /// <summary>
+        /// This refreshes the datagrid
+        /// </summary>
         private void RefreshBookGrid() 
         {
             LoadDatagrid();
         }
+        /// <summary>
+        /// This loads the info from a selected book in to the textboxes to it can be edited
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Booksdatagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
            
@@ -1008,7 +1110,11 @@ namespace _106._2.Admin.Book
             }
           
         }
-
+        /// <summary>
+        /// This if the search type is for A date it searches for a book  by date
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DuedateDatepicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             string Date = DuedateDatepicker.SelectedDate.ToString();
@@ -1035,7 +1141,11 @@ namespace _106._2.Admin.Book
                 }
             }
         }
-
+        /// <summary>
+        /// This if the search type is for A Boolean it searches for a book  by the selected item in the statusBOX
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StatusBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {/* - true
              On Hold
@@ -1305,14 +1415,23 @@ namespace _106._2.Admin.Book
            }
 
         }
-
+        /// <summary>
+        /// Clears the searchBox and refreshes the datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearSearch_Click(object sender, RoutedEventArgs e)
         {
             SearchBOX.Clear();
             SearchOptionBOX.SelectedIndex = -1;
             RefreshGrid();
         }
-
+        /// <summary>
+        /// Clears the searchBox and refreshes the datagrid
+        /// resets the selections.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResetBookDataGridSelection_Click(object sender, RoutedEventArgs e)
         {  
             BookIdnumberBOX.Clear() ;
@@ -1323,18 +1442,31 @@ namespace _106._2.Admin.Book
             Booksdatagrid.SelectedIndex = -1;
             RefreshGrid();
         }
-
+        /// <summary>
+        /// Set the max limit of the  'SelectedBookID' IntegerUpDown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectedBookID_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             int i = 0;
             SelectedBookID.Maximum = Convert.ToInt32(commander("SELECT bookid FROM book ORDER BY bookid DESC LIMIT 1 "));
         }
+        /// <summary>
+        /// Set the max limit of the  'SelectedMemberId' IntegerUpDown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectedMemberId_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
        
             SelectedMemberId.Maximum = Convert.ToInt32(commander("SELECT number FROM members ORDER BY number DESC LIMIT 1 "));
         }
-        //Excutes sql commands
+        /// <summary>
+        /// Executes a command  and returns a string 
+        /// </summary>
+        /// <param name="CMD"> the command/Query </param>
+        /// <returns></returns>
         public string commander(string CMD)
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
@@ -1347,15 +1479,6 @@ namespace _106._2.Admin.Book
             string Output = dataRow[0].ToString();
             return Output;
         }
-        public int commander(string CMD, int input)
-        {
-            NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
-            SqlCONN.Open();
-            using var command = new NpgsqlCommand(CMD, SqlCONN);
-            var count = (long)command.ExecuteScalar();
-            SqlCONN.Close();
-            input = (int)count;
-            return input;
-        }
+       
     }
 }

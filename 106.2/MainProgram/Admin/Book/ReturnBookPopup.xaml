@@ -11,59 +11,84 @@
 
     <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
+            <!--Column 0-->
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
+            <!--Row 0-->
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <!-- Row 1 (Grid Row 0) -->
+        <!-- Column 1 (Grid Column 0)-->
         <Grid Grid.Row="0" Grid.Column="0" Grid.IsSharedSizeScope="True" >
             <Grid.ColumnDefinitions>
+                <!--Column 0-->
                 <ColumnDefinition Width=".1*" />
+                <!--Column 1-->
                 <ColumnDefinition Width="1.48*"/>
+                <!--Column 2-->
                 <ColumnDefinition Width=".1*" />
+                <!--Column 3-->
                 <ColumnDefinition Width="1.48*"/>
+                <!--Column 4-->
                 <ColumnDefinition Width=".1*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions >
+                <!--Row 0-->
                 <RowDefinition Height=".05*"/>
+                <!--Row 1-->
                 <RowDefinition Height=".15*"/>
+                <!--Row 2-->
                 <RowDefinition Height=".05*"/>
-
+                <!--Row 3-->
                 <RowDefinition Height="1.3*"/>
+                <!--Row 4-->
                 <RowDefinition Height=".05*"/>
+                <!--Row 5-->
                 <RowDefinition Height=".3*"/>
             </Grid.RowDefinitions>
-
             <!--Label's-->
-
+            <!-- Row 1 (Grid Row 1) -->
+            <!-- Column 1 (Grid Column 1)-->
             <TextBox Grid.Row="1" BorderBrush="#000000"  Grid.Column="1" TextWrapping="WrapWithOverflow" TextAlignment="Center"  Background="White" Text="Book Info" MaxLines="1" />
+            <!-- Column 2 (Grid Column 3)-->
             <TextBox Grid.Row="1"  BorderBrush="#000000"  Grid.Column="3" TextWrapping="WrapWithOverflow" TextAlignment="Center"  Background="White" Text="Member Info" MaxLines="1" />
-
             <!--content-->
-
+            <!-- Row 2&3 (Grid Row 3&4) -->
+            <!-- Column 1 (Grid Column 1)-->
             <Border  Grid.Row="3"  Grid.RowSpan="1" Grid.Column="1" BorderBrush="#000000" BorderThickness="1" >
                 <TextBlock IsEnabled="False" TextWrapping="Wrap"  Background="White" x:Name="BookInfo"/>
             </Border>
-
+            <!-- Column 2 (Grid Column 3)-->
             <Border  Grid.Row="3" Grid.RowSpan="1"  Grid.Column="3" BorderBrush="#000000" BorderThickness="1" >
                 <TextBlock IsEnabled="False" TextWrapping="Wrap" Background="White" x:Name="MemberInfo"/>
             </Border>
-
+            <!-- Row 4 (Grid Row 5) -->
+            <!-- Column 1&2&3 (Grid Column 1&2&3)-->
             <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
-
+                    <!--Column 0-->
                     <ColumnDefinition Width="1.1*"/>
+                    <!--Column 1-->
                     <ColumnDefinition Width=".08*"/>
-
+                    <!--Column 2-->
                     <ColumnDefinition Width="1.1*"/>
-
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <!--Row 0-->
                     <RowDefinition Height=".5*"/>
+                    <!--Row 1-->
                     <RowDefinition Height="3*"/>
+                    <!--Row 2-->
                     <RowDefinition Height=".5*"/>
                 </Grid.RowDefinitions>
+                <!--Buttons-->
+                <!-- Row 1 (Grid Row 1) -->
+                <!-- Column 1 (Grid Column 0)-->
+                <!-- This is the Button to put  a book on Hold  -->
                 <Button IsDefault="True" x:Name="ReturnBook" Foreground="#000000" Background="#C6C5FF"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="0"  Click="ReturnBook_Click"  FontWeight="Bold">Return Book</Button>
+                <!-- Column 2 (Grid Column 2)-->
+                <!-- This is the Button to Cancel puting a book on Hold  -->
                 <Button IsCancel="True" x:Name="Cancelbutton" Foreground="#FFFFFF" Background="#FF1010"  BorderBrush="#000000"  Grid.Row="1" Grid.Column="2"  Click="Cancelbutton_Click"  FontWeight="Bold">Cancel</Button>
 
 

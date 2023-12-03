@@ -41,7 +41,6 @@ namespace _106._2.MainProgram
             public string Password { get; set; }
             public bool IsAdmin { get; set; }
         }
-         public ObservableCollection<Member> Members { get; set; }
         public class MemberViewModel
         {
             public ObservableCollection<Member> Members { get; set; }
