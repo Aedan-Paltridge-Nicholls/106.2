@@ -335,3 +335,5 @@ C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-wind
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\User\Userbook\UsersOverDueBookView.baml
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Homepage\BookSearchPage.g.cs
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\Homepage\BookSearchPage.baml
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\MyPage.g.cs
+C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\obj\Debug\net5.0-windows\MainProgram\MyPage.baml

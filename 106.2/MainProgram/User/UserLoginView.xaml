@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:_106._2.MainProgram.User"
+        xmlns:local="clr-namespace:_106._2.MainProgram.User" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d" FontFamily="Calibri"
         Title="UserLoginView" MinHeight="600" MinWidth="900" >
     <Grid >
@@ -18,7 +18,6 @@
             <RowDefinition Height="1.5*"/>
             
         </Grid.RowDefinitions>
-
         <Grid x:Name="Header" Background="Black" Grid.Column="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.1*"/>
@@ -59,19 +58,17 @@
                     <RowDefinition Height="1*"/>
                     <!--Row 1-->
                 </Grid.RowDefinitions>
-                <Image Grid.Column="0"  Grid.Row="0" Source="\MainProgram\Images\logo_color 1.png" IsEnabled="False">
-
-                </Image>
+                <Image Grid.Column="0"  Grid.Row="0" Source="/MainProgram/Images/logo_color 1.png" IsEnabled="False"/>
                 <TextBlock Foreground="White" Grid.Column="0" Grid.Row="2"> LIBRARY OF YOOBEE COLLEGE</TextBlock>
             </Grid>
-
-            <Grid x:Name="Searchbar" Grid.Column="2" Grid.Row="1" >
+            <!--Grid for the right side of the header -->
+            <Grid x:Name="Searchbar" Grid.Column="2" ShowGridLines="False" Grid.Row="1" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"/>
                     <!--Column 0-->
                     <ColumnDefinition Width="5*"/>
                     <!--Column 1-->
-                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width=".3*"/>
                     <!--Column 2-->
                     <ColumnDefinition Width="1*"/>
                     <!--Column 3-->
@@ -80,16 +77,59 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
                     <!--Row 0-->
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
                     <!--Row 1-->
                     <RowDefinition Height="1*"/>
                     <!--Row 2-->
-                </Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <!--Row 3-->
+                    <RowDefinition Height="1*"/>
+                    <!--Row 4-->
+                    <RowDefinition Height="1*"/>
 
-                <TextBox x:Name="searchBox" Grid.Column="1" Grid.Row="1" MaxLines="1" TextChanged="searchBox_TextChanged" VerticalContentAlignment="Center"/>
-                <Button x:Name="search" Grid.Column="3" Grid.Row="1" Click="search_Click" >Search</Button>
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" >
+                    <Grid.ColumnDefinitions> 
+                        <!--Column 0-->
+                        <ColumnDefinition Width="0.1*"/>
+                        <!--Column 1-->
+                        <ColumnDefinition Width="5*"/>
+                        <!--Column 2-->
+                        <ColumnDefinition Width="0.3*"/>
+                        <!--Column 3-->
+                        <ColumnDefinition Width="1.5*"/>
+                        <!--Column 4-->
+                        <ColumnDefinition Width="0.25*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <!--Row 0-->
+                        <RowDefinition Height=".5*"/>
+                        <!--Row 1-->
+                        <RowDefinition Height="2*"/>
+                        <!--Row 2-->
+                        <RowDefinition Height=".5*"/>
+
+                    </Grid.RowDefinitions>
+                    <xctk:WatermarkTextBox 
+                                         Watermark="Search" x:Name="SearchBOX" Grid.Column="1" Grid.Row="1" TextChanged="SearchBOX_TextChanged"
+                                         FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=ColumnDefinitions[2].ActualWidth }"
+                                         MaxLines="1" VerticalContentAlignment="Center"/>
+                    <xctk:WatermarkComboBox x:Name="SearchOptionBOX"  IsEditable="False" Grid.Column="3" 
+                              Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="-1"
+                              SelectionChanged="SearchOptionBOX_SelectionChanged" Watermark="Search By:"
+                              FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=ColumnDefinitions[4].ActualWidth}"  >      
+                        <ComboBoxItem>Book ID</ComboBoxItem>
+                        <ComboBoxItem>Title</ComboBoxItem>
+                        <ComboBoxItem>Author</ComboBoxItem>
+                        <ComboBoxItem>Genre</ComboBoxItem>
+                    </xctk:WatermarkComboBox>
+                </Grid>
+                
+                <Button x:Name="search" Grid.Column="3" Grid.RowSpan="3"  FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=RowDefinitions[2].ActualHeight }"
+                     Grid.Row="1"  Click="search_Click">Search</Button>
             </Grid>
             <Grid x:Name="ButtonOne" Grid.Column="3" Grid.Row="1" >
                 <Grid.ColumnDefinitions>
@@ -102,16 +142,22 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
                     <!--Row 0-->
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
                     <!--Row 1-->
                     <RowDefinition Height="1*"/>
                     <!--Row 2-->
+                    <RowDefinition Height="2*"/>
+                    <!--Row 3-->
+                    <RowDefinition Height="1*"/>
+                    <!--Row 4-->
+                    <RowDefinition Height="1*"/>
+
                 </Grid.RowDefinitions>
-                <Button x:Name="MyPage" Grid.Column="1" Grid.Row="1" >My Page</Button>
+                <Button x:Name="MyPage" Grid.Column="1" FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=RowDefinitions[2].ActualHeight }"
+                     Grid.Row="1" Grid.RowSpan="3" Click="MyPage_Click" >My Page</Button>
             </Grid>
-            <Grid x:Name="ButtonTwo" Grid.Column="4" Grid.Row="1" >
+            <Grid x:Name="ButtonTwo" Grid.Column="4" ShowGridLines="false" Grid.Row="1" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"/>
                     <!--Column 0-->
@@ -122,14 +168,21 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
                     <!--Row 0-->
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
                     <!--Row 1-->
                     <RowDefinition Height="1*"/>
                     <!--Row 2-->
+                    <RowDefinition Height="2*"/>
+                    <!--Row 3-->
+                    <RowDefinition Height="1*"/>
+                    <!--Row 4-->
+                    <RowDefinition Height="1*"/>
+
                 </Grid.RowDefinitions>
-                <Button x:Name="Logout" Grid.Column="1" Grid.Row="1" Background="#FF1010" Click="Logout_Click"  Foreground="White">Logout</Button>
+
+                <Button IsCancel="True"  x:Name="Logout" Grid.Column="1" FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=RowDefinitions[2].ActualHeight }"
+                     Grid.Row="1" Grid.RowSpan="3" Background="#FF1010" Click="Logout_Click"  Foreground="White" Content="Logout"/>
             </Grid>
         </Grid>
 

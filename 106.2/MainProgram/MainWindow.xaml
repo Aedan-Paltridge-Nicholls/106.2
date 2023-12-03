@@ -64,14 +64,14 @@
                 <Image Grid.Column="0"  Grid.Row="0" Source="/MainProgram/Images/logo_color 1.png" IsEnabled="False"/>
                 <TextBlock Foreground="White" Grid.Column="0" Grid.Row="2"> LIBRARY OF YOOBEE COLLEGE</TextBlock>
             </Grid>
-           
-            <Grid x:Name="Searchbar" Grid.Column="2" ShowGridLines="false" Grid.Row="1" >
+
+            <Grid x:Name="Searchbar" Grid.Column="2" ShowGridLines="False" Grid.Row="1" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"/>
                     <!--Column 0-->
                     <ColumnDefinition Width="5*"/>
                     <!--Column 1-->
-                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width=".3*"/>
                     <!--Column 2-->
                     <ColumnDefinition Width="1*"/>
                     <!--Column 3-->
@@ -92,10 +92,47 @@
                     <RowDefinition Height="1*"/>
 
                 </Grid.RowDefinitions>
+                <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" >
+                    <Grid.ColumnDefinitions>
+                        <!--Column 0-->
+                        <ColumnDefinition Width="0.1*"/>
+                        <!--Column 1-->
+                        <ColumnDefinition Width="5*"/>
+                        <!--Column 2-->
+                        <ColumnDefinition Width="0.3*"/>
+                        <!--Column 3-->
+                        <ColumnDefinition Width="1.5*"/>
+                        <!--Column 4-->
+                        <ColumnDefinition Width="0.25*"/>
 
-                <xctk:WatermarkTextBox Watermark="Search" x:Name="SearchBOX" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=RowDefinitions[2].ActualHeight }"   MaxLines="1" VerticalContentAlignment="Center"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <!--Row 0-->
+                        <RowDefinition Height=".5*"/>
+                        <!--Row 1-->
+                        <RowDefinition Height="2*"/>
+                        <!--Row 2-->
+                        <RowDefinition Height=".5*"/>
+
+                    </Grid.RowDefinitions>
+                    <xctk:WatermarkTextBox 
+                                         Watermark="Search" x:Name="SearchBOX" Grid.Column="1" Grid.Row="1"
+                                         FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=ColumnDefinitions[2].ActualWidth }"
+                                         MaxLines="1" VerticalContentAlignment="Center" TextChanged="SearchBOX_TextChanged" />
+                    <xctk:WatermarkComboBox x:Name="SearchOptionBOX"  IsEditable="False" Grid.Column="3" 
+                              Grid.Row="1" Background="White" BorderBrush="Black" Margin="1,1,1,1" SelectedIndex="-1"
+                              SelectionChanged="SearchOptionBOX_SelectionChanged" Watermark="Search By:"
+                              FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=ColumnDefinitions[4].ActualWidth}"  >
+                        <ComboBoxItem>Book ID</ComboBoxItem>
+                        <ComboBoxItem>Title</ComboBoxItem>
+                        <ComboBoxItem>Author</ComboBoxItem>
+                        <ComboBoxItem>Genre</ComboBoxItem>
+                    </xctk:WatermarkComboBox>
+                </Grid>
+
                 <Button x:Name="search" Grid.Column="3" Grid.RowSpan="3"  FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=RowDefinitions[2].ActualHeight }"
-                        Grid.Row="1"  Click="search_Click">Search</Button>
+                     Grid.Row="1"  Click="search_Click">Search</Button>
             </Grid>
             <Grid x:Name="ButtonOne" Grid.Column="3" Grid.Row="1" >
                 <Grid.ColumnDefinitions>
@@ -121,7 +158,7 @@
 
                 </Grid.RowDefinitions>
                 <Button x:Name="MyPage" Grid.Column="1" FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=RowDefinitions[2].ActualHeight }"
-                        Grid.Row="1" Grid.RowSpan="3" >My Page</Button>
+                 Grid.Row="1" Grid.RowSpan="3" Click="MyPage_Click"  >My Page</Button>
             </Grid>
             <Grid x:Name="ButtonTwo" Grid.Column="4" ShowGridLines="false" Grid.Row="1" >
                 <Grid.ColumnDefinitions>

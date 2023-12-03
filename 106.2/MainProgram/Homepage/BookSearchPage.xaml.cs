@@ -34,8 +34,13 @@ namespace _106._2.MainProgram.Homepage
             public object Genre { get; set; }
 
         }
-
-        public BookSearchPage(string  Search)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Search">'Search' is the search string</param>
+        /// <param name="numeric">'numeric' is seeing if the search is numeric or not</param>
+        /// <param name="SearchType">, 'SearchType' is  what the column is  searched , </param>
+        public BookSearchPage(string  Search, bool numeric, string SearchType)
         {
             InitializeComponent();
             // Initialize Books collection and populate it from the database
@@ -44,8 +49,8 @@ namespace _106._2.MainProgram.Homepage
             // NpgsqlConnection connectionString = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
             NpgsqlConnection connectionString = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
 
-            // SQL query to retrieve book data 
-            string query = $"SELECT * FROM book where bookname ILIKE \'%{Search}%\' ORDER BY bookid ";
+            // SQL query to retrieve book data  'Search' is the search string, 'SearchType' is the what the column is  searched , 'numeric' is seeing if the search is numeric or not
+            string query =(!numeric)? $"SELECT * FROM book WHERE {SearchType} ILIKE \'%{Search}%\' ORDER BY bookid ": $"SELECT * FROM book WHERE {SearchType} = {Search} ORDER BY bookid";
 
             try
             {

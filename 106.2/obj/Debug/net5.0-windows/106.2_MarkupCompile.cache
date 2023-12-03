@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\nicho\source\Aedan-Paltridge-Nicholls\106.2\106.2\App.xaml
-21-1155015229
+22-934866073
 11328433308
-24-748118950
+251041974244
 219-1293659568
-MainProgram\Admin\Book\AddBookPopup.xaml;MainProgram\Admin\Book\AdminBookView.xaml;MainProgram\Admin\Book\HoldBookPopup.xaml;MainProgram\Admin\Book\ReturnBookPopup.xaml;MainProgram\Admin\Book\UpdateBookPopup.xaml;MainProgram\Admin\Book\WithdrawBookPopup.xaml;MainProgram\Admin\Members\Addmemberpopup.xaml;MainProgram\Admin\Members\AdminLoginView.xaml;MainProgram\Admin\Members\UpdateloginPopup.xaml;MainProgram\Admin\Members\Updatememberpopup.xaml;MainProgram\Admin\OverDue\AdminOverDueView.xaml;MainProgram\Homepage\BookPopUP.xaml;MainProgram\Homepage\BookSearchPage.xaml;MainProgram\Homepage\Booktemplate.xaml;MainProgram\Homepage\Home.xaml;MainProgram\Images\ImagePopup.xaml;MainProgram\login.xaml;MainProgram\MainWindow.xaml;MainProgram\User\Userbook\UsersBooksView.xaml;MainProgram\User\Userbook\UsersOverDueBookView.xaml;MainProgram\User\UserLoginView.xaml;
+MainProgram\Admin\Book\AddBookPopup.xaml;MainProgram\Admin\Book\AdminBookView.xaml;MainProgram\Admin\Book\HoldBookPopup.xaml;MainProgram\Admin\Book\ReturnBookPopup.xaml;MainProgram\Admin\Book\UpdateBookPopup.xaml;MainProgram\Admin\Book\WithdrawBookPopup.xaml;MainProgram\Admin\Members\Addmemberpopup.xaml;MainProgram\Admin\Members\AdminLoginView.xaml;MainProgram\Admin\Members\UpdateloginPopup.xaml;MainProgram\Admin\Members\Updatememberpopup.xaml;MainProgram\Admin\OverDue\AdminOverDueView.xaml;MainProgram\Homepage\BookPopUP.xaml;MainProgram\Homepage\BookSearchPage.xaml;MainProgram\Homepage\Booktemplate.xaml;MainProgram\Homepage\Home.xaml;MainProgram\Images\ImagePopup.xaml;MainProgram\login.xaml;MainProgram\MainWindow.xaml;MainProgram\MyPage.xaml;MainProgram\User\Userbook\UsersBooksView.xaml;MainProgram\User\Userbook\UsersOverDueBookView.xaml;MainProgram\User\UserLoginView.xaml;
 
 False
 

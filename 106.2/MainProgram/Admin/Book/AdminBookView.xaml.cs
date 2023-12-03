@@ -390,10 +390,16 @@ namespace _106._2.Admin.Book
 
 
         }
+        /// <summary>
+        /// This refreshes the grid. 
+        /// </summary>
         public void RefreshGrid()
         {
             LoadDatagrid();
         }
+        /// <summary>
+        /// This Loads the genre box with all the genres in the 'book' table
+        /// </summary>
         public void LoadGenreBox()
         {
             NpgsqlConnection SqlCONN = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=Nicholls2004;Database=106.2;");
@@ -413,12 +419,20 @@ namespace _106._2.Admin.Book
         }
 
 
-
+        /// <summary>
+        /// This sets the data storage to the user input for book id
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BookIdnumberBOX_TextChanged(object sender, TextChangedEventArgs e)
         {
             dataStorage.Set_BookID(BookIdnumberBOX.Text);
         }
-
+        /// <summary>
+        /// This Sets the input type according to the selected 'SearchOptionBOX' item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchOptionBOX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (SearchOptionBOX.SelectedIndex)
@@ -502,6 +516,12 @@ namespace _106._2.Admin.Book
                 SearchBOX.Clear();
             }
         }
+        /// <summary>
+        /// This sets the the search type according to the selected 'SearchOptionBOX' item
+        /// and checks if the search string 'SearchOut' is equal to null or is empty 
+        /// then if it is not sends the search to 'LoadDatagrid(SearchOut, searchtype)'
+        /// </summary>
+        /// <param name="SearchOut"></param>
         public void Search(string SearchOut)
         {
             if (string.IsNullOrEmpty(SearchOut)) { LoadDatagrid(); }
@@ -554,6 +574,11 @@ namespace _106._2.Admin.Book
                 LoadDatagrid(SearchOut, searchtype);
             }
         }
+        /// <summary>
+        /// This checks the input type of a search and sends out the searches accordingly  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchBOX_TextChanged(object sender, TextChangedEventArgs e)
         {
             string SearchOut = "";
@@ -584,10 +609,21 @@ namespace _106._2.Admin.Book
             }
         }
 
+        /// <summary>
+        /// This sets the data storage to the user input for book title
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TitleBOX_TextChanged(object sender, TextChangedEventArgs e)
         {
             dataStorage.Set_Title(TitleBOX.Text.Trim());
         }
+
+        /// <summary>
+        /// This sets the data storage to the user input for book Author
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AuthorBOX_TextChanged(object sender, TextChangedEventArgs e)
         {
             dataStorage.Set_Author(AuthorBOX.Text.Trim());
@@ -619,7 +655,7 @@ namespace _106._2.Admin.Book
         {
             OpenFileDialog ofd = new OpenFileDialog();
 
-            ofd.InitialDirectory = "c:\\";    // Seting a filter for file extensions 
+            ofd.InitialDirectory = "c:\\";    // Setting a filter for file extensions 
             ofd.Filter = "\"Image files (*.bmp, *.jpg)|*.bmp;*.jpg|All files (*.*)|*.*\"'";
             ofd.Multiselect = false;
             ofd.Title = "Select Cover Image";
@@ -632,7 +668,7 @@ namespace _106._2.Admin.Book
             }
             else
             {
-                MessageBox.Show("Must Select Cover Image ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Must Select Cover Image ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);//Error message
                 GetImage();
             }
 

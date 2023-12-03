@@ -58,6 +58,9 @@
     <Compile Update="MainProgram\Admin\Members\Updatememberpopup.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MainProgram\MyPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MainProgram\User\Userbook\UsersBooksView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -118,6 +121,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainProgram\Admin\Members\Updatememberpopup.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainProgram\MyPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainProgram\User\Userbook\UsersBooksView.xaml">

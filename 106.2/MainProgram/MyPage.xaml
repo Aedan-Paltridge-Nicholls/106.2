@@ -1,0 +1,90 @@
+﻿<Page x:Class="_106._2.MainProgram.MyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_106._2.MainProgram" FontFamily="Calibri"
+      mc:Ignorable="d" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      MinHeight="730" MinWidth="1300" FontSize="12"
+      Title="MyPage">
+
+    <Grid ShowGridLines="False" Background="Azure" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*"></ColumnDefinition>
+            <ColumnDefinition Width="15*"></ColumnDefinition>
+            <ColumnDefinition Width=".5*"></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height=".5*"/>
+
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="1" Grid.Row="1" ShowGridLines="False" Background="Red" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition  Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+           
+            <!-- Left-->
+            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" ShowGridLines="False" Background="Blue"  >
+               
+                <ListView Grid.Column="1" Grid.Row="1" Background="White" x:Name="MemberInfoBOX" 
+                          
+                          ItemsSource="{Binding Members}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" >
+                                <TextBlock FontSize="25" Text="{Binding Name, StringFormat=Name: {0}}"  />
+                                <TextBlock FontSize="25" Text="{Binding Number, StringFormat=Id Number: {0}}" />
+                                <TextBlock FontSize="25" Text="{Binding PhoneNumber, StringFormat=Phone Number: {0}}" />
+                                <TextBlock FontSize="25" Text="{Binding Email, StringFormat=Email: {0}}" />
+                                <TextBlock FontSize="25" Text="{Binding JoinDate, StringFormat=Join Date: {0}}" />
+                                <TextBlock FontSize="25" Text="{Binding Address, StringFormat=Address: {0}}" />
+                                <TextBlock FontSize="25" Text="{Binding Username, StringFormat=Username: {0}}" />
+                                <TextBlock FontSize="25" Text="{Binding UserPassword, StringFormat=Password: {0}}" />
+                                <TextBlock FontSize="25" Text="{Binding IsAdmin, StringFormat=Is Admin: {0}}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <!-- Right-->
+            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ShowGridLines="False" Background="Gold" >
+                <DataGrid x:Name="books" ItemsSource="{Binding}" IsReadOnly="True" AutoGenerateColumns="False"
+                          SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" 
+                          CanUserResizeRows="False" RowDetailsVisibilityMode="Visible">
+                    <DataGrid.RowBackground>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InfoColorKey}}"/>
+                    </DataGrid.RowBackground>
+                    <DataGrid.AlternatingRowBackground>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionColorKey}}"/>
+                    </DataGrid.AlternatingRowBackground>
+
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Header="Book ID" Binding="{Binding book_id}"/>
+                        <DataGridTextColumn Header="Title" Binding="{Binding bookname}"/>
+                        <DataGridTextColumn Header="Author" Binding="{Binding author}"/>
+                        <DataGridTextColumn Header="Genre" Binding="{Binding genre}"/>
+                        <DataGridCheckBoxColumn  Header="On Hold" Binding="{Binding onhold}"/>
+                        <DataGridCheckBoxColumn  Header="Withdrawn" Binding="{Binding withdrawn}"/>
+                        <DataGridCheckBoxColumn  Header="Overdue" Binding="{Binding overdue}"/>
+                        <DataGridTextColumn Header="Due-date" Binding="{Binding duedate, StringFormat='yyyy-MM-dd'}" />
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </Grid>
+           
+        </Grid>
+    </Grid>
+</Page>
